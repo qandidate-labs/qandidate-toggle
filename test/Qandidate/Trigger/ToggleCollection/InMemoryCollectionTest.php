@@ -2,55 +2,13 @@
 
 namespace Qandidate\Trigger\ToggleCollection;
 
-use Qandidate\Trigger\TestCase;
 use Qandidate\Trigger\Toggle;
+use Qandidate\Trigger\ToggleCollectionTest;
 
-class InMemoryCollectionTest extends TestCase
+class InMemoryCollectionTest extends ToggleCollectionTest
 {
-    /**
-     * @test
-     */
-    public function it_returns_null_if_toggle_not_in_collection()
+    protected function createCollection()
     {
-        $collection = new InMemoryCollection();
-        $this->assertNull($collection->get('some-feature'));
-    }
-
-    /**
-     * @test
-     */
-    public function it_returns_a_set_toggle()
-    {
-        $toggle     = new Toggle('some-feature', array());
-        $collection = new InMemoryCollection();
-        $collection->set($toggle->getName(), $toggle);
-
-        $this->assertEquals($toggle, $collection->get('some-feature'));
-    }
-
-    /**
-     * @test
-     */
-    public function it_removes_a_toggle()
-    {
-        $toggle     = new Toggle('some-feature', array());
-        $collection = new InMemoryCollection();
-        $collection->set($toggle->getName(), $toggle);
-
-        $collection->remove('some-feature');
-
-        $this->assertNull($collection->get('some-feature'));
-    }
-
-    /**
-     * @test
-     */
-    public function it_does_not_complain_when_removing_a_non_existing_toggle()
-    {
-        $collection = new InMemoryCollection();
-
-        $collection->remove('some-feature');
-
-        $this->assertNull($collection->get('some-feature'));
+        return new InMemoryCollection();
     }
 }

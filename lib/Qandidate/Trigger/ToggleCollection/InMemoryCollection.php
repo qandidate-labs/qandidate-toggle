@@ -6,10 +6,8 @@ use Qandidate\Trigger\Toggle;
 use Qandidate\Trigger\ToggleCollection;
 
 /**
- * A collection of toggles, used by a manager.
- *
- * Abstraction to allow for different storage backends of toggles (e.g. redis,
- * sql, ...).
+ * In memory collection useful for testing or when toggles are loaded
+ * "statically" from for example configuration.
  */
 class InMemoryCollection extends ToggleCollection
 {

@@ -6,6 +6,12 @@
     "require": {
         "php": ">=5.3.2"
     },
+    "require-dev": {
+        "predis/predis": "~0.8"
+    },
+    "suggest": {
+        "predis/predis": "To use the PredisCollection to persist toggles in redis"
+    },
     "autoload": {
         "psr-0": {"Qandidate\\Trigger": "lib/"}
     }
