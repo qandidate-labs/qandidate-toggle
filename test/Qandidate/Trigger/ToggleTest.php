@@ -28,7 +28,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_is_inactive_if_none_of_the_conditions_hold() 
+    public function it_is_inactive_if_none_of_the_conditions_hold()
     {
         $conditions = array(
             new OperatorCondition('age', new LessThan(42)),
@@ -41,5 +41,15 @@ class ToggleTest extends TestCase
         $toggle = new Toggle('some-feature', $conditions);
 
         $this->assertFalse($toggle->activeFor($context));
+    }
+
+    /**
+     * @test
+     */
+    public function it_exposes_its_name()
+    {
+        $toggle = new Toggle('some-feature', array());
+
+        $this->assertEquals('some-feature', $toggle->getName());
     }
 }
