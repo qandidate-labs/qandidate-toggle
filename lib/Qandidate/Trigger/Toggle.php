@@ -38,4 +38,12 @@ class Toggle
 
         return false;
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 }
