@@ -1,7 +1,7 @@
 {
-    "name": "qandidate/trigger",
+    "name": "qandidate/toggle",
     "description": "Feature flipping for your PHP application.",
-    "keywords": ["feature", "flipping", "flip", "switch", "bits", "trigger"],
+    "keywords": ["feature", "flipping", "flip", "switch", "bits", "trigger", "toggle"],
     "license": "MIT",
     "require": {
         "php": ">=5.3.2"
@@ -13,6 +13,6 @@
         "predis/predis": "To use the PredisCollection to persist toggles in redis"
     },
     "autoload": {
-        "psr-0": {"Qandidate\\Trigger": "lib/"}
+        "psr-0": {"Qandidate\\Toggle": "lib/"}
     }
 }

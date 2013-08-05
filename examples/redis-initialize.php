@@ -2,12 +2,12 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Qandidate\Trigger\Context;
-use Qandidate\Trigger\Operator\LessThan;
-use Qandidate\Trigger\OperatorCondition;
-use Qandidate\Trigger\Toggle;
-use Qandidate\Trigger\ToggleCollection\PredisCollection;
-use Qandidate\Trigger\ToggleManager;
+use Qandidate\Toggle\Context;
+use Qandidate\Toggle\Operator\LessThan;
+use Qandidate\Toggle\OperatorCondition;
+use Qandidate\Toggle\Toggle;
+use Qandidate\Toggle\ToggleCollection\PredisCollection;
+use Qandidate\Toggle\ToggleManager;
 
 // Create the ToggleManager
 $predis     = new Predis\Client();
