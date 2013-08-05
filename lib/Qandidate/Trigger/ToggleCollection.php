@@ -21,4 +21,9 @@ abstract class ToggleCollection
      * @param Toggle $toggle
      */
     abstract public function set(Toggle $toggle);
+
+    /**
+     * @param string $name
+     */
+    abstract public function remove($name);
 }
