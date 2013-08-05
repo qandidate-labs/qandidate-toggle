@@ -23,7 +23,7 @@ class InMemoryCollectionTest extends TestCase
     {
         $toggle     = new Toggle('some-feature', array());
         $collection = new InMemoryCollection();
-        $collection->set($toggle);
+        $collection->set($toggle->getName(), $toggle);
 
         $this->assertEquals($toggle, $collection->get('some-feature'));
     }
@@ -35,7 +35,7 @@ class InMemoryCollectionTest extends TestCase
     {
         $toggle     = new Toggle('some-feature', array());
         $collection = new InMemoryCollection();
-        $collection->set($toggle);
+        $collection->set($toggle->getName(), $toggle);
 
         $collection->remove('some-feature');
 

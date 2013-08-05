@@ -18,9 +18,10 @@ abstract class ToggleCollection
     abstract public function get($name);
 
     /**
+     * @param string $name
      * @param Toggle $toggle
      */
-    abstract public function set(Toggle $toggle);
+    abstract public function set($name, Toggle $toggle);
 
     /**
      * @param string $name

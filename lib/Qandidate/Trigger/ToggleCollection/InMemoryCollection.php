@@ -30,9 +30,9 @@ class InMemoryCollection extends ToggleCollection
     /**
      * {@inheritDoc}
      */
-    public function set(Toggle $toggle)
+    public function set($name, Toggle $toggle)
     {
-        $this->toggles[$toggle->getName()] = $toggle;
+        $this->toggles[$name] = $toggle;
     }
 
     /**
