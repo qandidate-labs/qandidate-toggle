@@ -52,4 +52,21 @@ class ToggleTest extends TestCase
 
         $this->assertEquals('some-feature', $toggle->getName());
     }
+
+    /**
+     * @test
+     */
+    public function it_exposes_its_conditions()
+    {
+        $condition = new OperatorCondition('age', new LessThan(42));
+        $condition2 = new OperatorCondition('age', new GreaterThan(42));
+
+        $toggle = new Toggle('some-feature', array($condition, $condition2));
+
+        $actual = $toggle->getConditions();
+
+        $this->assertCount(2, $actual);
+        $this->assertEquals($condition, $actual[0]);
+        $this->assertEquals($condition2, $actual[1]);
+    }
 }

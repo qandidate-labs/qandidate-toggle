@@ -40,6 +40,14 @@ class Toggle
     }
 
     /**
+     * @return array
+     */
+    public function getConditions()
+    {
+        return $this->conditions;
+    }
+
+    /**
      * @return string
      */
     public function getName()
