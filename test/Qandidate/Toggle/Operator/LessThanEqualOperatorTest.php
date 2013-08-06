@@ -64,4 +64,13 @@ class LessThanEqualOperatorTest extends TestCase
             array(0.2,  0.1),
         );
     }
+
+    /**
+     * @test
+     */
+    public function it_exposes_its_value()
+    {
+        $operator = new LessThanEqual(42);
+        $this->assertEquals(42, $operator->getValue());
+    }
 }

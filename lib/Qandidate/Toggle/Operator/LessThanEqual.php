@@ -4,7 +4,7 @@ namespace Qandidate\Toggle\Operator;
 
 use Qandidate\Toggle\Operator;
 
-class LessThanEqual extends Operator
+class LessThanEqual extends EqualityOperator
 {
     private $value;
 
@@ -22,5 +22,13 @@ class LessThanEqual extends Operator
     public function appliesTo($argument)
     {
         return $argument <= $this->value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }
