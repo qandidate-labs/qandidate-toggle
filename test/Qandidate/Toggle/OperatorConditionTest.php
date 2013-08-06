@@ -37,4 +37,17 @@ class OperatorConditionTest extends TestCase
             array(84, true),
         );
     }
+
+    /**
+     * @test
+     */
+    public function it_exposes_its_key_and_operator()
+    {
+        $key       = 'age';
+        $operator  = new GreaterThan(42);
+        $condition = new OperatorCondition($key, $operator);
+
+        $this->assertEquals($key, $condition->getKey());
+        $this->assertEquals($operator, $condition->getOperator());
+    }
 }

@@ -32,4 +32,20 @@ class OperatorCondition extends Condition
 
         return $this->operator->appliesTo($argument);
     }
+
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * @return Operator
+     */
+    public function getOperator()
+    {
+        return $this->operator;
+    }
 }
