@@ -52,6 +52,25 @@ class ToggleManagerTest extends TestCase
         $this->assertFalse($manager->active('some-feature', new Context()));
     }
 
+    /**
+     * @test
+     */
+    public function it_exposes_all_toggles()
+    {
+        $toggle     = new Toggle('some-feature',       array());
+        $toggle2    = new Toggle('some-other-feature', array());
+
+        $manager = new ToggleManager(new InMemoryCollection());
+
+        $manager->add($toggle);
+        $manager->add($toggle2);
+
+        $all = $manager->all();
+        $this->assertCount(2, $all);
+        $this->assertEquals($all['some-feature'], $toggle);
+        $this->assertEquals($all['some-other-feature'], $toggle2);
+    }
+
     public function createToggleMock($active = true)
     {
         $toggleMock = $this->getMockBuilder('Qandidate\Toggle\Toggle')

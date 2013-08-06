@@ -55,6 +55,24 @@ abstract class ToggleCollectionTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function it_exposes_all_toggles()
+    {
+        $toggle     = new Toggle('some-feature',       array());
+        $toggle2    = new Toggle('some-other-feature', array());
+        $collection = $this->createCollection();
+
+        $collection->set($toggle->getName(),  $toggle);
+        $collection->set($toggle2->getName(), $toggle2);
+
+        $all = $collection->all();
+        $this->assertCount(2, $all);
+        $this->assertEquals($all['some-feature'], $toggle);
+        $this->assertEquals($all['some-other-feature'], $toggle2);
+    }
+
+    /**
      * @return ToggleCollection
      */
     abstract protected function createCollection();

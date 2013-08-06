@@ -11,7 +11,7 @@ use Qandidate\Toggle\ToggleManager;
 
 // Create the ToggleManager
 $predis     = new Predis\Client();
-$collection = new PredisCollection('toggle_demo', $predis);
+$collection = new PredisCollection('toggle_namespace', $predis);
 $manager    = new ToggleManager($collection);
 
 // A toggle that will be active is the user id is less than 42

@@ -61,4 +61,12 @@ class ToggleManager
     {
         $this->collection->set($toggle->getName(), $toggle);
     }
+
+    /**
+     * @return array All toggles from the manager.
+     */
+    public function all()
+    {
+        return $this->collection->all();
+    }
 }

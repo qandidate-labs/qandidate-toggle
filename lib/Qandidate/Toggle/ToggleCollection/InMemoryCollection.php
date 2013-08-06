@@ -16,6 +16,14 @@ class InMemoryCollection extends ToggleCollection
     /**
      * {@inheritDoc}
      */
+    public function all()
+    {
+        return $this->toggles;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function get($name)
     {
         if ( ! array_key_exists($name, $this->toggles)) {

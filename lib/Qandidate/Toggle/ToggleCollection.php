@@ -11,6 +11,11 @@ namespace Qandidate\Toggle;
 abstract class ToggleCollection
 {
     /**
+     * @return array
+     */
+    abstract public function all();
+
+    /**
      * @param string $name
      *
      * @return null|Toggle
