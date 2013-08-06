@@ -30,6 +30,8 @@ abstract class ToggleCollection
 
     /**
      * @param string $name
+     *
+     * @return boolean True, if element was removed
      */
     abstract public function remove($name);
 }

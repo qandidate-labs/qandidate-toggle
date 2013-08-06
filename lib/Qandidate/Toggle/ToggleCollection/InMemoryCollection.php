@@ -47,9 +47,11 @@ class InMemoryCollection extends ToggleCollection
     public function remove($name)
     {
         if ( ! array_key_exists($name, $this->toggles)) {
-            return;
+            return false;
         }
 
         unset($this->toggles[$name]);
+
+        return true;
     }
 }

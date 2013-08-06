@@ -60,7 +60,7 @@ class PredisCollection extends ToggleCollection
      */
     public function remove($name)
     {
-        $this->client->del($this->namespace . '__TOGGLE__' . $name);
+        return 1 === $this->client->del($this->namespace . '__TOGGLE__' . $name);
     }
 
     private function getFromKey($key)
