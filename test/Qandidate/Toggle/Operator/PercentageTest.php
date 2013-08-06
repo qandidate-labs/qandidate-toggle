@@ -87,4 +87,15 @@ class PercentageTest extends TestCase
             array(5, 1048),
         );
     }
+
+    /**
+     * @test
+     */
+    public function it_exposes_its_percentage_and_shift()
+    {
+        $operator = new Percentage(42, 5);
+
+        $this->assertEquals(42, $operator->getPercentage());
+        $this->assertEquals(5, $operator->getShift());
+    }
 }

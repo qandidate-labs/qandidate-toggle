@@ -25,4 +25,14 @@ class Percentage extends Operator
         return $asPercentage >= $this->shift &&
             $asPercentage < ($this->percentage + $this->shift);
     }
+
+    public function getPercentage()
+    {
+        return $this->percentage;
+    }
+
+    public function getShift()
+    {
+        return $this->shift;
+    }
 }
