@@ -36,10 +36,12 @@ class ToggleManager
      * Removes the toggle from the manager.
      *
      * @param string $name
+     *
+     * @return boolean True, if element was removed
      */
     public function remove($name)
     {
-        $this->collection->remove($name);
+        return $this->collection->remove($name);
     }
 
     /**

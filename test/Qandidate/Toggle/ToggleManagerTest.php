@@ -47,8 +47,8 @@ class ToggleManagerTest extends TestCase
         $manager = new ToggleManager(new InMemoryCollection());
 
         $manager->add($this->createToggleMock());
-        $manager->remove('some-feature');
 
+        $this->assertTrue($manager->remove('some-feature'));
         $this->assertFalse($manager->active('some-feature', new Context()));
     }
 
