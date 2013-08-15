@@ -31,7 +31,8 @@ class ToggleSerializerTest extends TestCase
                         'key' => 'user_id',
                         'operator' => array('name' => 'greater-than', 'value' => 42),
                     ),
-                )
+                ),
+                'status' => 'conditionally-active',
             ),
             $data
         );
@@ -52,7 +53,8 @@ class ToggleSerializerTest extends TestCase
                     'key' => 'user_id',
                     'operator' => array('name' => 'greater-than', 'value' => 42),
                 ),
-            )
+            ),
+            'status' => 'conditionally-active',
         );
 
         $operator = new OperatorCondition('user_id', new GreaterThan(42));
@@ -92,8 +94,12 @@ class ToggleSerializerTest extends TestCase
     {
         return array(
             array(array()),
-            array(array('name')),
-            array(array('conditions')),
+            array(array('name' => '')),
+            array(array('conditions' => '')),
+            array(array('status' => '')),
+            array(array('name' => '', 'conditions' => '')),
+            array(array('name' => '', 'status' => '')),
+            array(array('conditions' => '', 'status' => '')),
         );
     }
 
@@ -105,7 +111,55 @@ class ToggleSerializerTest extends TestCase
     {
         $serializer = $this->createToggleSerializer();
 
-        $serializer->deserialize(array('name' => 'foo', 'conditions' => 42));
+        $serializer->deserialize(array('name' => 'foo', 'status' => 'inactive', 'conditions' => 42));
+    }
+
+    /**
+     * @test
+     * @dataProvider toggleStatuses
+     */
+    public function it_serializes_all_statuses($toggle, $expectedStatus)
+    {
+        $serializer = $this->createToggleSerializer();
+
+        $data = $serializer->serialize($toggle);
+
+        $this->assertEquals($expectedStatus, $data['status']);
+    }
+
+    /**
+     * @test
+     * @dataProvider toggleStatuses
+     */
+    public function it_deserializes_to_the_appropriate_status($toggle)
+    {
+        $serializer = $this->createToggleSerializer();
+        $status     = $toggle->getStatus();
+
+        $data               = $serializer->serialize($toggle);
+        $deserializedToggle = $serializer->deserialize($data);
+
+        $this->assertEquals($status, $deserializedToggle->getStatus());
+    }
+
+    public function toggleStatuses()
+    {
+        return array(
+            array($this->createAlwaysActiveToggle(), 'always-active'),
+            array($this->createConditionallyActiveToggle(), 'conditionally-active'),
+            array($this->createInactiveToggle(), 'inactive'),
+        );
+    }
+
+    /**
+     * @test
+     * @expectedException RuntimeException
+     */
+    public function it_throws_exception_on_invalid_status_data()
+    {
+        $serializer = $this->createToggleSerializer();
+
+        $serializer->deserialize(array('name' => 'foo', 'status' => 'invalid', 'conditions' => array()));
     }
 
     private function createToggleSerializer()
@@ -114,6 +168,29 @@ class ToggleSerializerTest extends TestCase
         $operatorConditionSerializer = new OperatorConditionSerializer($operatorSerializer);
 
         return new ToggleSerializer($operatorConditionSerializer);
+    }
+
+    private function createAlwaysActiveToggle()
+    {
+        $toggle = new Toggle('some-feature', array());
+        $toggle->activate(Toggle::ALWAYS_ACTIVE);
+
+        return $toggle;
+    }
+
+    private function createConditionallyActiveToggle()
+    {
+        $toggle = new Toggle('some-feature', array());
+
+        return $toggle;
+    }
+
+    private function createInactiveToggle()
+    {
+        $toggle = new Toggle('some-feature', array());
+        $toggle->deactivate();
+
+        return $toggle;
     }
 }
 

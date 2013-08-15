@@ -28,27 +28,33 @@ class ToggleSerializer
         return array(
             'name' => $toggle->getName(),
             'conditions' => $this->serializeConditions($toggle->getConditions()),
+            'status' => $this->serializeStatus($toggle),
         );
     }
 
     /**
-     * @param array $toggle
+     * @param array $data
      *
      * @return Toggle
      */
-    public function deserialize(array $toggle)
+    public function deserialize(array $data)
     {
-        $this->assertHasKey('name', $toggle);
-        $this->assertHasKey('conditions', $toggle);
+        $this->assertHasKey('name', $data);
+        $this->assertHasKey('conditions', $data);
+        $this->assertHasKey('status', $data);
 
-        if ( ! is_array($toggle['conditions'])) {
+        if ( ! is_array($data['conditions'])) {
             throw new RuntimeException('Key "conditions" should be an array.');
         }
 
-        return new Toggle(
-            $toggle['name'],
-            $this->deserializeConditions($toggle['conditions'])
+        $toggle = new Toggle(
+            $data['name'],
+            $this->deserializeConditions($data['conditions'])
         );
+
+        $this->deserializeStatus($toggle, $data['status']);
+
+        return $toggle;
     }
 
     private function serializeConditions(array $conditions)
@@ -75,6 +81,35 @@ class ToggleSerializer
         }
 
         return $deserialized;
+    }
+
+    private function serializeStatus(Toggle $toggle)
+    {
+        switch ($toggle->getStatus()) {
+            case Toggle::ALWAYS_ACTIVE:
+                return 'always-active';
+            case Toggle::INACTIVE:
+                return 'inactive';
+            case Toggle::CONDITIONALLY_ACTIVE:
+                return 'conditionally-active';
+        }
+    }
+
+    private function deserializeStatus(Toggle $toggle, $status)
+    {
+        switch ($status) {
+            case 'always-active':
+                $toggle->activate(Toggle::ALWAYS_ACTIVE);
+                return;
+            case 'inactive':
+                $toggle->deactivate();
+                return;
+            case 'conditionally-active';
+                $toggle->activate(Toggle::CONDITIONALLY_ACTIVE);
+                return;
+        }
+
+        throw new RuntimeException(sprintf('Unknown toggle status "%s".', $status));
     }
 
     private function assertHasKey($key, array $data)

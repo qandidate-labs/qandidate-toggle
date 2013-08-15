@@ -49,13 +49,10 @@ class Toggle
         switch ($this->status) {
             case self::ALWAYS_ACTIVE:
                 return true;
-                break;
             case self::INACTIVE:
                 return false;
-                break;
             case self::CONDITIONALLY_ACTIVE:
                 return $this->atLeastOneConditionHolds($context);
-                break;
         }
     }
 
