@@ -4,7 +4,7 @@ namespace Qandidate\Toggle\Operator;
 
 use Qandidate\Toggle\Operator;
 
-class Inset extends Operator
+class InSet extends Operator
 {
     private $values;
 
