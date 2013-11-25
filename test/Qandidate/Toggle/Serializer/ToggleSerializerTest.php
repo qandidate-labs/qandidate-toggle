@@ -54,7 +54,6 @@ class ToggleSerializerTest extends TestCase
                     'operator' => array('name' => 'greater-than', 'value' => 42),
                 ),
             ),
-            'status' => 'conditionally-active',
         );
 
         $operator = new OperatorCondition('user_id', new GreaterThan(42));
