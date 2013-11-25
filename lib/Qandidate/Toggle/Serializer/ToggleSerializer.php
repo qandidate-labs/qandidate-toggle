@@ -41,7 +41,6 @@ class ToggleSerializer
     {
         $this->assertHasKey('name', $data);
         $this->assertHasKey('conditions', $data);
-        $this->assertHasKey('status', $data);
 
         if ( ! is_array($data['conditions'])) {
             throw new RuntimeException('Key "conditions" should be an array.');
@@ -52,7 +51,9 @@ class ToggleSerializer
             $this->deserializeConditions($data['conditions'])
         );
 
-        $this->deserializeStatus($toggle, $data['status']);
+        if (isset($data['status'])) {
+            $this->deserializeStatus($toggle, $data['status']);
+        }
 
         return $toggle;
     }
