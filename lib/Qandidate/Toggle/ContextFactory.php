@@ -3,11 +3,11 @@
 namespace Qandidate\Toggle;
 
 /**
- * Context factory is implemented in an application to provide the context for 
+ * Context factory is implemented in an application to provide the context for
  * feature flipping.
  *
- * To abstract away the business object from the feature library, the 
- * application is responsible for mapping the business objects into a context 
+ * To abstract away the business object from the feature library, the
+ * application is responsible for mapping the business objects into a context
  * based for feature flipping. For example:
  *
  *     $request = ...;
