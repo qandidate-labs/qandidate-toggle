@@ -3,6 +3,8 @@ Toggle
 
 Feature toggling for PHP.
 
+[![Build Status](https://travis-ci.org/qandidate-labs/qandidate-toggle.svg?branch=master)](https://travis-ci.org/qandidate-labs/qandidate-toggle)
+
 ## About
 
 Read the blog post about this library at http://labs.qandidate.com/blog/2014/08/18/a-new-feature-toggling-library-for-php/.
