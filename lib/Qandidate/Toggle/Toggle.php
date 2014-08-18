@@ -42,7 +42,7 @@ class Toggle
      *
      * @param Context $context
      *
-     * @return booleaan True, if one of conditions hold for the context.
+     * @return boolean True, if one of conditions hold for the context.
      */
     public function activeFor(Context $context)
     {
