@@ -3,6 +3,10 @@ Toggle
 
 Feature toggling for PHP.
 
+## About
+
+Read the blog post about this library at http://labs.qandidate.com/blog/2014/08/18/a-new-feature-toggling-library-for-php/.
+
 ## Installation
 
 Install the dependencies with composer:
