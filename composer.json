@@ -1,6 +1,6 @@
 {
     "name": "qandidate/toggle",
-    "description": "Feature flipping for your PHP application.",
+    "description": "Feature toggling for your PHP application.",
     "keywords": ["feature", "flipping", "flip", "switch", "bits", "trigger", "toggle"],
     "license": "MIT",
     "require": {
