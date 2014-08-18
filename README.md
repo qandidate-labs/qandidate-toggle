@@ -1,7 +1,7 @@
-Feature flip
-============
+Toggle
+======
 
-Feature flipping for PHP.
+Feature toggling for PHP.
 
 ## Installation
 
