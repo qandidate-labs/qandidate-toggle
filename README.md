@@ -34,3 +34,6 @@ Running the tests:
 ```
 $ phpunit
 ```
+## License
+
+MIT, see LICENSE.
