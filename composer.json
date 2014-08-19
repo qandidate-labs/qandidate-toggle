@@ -3,6 +3,16 @@
     "description": "Feature toggling for your PHP application.",
     "keywords": ["feature", "flipping", "flip", "switch", "bits", "trigger", "toggle"],
     "license": "MIT",
+    "authors": [
+      {
+        "name": "Alexander",
+        "email": "iam.asm89@gmail.com"
+      },
+      {
+        "name": "Qandidate.com",
+        "homepage": "http://labs.qandidate.com/"
+      }
+    ],
     "require": {
         "php": ">=5.3.2"
     },
