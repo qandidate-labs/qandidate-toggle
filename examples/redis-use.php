@@ -2,11 +2,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Predis\Client;
 use Qandidate\Toggle\Context;
-use Qandidate\Toggle\Operator\LessThan;
-use Qandidate\Toggle\OperatorCondition;
-use Qandidate\Toggle\Toggle;
 use Qandidate\Toggle\ToggleCollection\PredisCollection;
 use Qandidate\Toggle\ToggleManager;
 
