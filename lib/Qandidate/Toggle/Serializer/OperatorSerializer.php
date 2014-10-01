@@ -37,7 +37,7 @@ class OperatorSerializer
                 return array('name' => 'greater-than', 'value' => $operator->getValue());
             case $operator instanceof GreaterThanEqual:
                 return array('name' => 'greater-than-equal', 'value' => $operator->getValue());
-            case $operator instanceof InSet;
+            case $operator instanceof InSet:
                 return array('name' => 'in-set', 'values' => $operator->getValues());
             case $operator instanceof LessThan:
                 return array('name' => 'less-than', 'value' => $operator->getValue());
@@ -64,7 +64,7 @@ class OperatorSerializer
                 $this->assertHasKey('value', $operator);
 
                 return new GreaterThan($operator['value']);
-            case 'greater-than-equal';
+            case 'greater-than-equal':
                 $this->assertHasKey('value', $operator);
 
                 return new GreaterThanEqual($operator['value']);
