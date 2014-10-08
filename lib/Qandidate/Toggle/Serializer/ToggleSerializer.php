@@ -114,7 +114,7 @@ class ToggleSerializer
             case 'inactive':
                 $toggle->deactivate();
                 return;
-            case 'conditionally-active';
+            case 'conditionally-active':
                 $toggle->activate(Toggle::CONDITIONALLY_ACTIVE);
                 return;
         }
