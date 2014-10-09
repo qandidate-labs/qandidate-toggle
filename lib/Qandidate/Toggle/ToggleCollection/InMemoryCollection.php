@@ -53,6 +53,14 @@ class InMemoryCollection extends ToggleCollection
     /**
      * {@inheritDoc}
      */
+    public function update($name, Toggle $toggle)
+    {
+        $this->set($name, $toggle);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function remove($name)
     {
         if ( ! array_key_exists($name, $this->toggles)) {

@@ -67,6 +67,14 @@ class PredisCollection extends ToggleCollection
     /**
      * {@inheritDoc}
      */
+    public function update($name, Toggle $toggle)
+    {
+        $this->set($name, $toggle);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function remove($name)
     {
         return 1 === $this->client->del($this->namespace . '__TOGGLE__' . $name);
