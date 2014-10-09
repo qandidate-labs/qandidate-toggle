@@ -35,4 +35,9 @@ class Context
     {
         return array_key_exists($key, $this->values);
     }
+
+    public function toArray()
+    {
+        return $this->values;
+    }
 }
