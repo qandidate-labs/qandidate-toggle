@@ -29,3 +29,22 @@ var_dump($manager->active('toggling', $context)); // false
 $context = new Context();
 $context->set('user_id', 21);
 var_dump($manager->active('toggling', $context)); // true
+
+// Create and check a new context and condition using symfony expression language
+$context = new Context();
+$context->set('user', array(
+    'active' => true,
+    'tags' => array('symfony2', 'qandidate'),
+));
+
+$context->set('product', array(
+    'price' => 30,
+));
+
+$expression = 'user["active"] and product["price"] / 100 >= 0.2';
+
+$toggle = new Toggle('sf-expression', array($expression));
+
+$manager->add($toggle);
+
+var_dump($manager->active('sf-expression', $context)); // true
