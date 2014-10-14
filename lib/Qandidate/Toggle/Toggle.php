@@ -12,7 +12,6 @@
 namespace Qandidate\Toggle;
 
 use InvalidArgumentException;
-use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**
  * Representation of a feature toggle.
@@ -105,16 +104,8 @@ class Toggle
     private function atLeastOneConditionHolds(Context $context)
     {
         foreach ($this->conditions as $condition) {
-            if (false === is_string($condition)) {
-                if ($condition->holdsFor($context)) {
-                    return true;
-                }
-            } else {
-                $language = new ExpressionLanguage();
-
-                if ($language->evaluate($condition, $context->toArray())) {
-                    return true;
-                }
+            if ($condition->holdsFor($context)) {
+                return true;
             }
         }
 
