@@ -74,6 +74,26 @@ class ToggleManager
     }
 
     /**
+     * Rename the toggle.
+     *
+     * @param Toggle $toggle
+     * @param $originalName
+     * @return bool
+     */
+    public function rename(Toggle $toggle, $originalName)
+    {
+        $this->collection->set($toggle->getName(), $toggle);
+
+        if(!empty($originalName) && $toggle->getName() != $originalName
+            && $removed = $this->collection->remove($originalName)) {
+
+            return $removed;
+        }
+
+        return false;
+    }
+
+    /**
      * @return array All toggles from the manager.
      */
     public function all()
