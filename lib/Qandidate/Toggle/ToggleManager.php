@@ -79,7 +79,10 @@ class ToggleManager
      * Rename the toggle.
      *
      * @param Toggle $toggle
-     * @param $originalName
+     * @param string $originalName
+     *
+     * @throws OutOfBoundsException
+     *
      * @return bool
      */
     public function rename(Toggle $toggle, $originalName)
