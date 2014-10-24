@@ -64,6 +64,33 @@ class ToggleManagerTest extends TestCase
     /**
      * @test
      */
+    public function it_renames_a_toggle()
+    {
+        $manager = new ToggleManager(new InMemoryCollection());
+
+        $manager->add($this->createToggleMock());
+
+        $this->assertTrue($manager->rename($this->createToggleMock(true, 'other-feature'), 'some-feature'));
+        $this->assertFalse($manager->active('some-feature', new Context()));
+        $this->assertTrue($manager->active('other-feature', new Context()));
+    }
+
+    /**
+     * @test
+     * @expectedException OutOfBoundsException
+     */
+    public function it_returns_exception_if_toggle_name_matches_original_name()
+    {
+        $manager = new ToggleManager(new InMemoryCollection());
+
+        $manager->add($this->createToggleMock());
+
+        $this->assertTrue($manager->rename($this->createToggleMock(), 'some-feature'));
+    }
+
+    /**
+     * @test
+     */
     public function it_exposes_all_toggles()
     {
         $toggle     = new Toggle('some-feature',       array());
@@ -80,7 +107,7 @@ class ToggleManagerTest extends TestCase
         $this->assertEquals($all['some-other-feature'], $toggle2);
     }
 
-    public function createToggleMock($active = true)
+    public function createToggleMock($active = true, $getName = 'some-feature')
     {
         $toggleMock = $this->getMockBuilder('Qandidate\Toggle\Toggle')
             ->disableOriginalConstructor()
@@ -92,7 +119,7 @@ class ToggleManagerTest extends TestCase
 
         $toggleMock->expects($this->any())
             ->method('getName')
-            ->will($this->returnValue('some-feature'));
+            ->will($this->returnValue($getName));
 
         return $toggleMock;
     }
