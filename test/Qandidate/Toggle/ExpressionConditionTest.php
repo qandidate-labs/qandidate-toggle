@@ -51,5 +51,21 @@ class ExpressionConditionTest extends TestCase
 
         $this->assertFalse($condition->holdsFor($context));
     }
+
+    /**
+     * @test
+     */
+    public function it_should_return_false_if_the_expression_does_not_return_boolean()
+    {
+        $condition = new ExpressionCondition('user["tags"]');
+        $context   = new Context();
+
+        $context->set('user', array(
+                'active' => true,
+                'tags'   => array('symfony2', 'qandidate'),
+            ));
+
+        $this->assertFalse($condition->holdsFor($context));
+    }
 }
  

@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "predis/predis": "~0.8",
-        "symfony/expression-language": "2.5"
+        "symfony/expression-language": "~2.4"
     },
     "suggest": {
         "predis/predis": "To use the PredisCollection to persist toggles in redis",

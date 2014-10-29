@@ -3,9 +3,9 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Qandidate\Toggle\Context;
+use Qandidate\Toggle\ExpressionCondition;
 use Qandidate\Toggle\Operator\LessThan;
 use Qandidate\Toggle\OperatorCondition;
-use Qandidate\Toggle\ExpressionCondition;
 use Qandidate\Toggle\Toggle;
 use Qandidate\Toggle\ToggleCollection\InMemoryCollection;
 use Qandidate\Toggle\ToggleManager;
