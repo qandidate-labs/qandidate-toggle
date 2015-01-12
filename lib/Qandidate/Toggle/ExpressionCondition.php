@@ -15,12 +15,12 @@ class ExpressionCondition extends Condition
 
     /**
      * @param string             $expression The expression to ve evaluated
-     * @param ExpressionLanguage $language The instance of the Expression Language
+     * @param ExpressionLanguage $language   The instance of the Expression Language
      */
-    function __construct($expression, ExpressionLanguage $language = null)
+    function __construct($expression, ExpressionLanguage $language)
     {
         $this->expression = $expression;
-        $this->language   = $language ?: new ExpressionLanguage();
+        $this->language   = $language;
     }
 
     /**
