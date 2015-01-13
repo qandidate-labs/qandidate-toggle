@@ -17,10 +17,12 @@
         "php": ">=5.3.2"
     },
     "require-dev": {
-        "predis/predis": "~0.8"
+        "predis/predis": "~0.8",
+        "symfony/expression-language": "~2.4"
     },
     "suggest": {
-        "predis/predis": "To use the PredisCollection to persist toggles in redis"
+        "predis/predis": "To use the PredisCollection to persist toggles in redis",
+        "symfony/expression-language": "To use the ExpressionCondition to add conditions as a symfony language expression"
     },
     "autoload": {
         "psr-0": {"Qandidate\\Toggle": "lib/"}
