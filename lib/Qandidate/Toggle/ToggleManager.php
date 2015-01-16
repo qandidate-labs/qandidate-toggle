@@ -11,6 +11,8 @@
 
 namespace Qandidate\Toggle;
 
+use OutOfBoundsException;
+
 /**
  * Manages the toggles of an application.
  */
@@ -71,6 +73,27 @@ class ToggleManager
     public function update(Toggle $toggle)
     {
         $this->collection->set($toggle->getName(), $toggle);
+    }
+
+    /**
+     * Rename the toggle.
+     *
+     * @param Toggle $toggle
+     * @param string $originalName
+     *
+     * @throws OutOfBoundsException
+     *
+     * @return bool
+     */
+    public function rename(Toggle $toggle, $originalName)
+    {
+        if($toggle->getName() != $originalName) {
+            $this->collection->set($toggle->getName(), $toggle);
+
+            return $this->collection->remove($originalName);
+        }
+
+        throw new OutOfBoundsException("Toggle {$toggle->getName()} and {$originalName} are not valid arguments for renaming");
     }
 
     /**
