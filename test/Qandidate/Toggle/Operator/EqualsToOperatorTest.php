@@ -78,6 +78,10 @@ class EqualsToOperatorTest extends TestCase
             array(42,   43),
             array(-42, -43),
             array(-42.1, -43.1),
+            array(false, 0),
+            array(null, 0),
+            array(true, 1),
+            array("0", 0),
         );
     }
 
