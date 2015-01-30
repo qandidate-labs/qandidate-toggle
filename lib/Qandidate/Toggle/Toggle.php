@@ -27,14 +27,21 @@ class Toggle
     const ALWAYS_ACTIVE        = 2;
     const INACTIVE             = 4;
 
+    const STRATEGY_AFFIRMATIVE = 1;
+    const STRATEGY_MAJORITY    = 2;
+    const STRATEGY_UNANIMOUS   = 3;
+
     private $name;
     private $conditions;
     private $status = self::CONDITIONALLY_ACTIVE;
+    private $strategy = self::STRATEGY_AFFIRMATIVE;
 
-    public function __construct($name, array $conditions)
+    public function __construct($name, array $conditions, $strategy = self::STRATEGY_AFFIRMATIVE)
     {
         $this->name       = $name;
         $this->conditions = $conditions;
+        $this->assertValidStrategy($strategy);
+        $this->strategy   = $strategy;
     }
 
     /**
@@ -61,7 +68,14 @@ class Toggle
             case self::INACTIVE:
                 return false;
             case self::CONDITIONALLY_ACTIVE:
-                return $this->atLeastOneConditionHolds($context);
+                switch ($this->strategy) {
+                    case self::STRATEGY_AFFIRMATIVE:
+                        return $this->atLeastOneConditionHolds($context);
+                    case self::STRATEGY_MAJORITY:
+                        return $this->moreThanHalfConditionsHold($context);
+                    case self::STRATEGY_UNANIMOUS:
+                        return $this->allConditionsHold($context);
+                }
         }
     }
 
@@ -94,6 +108,17 @@ class Toggle
         return $this->status;
     }
 
+    /**
+     * @return integer
+     */
+    public function getStrategy()
+    {
+        return $this->strategy;
+    }
+
+    /**
+     * @param $status
+     */
     private function assertValidActiveStatus($status)
     {
         if ($status !== self::ALWAYS_ACTIVE && $status !== self::CONDITIONALLY_ACTIVE) {
@@ -101,6 +126,25 @@ class Toggle
         }
     }
 
+    /**
+     * @param $strategy
+     */
+    private function assertValidStrategy($strategy)
+    {
+        if (! in_array($strategy, array(
+            self::STRATEGY_AFFIRMATIVE,
+            self::STRATEGY_MAJORITY,
+            self::STRATEGY_UNANIMOUS
+        ))) {
+            throw new InvalidArgumentException('No supported strategy was provided.');
+        }
+    }
+
+    /**
+     * @param Context $context
+     *
+     * @return bool
+     */
     private function atLeastOneConditionHolds(Context $context)
     {
         foreach ($this->conditions as $condition) {
@@ -110,5 +154,38 @@ class Toggle
         }
 
         return false;
+    }
+
+    /**
+     * @param Context $context
+     *
+     * @return bool
+     */
+    private function moreThanHalfConditionsHold(Context $context)
+    {
+        $nbPositive = 0;
+        $nbNegative = 0;
+
+        foreach ($this->conditions as $condition) {
+            $condition->holdsFor($context) ? $nbPositive++ : $nbNegative++;
+        }
+
+        return $nbPositive > $nbNegative;
+    }
+
+    /**
+     * @param Context $context
+     *
+     * @return bool
+     */
+    private function allConditionsHold(Context $context)
+    {
+        foreach ($this->conditions as $condition) {
+            if (!$condition->holdsFor($context)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

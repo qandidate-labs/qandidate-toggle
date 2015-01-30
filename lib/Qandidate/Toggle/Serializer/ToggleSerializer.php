@@ -38,6 +38,7 @@ class ToggleSerializer
             'name' => $toggle->getName(),
             'conditions' => $this->serializeConditions($toggle->getConditions()),
             'status' => $this->serializeStatus($toggle),
+            'strategy' => $this->serializeStrategy($toggle)
         );
     }
 
@@ -57,7 +58,8 @@ class ToggleSerializer
 
         $toggle = new Toggle(
             $data['name'],
-            $this->deserializeConditions($data['conditions'])
+            $this->deserializeConditions($data['conditions']),
+            isset($data['strategy']) ? $this->deserializeStrategy($data['strategy']) : Toggle::STRATEGY_AFFIRMATIVE
         );
 
         if (isset($data['status'])) {
@@ -120,6 +122,42 @@ class ToggleSerializer
         }
 
         throw new RuntimeException(sprintf('Unknown toggle status "%s".', $status));
+    }
+
+    /**
+     * @param Toggle $toggle
+     *
+     * @return string
+     */
+    private function serializeStrategy(Toggle $toggle)
+    {
+        switch ($toggle->getStrategy()) {
+            case Toggle::STRATEGY_AFFIRMATIVE:
+                return 'affirmative';
+            case Toggle::STRATEGY_MAJORITY:
+                return 'majority';
+            case Toggle::STRATEGY_UNANIMOUS:
+                return 'unanimous';
+        }
+    }
+
+    /**
+     * @param string $strategy
+     *
+     * @return int
+     */
+    private function deserializeStrategy($strategy)
+    {
+        switch ($strategy) {
+            case 'affirmative':
+                return Toggle::STRATEGY_AFFIRMATIVE;
+            case 'majority':
+                return Toggle::STRATEGY_MAJORITY;
+            case 'unanimous':
+                return Toggle::STRATEGY_UNANIMOUS;
+        }
+
+        throw new RuntimeException(sprintf('Unknown toggle strategy "%s".', $strategy));
     }
 
     private function assertHasKey($key, array $data)
