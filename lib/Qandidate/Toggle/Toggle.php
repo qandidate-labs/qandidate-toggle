@@ -87,6 +87,14 @@ class Toggle
     }
 
     /**
+     * @param string $newName
+     */
+    public function rename($newName)
+    {
+        $this->name = $newName;
+    }
+
+    /**
      * @return integer
      */
     public function getStatus()

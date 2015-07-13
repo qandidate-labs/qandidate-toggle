@@ -11,7 +11,7 @@
 
 namespace Qandidate\Toggle;
 
-use OutOfBoundsException;
+use RuntimeException;
 
 /**
  * Manages the toggles of an application.
@@ -78,22 +78,50 @@ class ToggleManager
     /**
      * Rename the toggle.
      *
-     * @param Toggle $toggle
-     * @param string $originalName
+     * @param string $oldName
+     * @param string $newName
      *
-     * @throws OutOfBoundsException
+     * @throws RuntimeException
      *
      * @return bool
      */
-    public function rename(Toggle $toggle, $originalName)
+    public function rename($oldName, $newName)
     {
-        if($toggle->getName() != $originalName) {
-            $this->collection->set($toggle->getName(), $toggle);
-
-            return $this->collection->remove($originalName);
+        if (null !== $this->collection->get($newName)) {
+            throw new RuntimeException(
+                sprintf(
+                    'Could not rename toggle %1$s to %2$s, a toggle with name %2$s already exists',
+                    $oldName,
+                    $newName
+                )
+            );
         }
 
-        throw new OutOfBoundsException("Toggle {$toggle->getName()} and {$originalName} are not valid arguments for renaming");
+        $currentToggle = $this->collection->get($oldName);
+
+        if (null === $currentToggle) {
+            throw new RuntimeException(
+                sprintf(
+                    'Could not rename toggle %1$s to %2$s, toggle with name %1$s does not exists',
+                    $oldName,
+                    $newName
+                )
+            );
+        }
+
+        $currentToggle->rename($newName);
+
+        if (false === $this->add($currentToggle)) {
+            throw new RuntimeException(
+                sprintf(
+                    'Failed to rename toggle %1$s to %2$s, an error occured when saving toggle with new name',
+                    $oldName,
+                    $newName
+                )
+            );
+        }
+
+        return $this->remove($oldName);
     }
 
     /**
