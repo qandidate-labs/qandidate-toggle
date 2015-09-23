@@ -28,6 +28,10 @@ class Toggle
     const INACTIVE             = 4;
 
     private $name;
+
+    /**
+     * @var Condition[]
+     */
     private $conditions;
     private $status = self::CONDITIONALLY_ACTIVE;
 
