@@ -27,6 +27,10 @@ class Toggle
     const ALWAYS_ACTIVE        = 2;
     const INACTIVE             = 4;
 
+    const STRATEGY_AFFIRMATIVE = -1;
+    const STRATEGY_CONSENSUS   = -2;
+    const STRATEGY_UNANIMOUS   = -4;
+
     private $name;
 
     /**
@@ -34,11 +38,15 @@ class Toggle
      */
     private $conditions;
     private $status = self::CONDITIONALLY_ACTIVE;
+    private $strategy;
 
-    public function __construct($name, array $conditions)
+    public function __construct($name, array $conditions, $strategy = self::STRATEGY_AFFIRMATIVE)
     {
+        $this->assertValidStrategy($strategy);
+
         $this->name       = $name;
         $this->conditions = $conditions;
+        $this->strategy   = $strategy;
     }
 
     /**
@@ -65,7 +73,7 @@ class Toggle
             case self::INACTIVE:
                 return false;
             case self::CONDITIONALLY_ACTIVE:
-                return $this->atLeastOneConditionHolds($context);
+                return $this->conditionsHold($context);
         }
     }
 
@@ -106,6 +114,14 @@ class Toggle
         return $this->status;
     }
 
+    /**
+     * @return integer
+     */
+    public function getStrategy()
+    {
+        return $this->strategy;
+    }
+
     private function assertValidActiveStatus($status)
     {
         if ($status !== self::ALWAYS_ACTIVE && $status !== self::CONDITIONALLY_ACTIVE) {
@@ -113,10 +129,69 @@ class Toggle
         }
     }
 
+    private static function assertValidStrategy($strategy)
+    {
+        $validStrategies = array(
+            self::STRATEGY_AFFIRMATIVE,
+            self::STRATEGY_CONSENSUS,
+            self::STRATEGY_UNANIMOUS,
+        );
+
+        if ( ! in_array($strategy, $validStrategies)) {
+            throw new InvalidArgumentException('No valid "strategy" was provided.');
+        }
+    }
+
+    /**
+     * @param Context $context
+     *
+     * @return bool
+     */
+    private function conditionsHold(Context $context)
+    {
+        switch ($this->strategy) {
+            case self::STRATEGY_AFFIRMATIVE:
+                return $this->atLeastOneConditionHolds($context);
+            case self::STRATEGY_UNANIMOUS:
+                return $this->allConditionsHold($context);
+            case self::STRATEGY_CONSENSUS:
+                return $this->mostConditionsHold($context);
+        }
+    }
+
     private function atLeastOneConditionHolds(Context $context)
     {
         foreach ($this->conditions as $condition) {
             if ($condition->holdsFor($context)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function allConditionsHold($context)
+    {
+        foreach ($this->conditions as $condition) {
+            if ( ! $condition->holdsFor($context)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function mostConditionsHold($context)
+    {
+        $conditionThreshold = (int) (count($this->conditions) / 2);
+        $conditionsThatHold = 0;
+        foreach ($this->conditions as $condition) {
+            if ( ! $condition->holdsFor($context)) {
+                continue;
+            }
+
+            $conditionsThatHold++;
+            if ($conditionsThatHold > $conditionThreshold) {
                 return true;
             }
         }
