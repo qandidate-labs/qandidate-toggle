@@ -9,6 +9,6 @@ php:
   - 5.5
 
 install:
-  - composer install --dev
+  - composer install
 
 script: phpunit
