@@ -38,11 +38,8 @@ class ToggleSerializer
             'name' => $toggle->getName(),
             'conditions' => $this->serializeConditions($toggle->getConditions()),
             'status' => $this->serializeStatus($toggle),
+            'strategy' => $this->serializeStrategy($toggle),
         );
-
-        if ($toggle->getStrategy() != Toggle::STRATEGY_AFFIRMATIVE) {
-            $serialized['strategy'] = $this->serializeStrategy($toggle);
-        }
 
         return $serialized;
     }

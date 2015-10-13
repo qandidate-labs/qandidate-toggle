@@ -42,6 +42,7 @@ class ToggleSerializerTest extends TestCase
                     ),
                 ),
                 'status' => 'conditionally-active',
+                'strategy' => 'affirmative',
             ),
             $data
         );
