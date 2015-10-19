@@ -25,6 +25,8 @@
         "symfony/expression-language": "To use the ExpressionCondition to add conditions as a symfony language expression"
     },
     "autoload": {
-        "psr-0": {"Qandidate\\Toggle": "lib/"}
+        "psr-4": {
+          "Qandidate\\Toggle\\": "lib/Qandidate/Toggle/"
+        }
     }
 }
