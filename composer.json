@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-          "Qandidate\\Toggle\\": "lib/Qandidate/Toggle/"
+          "Qandidate\\Toggle\\": "lib/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Qandidate\\Toggle\\": "test/Qandidate/Toggle/"
+            "Qandidate\\Toggle\\": "test/"
         }
     }
 }

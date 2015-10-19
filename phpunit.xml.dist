@@ -13,7 +13,7 @@
 >
   <testsuites>
     <testsuite name="Qandidate Feature Flip Test Suite">
-      <directory>./test/Qandidate/</directory>
+      <directory>./test/</directory>
     </testsuite>
   </testsuites>
 
