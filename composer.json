@@ -28,5 +28,10 @@
         "psr-4": {
           "Qandidate\\Toggle\\": "lib/Qandidate/Toggle/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Qandidate\\Toggle\\": "test/Qandidate/Toggle/"
+        }
     }
 }
