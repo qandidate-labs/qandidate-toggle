@@ -34,11 +34,14 @@ class ToggleSerializer
      */
     public function serialize(Toggle $toggle)
     {
-        return array(
+        $serialized = array(
             'name' => $toggle->getName(),
             'conditions' => $this->serializeConditions($toggle->getConditions()),
             'status' => $this->serializeStatus($toggle),
+            'strategy' => $this->serializeStrategy($toggle),
         );
+
+        return $serialized;
     }
 
     /**
@@ -55,9 +58,15 @@ class ToggleSerializer
             throw new RuntimeException('Key "conditions" should be an array.');
         }
 
+        $strategy = Toggle::STRATEGY_AFFIRMATIVE;
+        if (isset($data['strategy'])) {
+            $strategy = $this->deserializeStrategy($data['strategy']);
+        }
+
         $toggle = new Toggle(
             $data['name'],
-            $this->deserializeConditions($data['conditions'])
+            $this->deserializeConditions($data['conditions']),
+            $strategy
         );
 
         if (isset($data['status'])) {
@@ -120,6 +129,32 @@ class ToggleSerializer
         }
 
         throw new RuntimeException(sprintf('Unknown toggle status "%s".', $status));
+    }
+
+    private function serializeStrategy(Toggle $toggle)
+    {
+        switch ($toggle->getStrategy()) {
+            case Toggle::STRATEGY_AFFIRMATIVE:
+                return 'affirmative';
+            case Toggle::STRATEGY_UNANIMOUS:
+                return 'unanimous';
+            case Toggle::STRATEGY_CONSENSUS:
+                return 'consensus';
+        }
+    }
+
+    private function deserializeStrategy($strategy)
+    {
+        switch ($strategy) {
+            case 'affirmative':
+                return Toggle::STRATEGY_AFFIRMATIVE;
+            case 'unanimous':
+                return Toggle::STRATEGY_UNANIMOUS;
+            case 'consensus':
+                return Toggle::STRATEGY_CONSENSUS;
+        }
+
+        throw new RuntimeException(sprintf('Unknown toggle strategy "%s".', $strategy));
     }
 
     private function assertHasKey($key, array $data)

@@ -42,6 +42,7 @@ class ToggleSerializerTest extends TestCase
                     ),
                 ),
                 'status' => 'conditionally-active',
+                'strategy' => 'affirmative',
             ),
             $data
         );
@@ -75,6 +76,33 @@ class ToggleSerializerTest extends TestCase
 
     /**
      * @test
+     */
+    public function it_deserializes_a_toggle_with_strategy()
+    {
+        $serializer = $this->createToggleSerializer();
+
+        $toggle = array(
+            'name' => 'some-feature',
+            'conditions' => array(
+                array(
+                    'name' => 'operator-condition',
+                    'key' => 'user_id',
+                    'operator' => array('name' => 'greater-than', 'value' => 42),
+                ),
+            ),
+            'strategy' => 'unanimous'
+        );
+
+        $operator = new OperatorCondition('user_id', new GreaterThan(42));
+        $expected = new Toggle('some-feature', array($operator), Toggle::STRATEGY_UNANIMOUS);
+
+        $toggle = $serializer->deserialize($toggle);
+
+        $this->assertEquals($expected, $toggle);
+    }
+
+    /**
+     * @test
      * @expectedException RuntimeException
      */
     public function it_throws_exception_on_unsupport_condition()
@@ -97,6 +125,24 @@ class ToggleSerializerTest extends TestCase
 
         $serializer->deserialize($serialized);
     }
+
+
+    /**
+     * @test
+     * @expectedException RuntimeException
+     */
+    public function it_throws_exception_on_unsupported_strategy()
+    {
+        $serializer = $this->createToggleSerializer();
+
+        $serializer->deserialize(array(
+            'name'       => 'some-feature',
+            'conditions' => array(),
+            'status'     => 'inactive',
+            'strategy'   => '',
+        ));
+    }
+
 
     public function missingKeys()
     {
