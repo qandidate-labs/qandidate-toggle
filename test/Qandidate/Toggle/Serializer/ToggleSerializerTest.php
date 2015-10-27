@@ -42,6 +42,7 @@ class ToggleSerializerTest extends TestCase
                     ),
                 ),
                 'status' => 'conditionally-active',
+                'strategy' => 'affirmative'
             ),
             $data
         );
@@ -71,6 +72,8 @@ class ToggleSerializerTest extends TestCase
         $toggle = $serializer->deserialize($toggle);
 
         $this->assertEquals($expected, $toggle);
+        $this->assertEquals(Toggle::CONDITIONALLY_ACTIVE, $toggle->getStatus());
+        $this->assertEquals(Toggle::STRATEGY_AFFIRMATIVE, $toggle->getStrategy());
     }
 
     /**
@@ -108,6 +111,7 @@ class ToggleSerializerTest extends TestCase
             array(array('name' => '', 'conditions' => '')),
             array(array('name' => '', 'status' => '')),
             array(array('conditions' => '', 'status' => '')),
+            array(array('strategy' => ''))
         );
     }
 
@@ -170,6 +174,54 @@ class ToggleSerializerTest extends TestCase
         $serializer->deserialize(array('name' => 'foo', 'status' => 'invalid', 'conditions' => array()));
     }
 
+    /**
+     * @test
+     * @dataProvider toggleStrategies
+     */
+    public function it_serializes_all_strategies($toggle, $expectedStrategy)
+    {
+        $serializer = $this->createToggleSerializer();
+
+        $data = $serializer->serialize($toggle);
+
+        $this->assertEquals($expectedStrategy, $data['strategy']);
+    }
+
+    /**
+     * @test
+     * @dataProvider toggleStrategies
+     */
+    public function it_deserializes_to_the_appropriate_strategies($toggle)
+    {
+        $serializer = $this->createToggleSerializer();
+        $strategy   = $toggle->getStrategy();
+
+        $data               = $serializer->serialize($toggle);
+        $deserializedToggle = $serializer->deserialize($data);
+
+        $this->assertEquals($strategy, $deserializedToggle->getStrategy());
+    }
+
+    /**
+     * @test
+     * @expectedException RuntimeException
+     */
+    public function it_throws_exception_on_invalid_strategy_data()
+    {
+        $serializer = $this->createToggleSerializer();
+
+        $serializer->deserialize(array('name' => 'foo', 'status' => 'conditionally-active', 'strategy' => 'invalid', 'conditions' => array()));
+    }
+
+    public function toggleStrategies()
+    {
+        return array(
+            array($this->createAffirmativeToggle(), 'affirmative'),
+            array($this->createMajorityToggle(), 'majority'),
+            array($this->createUnanimousToggle(), 'unanimous'),
+        );
+    }
+
     private function createToggleSerializer()
     {
         $operatorSerializer          = new OperatorSerializer();
@@ -197,6 +249,27 @@ class ToggleSerializerTest extends TestCase
     {
         $toggle = new Toggle('some-feature', array());
         $toggle->deactivate();
+
+        return $toggle;
+    }
+
+    private function createAffirmativeToggle()
+    {
+        $toggle = new Toggle('some-feature', array(), Toggle::STRATEGY_AFFIRMATIVE);
+
+        return $toggle;
+    }
+
+    private function createMajorityToggle()
+    {
+        $toggle = new Toggle('some-feature', array(), Toggle::STRATEGY_MAJORITY);
+
+        return $toggle;
+    }
+
+    private function createUnanimousToggle()
+    {
+        $toggle = new Toggle('some-feature', array(), Toggle::STRATEGY_UNANIMOUS);
 
         return $toggle;
     }
