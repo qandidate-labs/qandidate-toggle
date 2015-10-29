@@ -1,5 +1,5 @@
 {
-    "name": "qandidate/toggle",
+    "name": "blablacar/qandidate-toggle",
     "description": "Feature toggling for your PHP application.",
     "keywords": ["feature", "flipping", "flip", "switch", "bits", "trigger", "toggle"],
     "license": "MIT",
