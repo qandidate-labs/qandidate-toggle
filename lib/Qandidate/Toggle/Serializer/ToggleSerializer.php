@@ -20,7 +20,7 @@ use RuntimeException;
  */
 class ToggleSerializer
 {
-    private $operatorConditionSerializer;
+    protected $operatorConditionSerializer;
 
     public function __construct(OperatorConditionSerializer $operatorConditionSerializer)
     {
