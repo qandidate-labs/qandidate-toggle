@@ -69,7 +69,7 @@ class ToggleSerializer
         return $toggle;
     }
 
-    private function serializeConditions(array $conditions)
+    protected function serializeConditions(array $conditions)
     {
         $serialized = array();
 
@@ -84,7 +84,7 @@ class ToggleSerializer
         return $serialized;
     }
 
-    private function deserializeConditions(array $conditions)
+    protected function deserializeConditions(array $conditions)
     {
         $deserialized = array();
 
@@ -95,7 +95,7 @@ class ToggleSerializer
         return $deserialized;
     }
 
-    private function serializeStatus(Toggle $toggle)
+    protected function serializeStatus(Toggle $toggle)
     {
         switch ($toggle->getStatus()) {
             case Toggle::ALWAYS_ACTIVE:
@@ -107,7 +107,7 @@ class ToggleSerializer
         }
     }
 
-    private function deserializeStatus(Toggle $toggle, $status)
+    protected function deserializeStatus(Toggle $toggle, $status)
     {
         switch ($status) {
             case 'always-active':
@@ -160,7 +160,7 @@ class ToggleSerializer
         throw new RuntimeException(sprintf('Unknown toggle strategy "%s".', $strategy));
     }
 
-    private function assertHasKey($key, array $data)
+    protected function assertHasKey($key, array $data)
     {
         if ( ! array_key_exists($key, $data)) {
             throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));
