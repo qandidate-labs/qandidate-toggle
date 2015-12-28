@@ -4,7 +4,7 @@ namespace Qandidate\Toggle\Operator;
 
 use Qandidate\Toggle\TestCase;
 
-class EqualsToOperatorTest extends TestCase
+class EqualToOperatorTest extends TestCase
 {
     /**
      * @test
@@ -12,7 +12,7 @@ class EqualsToOperatorTest extends TestCase
      */
     public function it_applies_to_integer_values($value, $argument)
     {
-        $operator = new EqualsTo($value);
+        $operator = new EqualTo($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
@@ -31,7 +31,7 @@ class EqualsToOperatorTest extends TestCase
      */
     public function it_applies_to_string_values($value, $argument)
     {
-        $operator = new EqualsTo($value);
+        $operator = new EqualTo($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
@@ -50,7 +50,7 @@ class EqualsToOperatorTest extends TestCase
      */
     public function it_applies_to_float_values($value, $argument)
     {
-        $operator = new EqualsTo($value);
+        $operator = new EqualTo($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
@@ -68,7 +68,7 @@ class EqualsToOperatorTest extends TestCase
      */
     public function it_does_not_apply_to_not_equal_values($value, $argument)
     {
-        $operator = new EqualsTo($value);
+        $operator = new EqualTo($value);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
@@ -90,7 +90,7 @@ class EqualsToOperatorTest extends TestCase
      */
     public function it_exposes_its_value()
     {
-        $operator = new EqualsTo(42);
+        $operator = new EqualTo(42);
         $this->assertEquals(42, $operator->getValue());
     }
 } 

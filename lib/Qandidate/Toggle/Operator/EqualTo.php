@@ -2,7 +2,7 @@
 
 namespace Qandidate\Toggle\Operator;
 
-class EqualsTo extends EqualityOperator
+class EqualTo extends EqualityOperator
 {
     /**
      * {@inheritdoc}
