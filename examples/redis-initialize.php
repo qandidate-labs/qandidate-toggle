@@ -13,7 +13,7 @@ $predis     = new Predis\Client();
 $collection = new PredisCollection('toggle_demo', $predis);
 $manager    = new ToggleManager($collection);
 
-// A toggle that will be active is the user id is less than 42
+// A toggle that will be active when  the user id is less than 42
 $operator  = new LessThan(42);
 $condition = new OperatorCondition('user_id', $operator);
 $toggle    = new Toggle('toggling', array($condition));

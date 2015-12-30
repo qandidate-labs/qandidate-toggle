@@ -12,8 +12,8 @@ $data = array(
         'name' => 'toggling',
         'conditions' => array(
             array(
-                'name' => 'operator-condition',
-                'key' => 'user_id',
+                'name'     => 'operator-condition',
+                'key'      => 'user_id',
                 'operator' => array('name' => 'greater-than', 'value' => 41),
             ),
         ),
