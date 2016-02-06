@@ -19,7 +19,7 @@ abstract class Operator
     /**
      * @param mixed $argument
      *
-     * @return boolean True, if the operator applies to the argument
+     * @return bool True, if the operator applies to the argument
      */
     abstract public function appliesTo($argument);
 }

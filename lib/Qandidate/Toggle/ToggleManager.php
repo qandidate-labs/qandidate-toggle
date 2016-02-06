@@ -32,7 +32,7 @@ class ToggleManager
      * @param string  $name
      * @param Context $context
      *
-     * @return True, if the toggle exists and is active
+     * @return bool True, if the toggle exists and is active
      */
     public function active($name, Context $context)
     {
@@ -48,7 +48,7 @@ class ToggleManager
      *
      * @param string $name
      *
-     * @return boolean True, if element was removed
+     * @return bool True, if element was removed
      */
     public function remove($name)
     {
@@ -114,7 +114,7 @@ class ToggleManager
         if (false === $this->add($currentToggle)) {
             throw new RuntimeException(
                 sprintf(
-                    'Failed to rename toggle %1$s to %2$s, an error occured when saving toggle with new name',
+                    'Failed to rename toggle %1$s to %2$s, an error occurred when saving toggle with new name',
                     $oldName,
                     $newName
                 )
@@ -125,7 +125,7 @@ class ToggleManager
     }
 
     /**
-     * @return array All toggles from the manager.
+     * @return array|Toggle[] All toggles from the manager.
      */
     public function all()
     {

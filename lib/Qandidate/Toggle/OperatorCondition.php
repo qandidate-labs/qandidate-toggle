@@ -16,7 +16,10 @@ namespace Qandidate\Toggle;
  */
 class OperatorCondition extends Condition
 {
+    /** @var string */
     private $key;
+
+    /** @var Operator */
     private $operator;
 
     /**
@@ -28,6 +31,7 @@ class OperatorCondition extends Condition
         $this->key      = $key;
         $this->operator = $operator;
     }
+
     /**
      * {@inheritdoc}
      */

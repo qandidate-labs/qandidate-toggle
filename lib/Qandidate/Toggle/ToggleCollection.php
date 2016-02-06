@@ -20,7 +20,7 @@ namespace Qandidate\Toggle;
 abstract class ToggleCollection
 {
     /**
-     * @return array
+     * @return array|Toggle[]
      */
     abstract public function all();
 
@@ -40,7 +40,7 @@ abstract class ToggleCollection
     /**
      * @param string $name
      *
-     * @return boolean True, if element was removed
+     * @return bool True, if element was removed
      */
     abstract public function remove($name);
 }
