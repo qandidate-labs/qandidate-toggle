@@ -17,13 +17,25 @@ namespace Qandidate\Toggle;
  */
 class Context
 {
+    /** @var array */
     private $values = array();
 
+    /**
+     * @param int|string $key
+     *
+     * @return mixed
+     */
     public function get($key)
     {
         return $this->values[$key];
     }
 
+    /**
+     * @param int|string $key
+     * @param mixed      $value
+     *
+     * @return $this
+     */
     public function set($key, $value)
     {
         $this->values[$key] = $value;
@@ -31,11 +43,19 @@ class Context
         return $this;
     }
 
+    /**
+     * @param int|string $key
+     *
+     * @return bool
+     */
     public function has($key)
     {
         return array_key_exists($key, $this->values);
     }
 
+    /**
+     * @return array|mixed[]
+     */
     public function toArray()
     {
         return $this->values;

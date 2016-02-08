@@ -20,6 +20,7 @@ use Qandidate\Toggle\ToggleCollection;
  */
 class InMemoryCollection extends ToggleCollection
 {
+    /** @var array|Toggle[] */
     private $toggles = array();
 
     /**
@@ -35,7 +36,7 @@ class InMemoryCollection extends ToggleCollection
      */
     public function get($name)
     {
-        if ( ! array_key_exists($name, $this->toggles)) {
+        if (!array_key_exists($name, $this->toggles)) {
             return null;
         }
 
@@ -55,7 +56,7 @@ class InMemoryCollection extends ToggleCollection
      */
     public function remove($name)
     {
-        if ( ! array_key_exists($name, $this->toggles)) {
+        if (!array_key_exists($name, $this->toggles)) {
             return false;
         }
 

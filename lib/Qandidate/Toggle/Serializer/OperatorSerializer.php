@@ -12,7 +12,7 @@
 namespace Qandidate\Toggle\Serializer;
 
 use Qandidate\Toggle\Operator;
-use Qandidate\Toggle\Operator\EqualsTo;
+use Qandidate\Toggle\Operator\EqualTo;
 use Qandidate\Toggle\Operator\GreaterThan;
 use Qandidate\Toggle\Operator\GreaterThanEqual;
 use Qandidate\Toggle\Operator\InSet;
@@ -35,8 +35,8 @@ class OperatorSerializer
     public function serialize(Operator $operator)
     {
         switch(true) {
-            case $operator instanceof EqualsTo:
-                return array('name' => 'equals-to', 'value' => $operator->getValue());
+            case $operator instanceof EqualTo:
+                return array('name' => 'equal-to', 'value' => $operator->getValue());
             case $operator instanceof GreaterThan:
                 return array('name' => 'greater-than', 'value' => $operator->getValue());
             case $operator instanceof GreaterThanEqual:
@@ -66,10 +66,11 @@ class OperatorSerializer
         $this->assertHasKey('name', $operator);
 
         switch($operator['name']) {
-            case 'equals-to':
+            case 'equals-to': // Left for backward compatibility, todo: should be removed in future
+            case 'equal-to':
                 $this->assertHasKey('value', $operator);
 
-                return new EqualsTo($operator['value']);
+                return new EqualTo($operator['value']);
             case 'greater-than':
                 $this->assertHasKey('value', $operator);
 

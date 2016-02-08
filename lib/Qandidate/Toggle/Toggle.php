@@ -27,15 +27,32 @@ class Toggle
     const ALWAYS_ACTIVE        = 2;
     const INACTIVE             = 4;
 
+    /** At least one of the provided conditions has to be met */
     const STRATEGY_AFFIRMATIVE = 1;
+
+    /** At least half of the provided conditions have to be met */
     const STRATEGY_MAJORITY    = 2;
+
+    /** All conditions have to be met */
     const STRATEGY_UNANIMOUS   = 3;
 
+    /** @var string */
     private $name;
+
+    /** @var array|Condition[] */
     private $conditions;
+
+    /** @var int */
     private $status = self::CONDITIONALLY_ACTIVE;
+
+    /** @var int */
     private $strategy = self::STRATEGY_AFFIRMATIVE;
 
+    /**
+     * @param                   $name
+     * @param array|Condition[] $conditions
+     * @param int               $strategy
+     */
     public function __construct($name, array $conditions, $strategy = self::STRATEGY_AFFIRMATIVE)
     {
         $this->name       = $name;
@@ -45,7 +62,7 @@ class Toggle
     }
 
     /**
-     * @param integer $status
+     * @param int $status
      */
     public function activate($status = self::CONDITIONALLY_ACTIVE)
     {
@@ -58,7 +75,7 @@ class Toggle
      *
      * @param Context $context
      *
-     * @return boolean True, if one of conditions hold for the context.
+     * @return bool True, if one of conditions hold for the context.
      */
     public function activeFor(Context $context)
     {
@@ -79,13 +96,18 @@ class Toggle
         }
     }
 
+    /**
+     * Immediately set this toggle's status to inactive
+     *
+     * @return int The status code after deactivation
+     */
     public function deactivate()
     {
         return $this->status = self::INACTIVE;
     }
 
     /**
-     * @return array
+     * @return array|Condition[]
      */
     public function getConditions()
     {
@@ -109,7 +131,7 @@ class Toggle
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getStatus()
     {
@@ -117,7 +139,7 @@ class Toggle
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function getStrategy()
     {
@@ -125,7 +147,7 @@ class Toggle
     }
 
     /**
-     * @param $status
+     * @param int $status
      */
     private function assertValidActiveStatus($status)
     {
@@ -135,7 +157,7 @@ class Toggle
     }
 
     /**
-     * @param $strategy
+     * @param int $strategy
      */
     private function assertValidStrategy($strategy)
     {

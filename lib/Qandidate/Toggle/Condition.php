@@ -19,7 +19,7 @@ abstract class Condition
     /**
      * @param Context $context
      *
-     * @return boolean True, if the condition holds for the given context
+     * @return bool True, if the condition holds for the given context
      */
     abstract public function holdsFor(Context $context);
 }
