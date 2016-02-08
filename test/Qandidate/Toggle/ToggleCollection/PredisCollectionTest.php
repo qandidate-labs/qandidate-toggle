@@ -12,6 +12,7 @@
 namespace Qandidate\Toggle\ToggleCollection;
 
 use Predis\Client;
+use Predis\Connection\ConnectionException;
 use Qandidate\Toggle\ToggleCollectionTest;
 
 class PredisCollectionTest extends ToggleCollectionTest
@@ -23,6 +24,11 @@ class PredisCollectionTest extends ToggleCollectionTest
     {
         $this->client     = new Client();
         $this->collection = new PredisCollection('toggle_predis_test', $this->client);
+        try {
+            $this->client->connect();
+        } catch (ConnectionException $e) {
+            $this->markTestSkipped('Failed to connect to redis.');
+        }
     }
 
     public function tearDown()
