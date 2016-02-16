@@ -16,7 +16,7 @@ Read our blog post series about this repository at:
 Install the dependencies with composer:
 
 ```
-$ composer install
+$ composer require qandidate/toggle "^1.0"
 ```
 
 ## How to use
