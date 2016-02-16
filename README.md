@@ -13,10 +13,10 @@ Read our blog post series about this repository at:
 
 ## Installation
 
-Install the dependencies with composer:
+Add the library to your project:
 
 ```
-$ composer install
+$ composer require qandidate/toggle ^1.0
 ```
 
 ## How to use
@@ -29,7 +29,7 @@ Based on a given Context, the manager will tell you if a feature is active or no
 
 ## Tests
 
-To run the tests you'll need to have redis installed.
+To run all the tests you'll need to have redis installed (redis tests wil be skipped when not available).
 
 Running the tests:
 
