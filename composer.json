@@ -13,12 +13,10 @@
         "homepage": "http://labs.qandidate.com/"
       }
     ],
-    "require": {
-        "php": ">=5.5.9"
-    },
     "require-dev": {
-        "predis/predis": "~0.8",
-        "symfony/expression-language": "~2.4"
+        "predis/predis": "^1|^0.8",
+        "symfony/expression-language": "^2|^1",
+        "phpunit/phpunit": "^5|^4"
     },
     "suggest": {
         "predis/predis": "To use the PredisCollection to persist toggles in redis",
