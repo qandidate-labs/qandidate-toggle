@@ -15,8 +15,9 @@ class InMemoryCollectionSerializer
         $collection = new InMemoryCollection();
         $serializer = new ToggleSerializer(new OperatorConditionSerializer(new OperatorSerializer()));
 
-        foreach ($data as $name => $serializedToggle) {
+        foreach ($data as $serializedToggle) {
             $toggle = $serializer->deserialize($serializedToggle);
+            $name = $toggle->getName();
             $collection->set($name, $toggle);
         }
 
@@ -31,8 +32,8 @@ class InMemoryCollectionSerializer
     {
         $serializer = new ToggleSerializer(new OperatorConditionSerializer(new OperatorSerializer()));
         $ret = array();
-        foreach ($toggleCollection->all() as $key => $toggle) {
-            $ret[$key] = $serializer->serialize($toggle);
+        foreach ($toggleCollection->all() as $toggle) {
+            $ret[] = $serializer->serialize($toggle);
         }
 
         return $ret;
