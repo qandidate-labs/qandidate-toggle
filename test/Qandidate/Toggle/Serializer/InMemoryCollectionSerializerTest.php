@@ -16,7 +16,7 @@ class InMemoryCollectionSerializerTest extends TestCase
     public function it_unserializes_a_collection_from_an_array()
     {
         $data = array(
-            'some-feature' => array(
+            array(
                 'name' => 'toggling',
                 'conditions' => array(
                     array(
@@ -32,7 +32,7 @@ class InMemoryCollectionSerializerTest extends TestCase
         $serializer = new InMemoryCollectionSerializer();
         $collection = $serializer->deserialize($data);
 
-        $this->assertInstanceOf('Qandidate\Toggle\Toggle', $collection->get('some-feature'));
+        $this->assertInstanceOf('Qandidate\Toggle\Toggle', $collection->get('toggling'));
         $this->assertCount(1, $collection->all());
     }
 
@@ -51,10 +51,10 @@ class InMemoryCollectionSerializerTest extends TestCase
         $serialized = $serializer->serialize($collection);
 
         $this->assertInternalType('array', $serialized);
-        $this->assertArrayHasKey('some-feature', $serialized);
-        $this->assertArrayHasKey('name', $serialized['some-feature']);
-        $this->assertArrayHasKey('conditions', $serialized['some-feature']);
-        $this->assertSame('toggling', $serialized['some-feature']['name']);
+        $this->assertCount(1, $serialized);
+        $this->assertArrayHasKey('name', $serialized[0]);
+        $this->assertArrayHasKey('conditions', $serialized[0]);
+        $this->assertSame('toggling', $serialized[0]['name']);
     }
 
     /**
@@ -66,7 +66,7 @@ class InMemoryCollectionSerializerTest extends TestCase
         $operator   = new LessThan(42);
         $condition  = new OperatorCondition('user_id', $operator);
         $toggle     = new Toggle('toggling', array($condition));
-        $collection->set('some-feature', $toggle);
+        $collection->set('toggling', $toggle);
         $serializer = new InMemoryCollectionSerializer();
 
         $serialized = $serializer->serialize($collection);
