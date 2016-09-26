@@ -31,7 +31,7 @@ class InSet extends Operator
     public function appliesTo($argument)
     {
         return null !== $argument
-            && in_array($argument, $this->values);
+        && (in_array($argument, $this->values) || (isset($this->values[$argument]) && $this->values[$argument]));
     }
 
     /**
