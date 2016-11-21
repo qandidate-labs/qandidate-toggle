@@ -44,6 +44,18 @@ class ToggleManager
     }
 
     /**
+     * Return toggle existence boolean
+     *
+     * @param $name
+     *
+     * @return bool
+     */
+    public function exist($name)
+    {
+        return (boolean) $this->collection->get($name);
+    }
+
+    /**
      * Removes the toggle from the manager.
      *
      * @param string $name

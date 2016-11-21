@@ -22,7 +22,7 @@ class InSet extends Operator
      */
     public function __construct(array $values)
     {
-        $this->values = $values;
+        $this->values = array_map('trim',$values);
     }
 
     /**
@@ -31,7 +31,7 @@ class InSet extends Operator
     public function appliesTo($argument)
     {
         return null !== $argument
-            && in_array($argument, $this->values);
+        && (in_array($argument, $this->values, true) || (isset($this->values[$argument]) && $this->values[$argument]));
     }
 
     /**
