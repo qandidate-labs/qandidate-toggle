@@ -1,5 +1,5 @@
 {
-    "name": "qandidate/toggle",
+    "name": "blablacar/qandidate-toggle",
     "description": "Feature toggling for your PHP application.",
     "keywords": ["feature", "flipping", "flip", "switch", "bits", "trigger", "toggle"],
     "license": "MIT",
@@ -14,7 +14,7 @@
       }
     ],
     "require": {
-        "php": ">=5.5.9"
+        "php": ">=5.3.2"
     },
     "require-dev": {
         "predis/predis": "~0.8",
