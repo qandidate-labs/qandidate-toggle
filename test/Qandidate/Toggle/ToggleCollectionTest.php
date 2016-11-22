@@ -40,6 +40,18 @@ abstract class ToggleCollectionTest extends TestCase
     /**
      * @test
      */
+    public function it_returns_a_updated_toggle()
+    {
+        $toggle     = new Toggle('some-feature', array());
+        $collection = $this->createCollection();
+        $collection->update($toggle->getName(), $toggle);
+
+        $this->assertEquals($toggle, $collection->get('some-feature'));
+    }
+
+    /**
+     * @test
+     */
     public function it_removes_a_toggle()
     {
         $toggle     = new Toggle('some-feature', array());

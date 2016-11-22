@@ -70,9 +70,13 @@ class ToggleManager
      *
      * @param Toggle $toggle
      */
-    public function update(Toggle $toggle)
+    public function update(Toggle $toggle, $name = null)
     {
-        $this->collection->set($toggle->getName(), $toggle);
+        if(is_null($name)) {
+            $name = $toggle->getName();
+        }
+
+        $this->collection->update($name, $toggle);
     }
 
     /**

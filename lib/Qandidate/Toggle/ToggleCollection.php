@@ -39,6 +39,12 @@ abstract class ToggleCollection
 
     /**
      * @param string $name
+     * @param Toggle $toggle
+     */
+    abstract public function update($name, Toggle $toggle);
+
+    /**
+     * @param string $name
      *
      * @return bool True, if element was removed
      */
