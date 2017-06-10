@@ -30,7 +30,7 @@ class ToggleSerializer
     /**
      * @param Toggle $toggle
      *
-     * @return string
+     * @return array
      */
     public function serialize(Toggle $toggle)
     {
