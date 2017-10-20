@@ -14,10 +14,10 @@ class ExpressionCondition extends Condition
     protected $language;
 
     /**
-     * @param string             $expression The expression to ve evaluated
+     * @param string             $expression The expression to be evaluated
      * @param ExpressionLanguage $language   The instance of the Expression Language
      */
-    function __construct($expression, ExpressionLanguage $language)
+    public function __construct($expression, ExpressionLanguage $language)
     {
         $this->expression = $expression;
         $this->language   = $language;

@@ -85,15 +85,9 @@ class Toggle
             case self::INACTIVE:
                 return false;
             case self::CONDITIONALLY_ACTIVE:
-                switch ($this->strategy) {
-                    case self::STRATEGY_AFFIRMATIVE:
-                        return $this->atLeastOneConditionHolds($context);
-                    case self::STRATEGY_MAJORITY:
-                        return $this->moreThanHalfConditionsHold($context);
-                    case self::STRATEGY_UNANIMOUS:
-                        return $this->allConditionsHold($context);
-                }
+                return $this->executeCondition($context);
         }
+        return false;
     }
 
     /**
@@ -167,6 +161,20 @@ class Toggle
             self::STRATEGY_UNANIMOUS
         ))) {
             throw new InvalidArgumentException('No supported strategy was provided.');
+        }
+    }
+
+    private function executeCondition(Context $context)
+    {
+        switch ($this->strategy) {
+          case self::STRATEGY_AFFIRMATIVE:
+            return $this->atLeastOneConditionHolds($context);
+          case self::STRATEGY_MAJORITY:
+            return $this->moreThanHalfConditionsHold($context);
+          case self::STRATEGY_UNANIMOUS:
+            return $this->allConditionsHold($context);
+          default:
+            return false;
         }
     }
 
