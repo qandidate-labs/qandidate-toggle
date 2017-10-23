@@ -11,7 +11,7 @@
 
 namespace Qandidate\Toggle\Operator;
 
-class MatchesAnyInSet extends EqualityOperator
+class HasIntersection extends EqualityOperator
 {
     private $values;
 

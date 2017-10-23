@@ -13,7 +13,7 @@ namespace Qandidate\Toggle\Operator;
 
 use Qandidate\Toggle\TestCase;
 
-class MatchesAnyInSetTest extends TestCase
+class HasIntersectionTest extends TestCase
 {
     /**
      * @test
@@ -21,7 +21,7 @@ class MatchesAnyInSetTest extends TestCase
      */
     public function it_not_applies_to_set_not_matching_values($values, $argument)
     {
-        $operator = new MatchesAnyInSet($values);
+        $operator = new HasIntersection($values);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
@@ -40,7 +40,7 @@ class MatchesAnyInSetTest extends TestCase
      */
     public function it_applies_to_set_matching_values($values, $argument)
     {
-        $operator = new MatchesAnyInSet($values);
+        $operator = new HasIntersection($values);
         $this->assertTrue ($operator->appliesTo($argument));
     }
 
@@ -59,7 +59,7 @@ class MatchesAnyInSetTest extends TestCase
      */
     public function it_exposes_its_value()
     {
-        $operator = new MatchesAnyInSet(['a', 'b', 'c']);
+        $operator = new HasIntersection(['a', 'b', 'c']);
         $this->assertEquals(['a', 'b', 'c'], $operator->getValues());
     }
 }
