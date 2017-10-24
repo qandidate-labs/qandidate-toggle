@@ -15,6 +15,7 @@ use Qandidate\Toggle\Operator;
 use Qandidate\Toggle\Operator\EqualTo;
 use Qandidate\Toggle\Operator\GreaterThan;
 use Qandidate\Toggle\Operator\GreaterThanEqual;
+use Qandidate\Toggle\Operator\HasIntersection;
 use Qandidate\Toggle\Operator\InSet;
 use Qandidate\Toggle\Operator\LessThan;
 use Qandidate\Toggle\Operator\LessThanEqual;
@@ -41,6 +42,8 @@ class OperatorSerializer
                 return array('name' => 'greater-than', 'value' => $operator->getValue());
             case $operator instanceof GreaterThanEqual:
                 return array('name' => 'greater-than-equal', 'value' => $operator->getValue());
+            case $operator instanceof HasIntersection:
+                return array('name' => 'has-intersection', 'values' => $operator->getValues());
             case $operator instanceof InSet:
                 return array('name' => 'in-set', 'values' => $operator->getValues());
             case $operator instanceof LessThan:
@@ -79,6 +82,10 @@ class OperatorSerializer
                 $this->assertHasKey('value', $operator);
 
                 return new GreaterThanEqual($operator['value']);
+            case 'has-intersection':
+                $this->assertHasKey('values', $operator);
+
+                return new HasIntersection($operator['values']);
             case 'in-set':
                 $this->assertHasKey('values', $operator);
 
