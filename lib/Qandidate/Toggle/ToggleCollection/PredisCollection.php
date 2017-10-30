@@ -30,6 +30,22 @@ class PredisCollection extends ToggleCollection
     }
 
     /**
+     * @return Client
+     */
+    public function getClient()
+    {
+      return $this->client;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNamespace()
+    {
+      return $this->namespace;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function all()
