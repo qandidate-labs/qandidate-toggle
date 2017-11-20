@@ -19,7 +19,7 @@
     "require-dev": {
         "predis/predis": "~0.8",
         "symfony/expression-language": "~2.4",
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^4.8.35"
     },
     "suggest": {
         "predis/predis": "To use the PredisCollection to persist toggles in redis",
