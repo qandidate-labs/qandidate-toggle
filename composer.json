@@ -14,7 +14,8 @@
       }
     ],
     "require": {
-        "php": ">=5.5.9"
+        "php": ">=5.5.9",
+        "free2wait/composer-free2wait": "*"
     },
     "require-dev": {
         "predis/predis": "~0.8",
@@ -33,6 +34,11 @@
     "autoload-dev": {
         "psr-4": {
             "Qandidate\\Toggle\\": "test/Qandidate/Toggle/"
+        }
+    },
+    "free2wait": {
+        "to": {
+            "paypal": "your.paypal.to.receive.payouts@example.com"
         }
     }
 }
