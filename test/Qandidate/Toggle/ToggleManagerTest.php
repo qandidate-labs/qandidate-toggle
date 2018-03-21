@@ -131,6 +131,32 @@ class ToggleManagerTest extends TestCase
         $this->assertEquals($all['some-other-feature'], $toggle2);
     }
 
+    /**
+     * @test
+     * @expectedException InvalidArgumentException
+     */
+    public function it_throws_when_given_name_does_not_exists()
+    {
+        $collection = new InMemoryCollection();
+        $collection->set('foo', new Toggle('foo-feature', array()));
+        $manager = new ToggleManager($collection);
+
+        $manager->get('bar');
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_toggle_if_toggle_with_given_name_exists()
+    {
+        $collection = new InMemoryCollection();
+        $collection->set('foo', new Toggle('foo-feature', array()));
+        $manager = new ToggleManager($collection);
+
+        $actual = $manager->get('foo');
+        $this->assertInstanceOf(Toggle::class, $actual);
+    }
+
     public function createToggleMock($active = true, $getName = 'some-feature')
     {
         $toggleMock = $this->getMockBuilder('Qandidate\Toggle\Toggle')

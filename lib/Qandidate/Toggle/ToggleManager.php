@@ -132,8 +132,18 @@ class ToggleManager
         return $this->collection->all();
     }
 
+    /**
+     * @throws InvalidArgumentException
+     * 
+     * @return Toggle Toggle from manager that has given name.
+     */
     public function get($name)
     {
-        return $this->collection->get($name);
+        $toggle = $this->collection->get($name);
+        if(!$toggle){
+            throw new \InvalidArgumentException("Cannot find Toggle with name $name");
+        }
+
+        return $toggle;
     }
 }
