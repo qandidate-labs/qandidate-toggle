@@ -131,4 +131,9 @@ class ToggleManager
     {
         return $this->collection->all();
     }
+
+    public function get($name)
+    {
+        return $this->collection->get($name);
+    }
 }
