@@ -17,6 +17,7 @@ use Qandidate\Toggle\Operator\GreaterThan;
 use Qandidate\Toggle\Operator\GreaterThanEqual;
 use Qandidate\Toggle\Operator\HasIntersection;
 use Qandidate\Toggle\Operator\InSet;
+use Qandidate\Toggle\Operator\NotInSet;
 use Qandidate\Toggle\Operator\LessThan;
 use Qandidate\Toggle\Operator\LessThanEqual;
 use Qandidate\Toggle\Operator\Percentage;
@@ -35,24 +36,26 @@ class OperatorSerializer
      */
     public function serialize(Operator $operator)
     {
-        switch(true) {
-            case $operator instanceof EqualTo:
+        switch(get_class($operator)) {
+            case EqualTo::class:
                 return array('name' => 'equal-to', 'value' => $operator->getValue());
-            case $operator instanceof GreaterThan:
+            case GreaterThan::class:
                 return array('name' => 'greater-than', 'value' => $operator->getValue());
-            case $operator instanceof GreaterThanEqual:
+            case GreaterThanEqual::class:
                 return array('name' => 'greater-than-equal', 'value' => $operator->getValue());
-            case $operator instanceof HasIntersection:
+            case HasIntersection::class:
                 return array('name' => 'has-intersection', 'values' => $operator->getValues());
-            case $operator instanceof InSet:
+            case InSet::class:
                 return array('name' => 'in-set', 'values' => $operator->getValues());
-            case $operator instanceof LessThan:
+            case NotInSet::class:
+                return array('name' => 'not-in-set', 'values' => $operator->getValues());
+            case LessThan::class:
                 return array('name' => 'less-than', 'value' => $operator->getValue());
-            case $operator instanceof LessThanEqual:
+            case LessThanEqual::class:
                 return array('name' => 'less-than-equal', 'value' => $operator->getValue());
-            case $operator instanceof Percentage:
+            case Percentage::class:
                 return array('name' => 'percentage', 'percentage' => $operator->getPercentage(), 'shift' => $operator->getShift());
-            case $operator instanceof MatchesRegex:
+            case MatchesRegex::class:
                 return array('name' => 'matches-regex', 'value' => $operator->getValue());
             default:
                 throw new RuntimeException(sprintf('Unknown operator %s.', get_class($operator)));
@@ -90,6 +93,10 @@ class OperatorSerializer
                 $this->assertHasKey('values', $operator);
 
                 return new InSet($operator['values']);
+            case 'not-in-set':
+                $this->assertHasKey('values', $operator);
+
+                return new NotInSet($operator['values']);
             case 'less-than':
                 $this->assertHasKey('value', $operator);
 

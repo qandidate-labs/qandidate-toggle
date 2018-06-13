@@ -16,6 +16,7 @@ use Qandidate\Toggle\Operator\GreaterThan;
 use Qandidate\Toggle\Operator\GreaterThanEqual;
 use Qandidate\Toggle\Operator\HasIntersection;
 use Qandidate\Toggle\Operator\InSet;
+use Qandidate\Toggle\Operator\NotInSet;
 use Qandidate\Toggle\Operator\LessThan;
 use Qandidate\Toggle\Operator\LessThanEqual;
 use Qandidate\Toggle\Operator\Percentage;
@@ -56,6 +57,7 @@ class OperatorSerializerTest extends TestCase
             array(new Percentage(42, 5), array('name' => 'percentage', 'percentage' => 42, 'shift' => 5)),
             array(new HasIntersection(array(1, 2, 3)), array('name' => 'has-intersection', 'values' => array(1, 2, 3))),
             array(new InSet(array(1, 2, 3)), array('name' => 'in-set', 'values' => array(1, 2, 3))),
+            array(new NotInSet(array(1, 2, 3)), array('name' => 'not-in-set', 'values' => array(1, 2, 3)))
         );
     }
 
@@ -95,6 +97,7 @@ class OperatorSerializerTest extends TestCase
             array(array('name' => 'percentage', 'percentage' => 42)),
             array(array('name' => 'percentage', 'shift' => 5)),
             array(array('name' => 'in-set')),
+            array(array('name' => 'not-in-set')),
             array(array('name' => 'has-intersection')),
         );
     }
