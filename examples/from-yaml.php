@@ -17,26 +17,26 @@ $yaml = <<<YML
 toggles:
   - name: some-feature
     conditions:
-     - name: operator-condition
-       key: user_id
-       operator:
-           name: greater-than
-           value: 41
-       status: conditionally-active
+      - name: operator-condition
+        key: user_id
+        operator:
+          name: greater-than
+          value: 41
+    status: conditionally-active
   - name: some-feature2
     conditions:
-     - name: operator-condition
-       key: user_id
-       operator:
-           name: greater-than
-           value: 42
-       status: conditionally-active
+      - name: operator-condition
+        key: user_id
+        operator:
+          name: greater-than
+          value: 42
+    status: conditionally-active
 YML;
 
 // Create the ToggleManager
 $array      = Yaml::parse($yaml);
 $serializer = new InMemoryCollectionSerializer();
-$collection = $serializer->deserialize($array);
+$collection = $serializer->deserialize($array['toggles']);
 $manager    = new ToggleManager($collection);
 
 // Create and check a new context for a user with id 42
