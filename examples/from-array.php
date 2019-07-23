@@ -29,9 +29,9 @@ $manager    = new ToggleManager($collection);
 // Create and check a new context for a user with id 42
 $context = new Context();
 $context->set('user_id', 42);
-var_dump($manager->active('some-feature', $context)); // true
+var_dump($manager->active('toggling', $context)); // true
 
 // Create and check a new context for a user with id 21
 $context = new Context();
 $context->set('user_id', 21);
-var_dump($manager->active('some-feature', $context)); // false
+var_dump($manager->active('toggling', $context)); // false
