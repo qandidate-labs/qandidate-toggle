@@ -55,10 +55,10 @@ class OperatorConditionSerializerTest extends TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
      */
     public function it_throws_exception_on_unknown_name()
     {
+        $this->expectException('RuntimeException');
         $serializer = $this->createOperatorConditionSerializer();
 
         $serialized = array(
@@ -73,10 +73,10 @@ class OperatorConditionSerializerTest extends TestCase
     /**
      * @test
      * @dataProvider missingKeys
-     * @expectedException RuntimeException
      */
     public function it_throws_exception_on_missing_key($serialized)
     {
+        $this->expectException('RuntimeException');
         $serializer = $this->createOperatorConditionSerializer();
 
         $serializer->deserialize($serialized);

@@ -15,10 +15,10 @@ class ExpressionConditionTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Symfony\Component\ExpressionLanguage\SyntaxError
      */
     public function it_should_fire_a_syntax_error_exception()
     {
+        $this->expectException('Symfony\Component\ExpressionLanguage\SyntaxError');
         $condition = new ExpressionCondition("price < 5", $this->language);
         $context   = new Context();
 

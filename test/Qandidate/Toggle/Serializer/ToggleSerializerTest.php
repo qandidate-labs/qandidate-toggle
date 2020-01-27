@@ -78,10 +78,10 @@ class ToggleSerializerTest extends TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
      */
     public function it_throws_exception_on_unsupport_condition()
     {
+        $this->expectException('RuntimeException');
         $operator = new OtherCondition();
         $toggle   = new Toggle('some-feature', array($operator));
 
@@ -92,10 +92,10 @@ class ToggleSerializerTest extends TestCase
     /**
      * @test
      * @dataProvider missingKeys
-     * @expectedException RuntimeException
      */
     public function it_throws_exception_on_missing_key($serialized)
     {
+        $this->expectException('RuntimeException');
         $serializer = $this->createToggleSerializer();
 
         $serializer->deserialize($serialized);
@@ -117,10 +117,10 @@ class ToggleSerializerTest extends TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
      */
     public function it_throws_exception_if_conditions_key_is_not_an_array()
     {
+        $this->expectException('RuntimeException');
         $serializer = $this->createToggleSerializer();
 
         $serializer->deserialize(array('name' => 'foo', 'status' => 'inactive', 'conditions' => 42));
@@ -165,10 +165,10 @@ class ToggleSerializerTest extends TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
      */
     public function it_throws_exception_on_invalid_status_data()
     {
+        $this->expectException('RuntimeException');
         $serializer = $this->createToggleSerializer();
 
         $serializer->deserialize(array('name' => 'foo', 'status' => 'invalid', 'conditions' => array()));
@@ -204,10 +204,10 @@ class ToggleSerializerTest extends TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
      */
     public function it_throws_exception_on_invalid_strategy_data()
     {
+        $this->expectException('RuntimeException');
         $serializer = $this->createToggleSerializer();
 
         $serializer->deserialize(array('name' => 'foo', 'status' => 'conditionally-active', 'strategy' => 'invalid', 'conditions' => array()));

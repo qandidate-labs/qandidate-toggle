@@ -224,10 +224,10 @@ class ToggleTest extends TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
      */
     public function it_cannot_be_activated_as_inactive()
     {
+        $this->expectException('InvalidArgumentException');
         $toggle = new Toggle('some-feature', array());
 
         $toggle->activate(Toggle::INACTIVE);
@@ -235,10 +235,10 @@ class ToggleTest extends TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
      */
     public function it_cannot_be_set_with_an_non_existing_strategy()
     {
+        $this->expectException('InvalidArgumentException');
         new Toggle('some-feature', array(), 'some-strategy');
     }
 

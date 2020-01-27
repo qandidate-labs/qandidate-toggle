@@ -25,11 +25,11 @@ class OperatorSerializerTest extends TestCase
 {
     /**
      * @test
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Unknown operator Qandidate\Toggle\Serializer\UnknownOperator.
      */
     public function it_throws_exception_on_unknown_operator()
     {
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('Unknown operator Qandidate\Toggle\Serializer\UnknownOperator.');
         $serializer = new OperatorSerializer();
 
         $serializer->serialize(new UnknownOperator());
@@ -76,10 +76,10 @@ class OperatorSerializerTest extends TestCase
     /**
      * @test
      * @dataProvider missingKeys
-     * @expectedException RuntimeException
      */
     public function it_throws_an_exception_if_a_key_is_missing_from_the_data($serialized)
     {
+        $this->expectException('RuntimeException');
         $serializer = new OperatorSerializer();
 
         $operator = $serializer->deserialize($serialized);
@@ -104,10 +104,10 @@ class OperatorSerializerTest extends TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
      */
     public function it_throws_an_exception_on_deserializing_unknown_operator()
     {
+        $this->expectException('RuntimeException');
         $serializer = new OperatorSerializer();
 
         $operator = $serializer->deserialize(array('name' => 'unknown'));
