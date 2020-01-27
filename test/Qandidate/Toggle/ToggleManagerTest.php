@@ -87,11 +87,11 @@ class ToggleManagerTest extends TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Could not rename toggle foo to some-feature, a toggle with name some-feature already exists
      */
     public function it_throws_if_new_name_is_already_in_use()
     {
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('Could not rename toggle foo to some-feature, a toggle with name some-feature already exists');
         $manager = new ToggleManager(new InMemoryCollection());
 
         $toggle = $this->createToggleMock();
@@ -103,11 +103,11 @@ class ToggleManagerTest extends TestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
-     * @expectedExceptionMessage Could not rename toggle foo to some-feature, toggle with name foo does not exists
      */
     public function it_throws_when_to_be_renamed_toggle_doesnt_exists()
     {
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('Could not rename toggle foo to some-feature, toggle with name foo does not exists');
         $manager = new ToggleManager(new InMemoryCollection());
         $manager->rename('foo', 'some-feature');
     }
@@ -133,10 +133,10 @@ class ToggleManagerTest extends TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
      */
     public function it_throws_when_given_name_does_not_exists()
     {
+        $this->expectException('InvalidArgumentException');
         $collection = new InMemoryCollection();
         $collection->set('foo', new Toggle('foo-feature', array()));
         $manager = new ToggleManager($collection);
