@@ -18,7 +18,7 @@
     },
     "require-dev": {
         "predis/predis": "~0.8",
-        "symfony/expression-language": "~2.4",
+        "symfony/expression-language": "~3.4",
         "phpunit/phpunit": "^7.0"
     },
     "suggest": {
