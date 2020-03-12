@@ -1,6 +1,4 @@
-phpunit.xml.dist
 composer.lock
-composer.phar
 /vendor/
-.idea/
 .php_cs.cache
+.phpunit.result.cache

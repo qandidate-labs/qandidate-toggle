@@ -161,9 +161,7 @@ class ToggleManagerTest extends TestCase
 
     public function createToggleMock($active = true, $getName = 'some-feature')
     {
-        $toggleMock = $this->getMockBuilder('Qandidate\Toggle\Toggle')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $toggleMock = $this->createMock('Qandidate\Toggle\Toggle');
 
         $toggleMock->expects($this->any())
             ->method('activeFor')

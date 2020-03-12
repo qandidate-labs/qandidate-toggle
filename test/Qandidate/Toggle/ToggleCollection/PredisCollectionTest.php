@@ -22,7 +22,7 @@ class PredisCollectionTest extends ToggleCollectionTest
     private $client;
     private $collection;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->client = new Client();
         $this->collection = new PredisCollection('toggle_predis_test', $this->client);
@@ -33,7 +33,7 @@ class PredisCollectionTest extends ToggleCollectionTest
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $keys = $this->client->keys('toggle_predis_test*');
 

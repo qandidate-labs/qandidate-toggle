@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Qandidate\Toggle\ToggleCollection;
+namespace Qandidate\Toggle\Serializer;
 
 use Qandidate\Toggle\Operator\LessThan;
 use Qandidate\Toggle\OperatorCondition;
-use Qandidate\Toggle\Serializer\InMemoryCollectionSerializer;
 use Qandidate\Toggle\TestCase;
 use Qandidate\Toggle\Toggle;
+use Qandidate\Toggle\ToggleCollection\InMemoryCollection;
 
 class InMemoryCollectionSerializerTest extends TestCase
 {
@@ -52,7 +52,7 @@ class InMemoryCollectionSerializerTest extends TestCase
 
         $serialized = $serializer->serialize($collection);
 
-        $this->assertInternalType('array', $serialized);
+        $this->assertIsArray($serialized);
         $this->assertCount(1, $serialized);
         $this->assertArrayHasKey('name', $serialized[0]);
         $this->assertArrayHasKey('conditions', $serialized[0]);

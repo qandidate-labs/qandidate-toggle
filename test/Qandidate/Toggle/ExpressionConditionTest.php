@@ -10,7 +10,7 @@ class ExpressionConditionTest extends TestCase
 {
     protected $language;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->language = new ExpressionLanguage();
     }
