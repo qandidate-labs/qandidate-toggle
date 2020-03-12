@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -27,12 +29,12 @@ class GreaterThanEqualOperatorTest extends TestCase
 
     public function greaterValues()
     {
-        return array(
-            array(42,  43),
-            array(42,  1337),
-            array(42,  42.1),
-            array(0.1, 0.2),
-        );
+        return [
+            [42,  43],
+            [42,  1337],
+            [42,  42.1],
+            [0.1, 0.2],
+        ];
     }
 
     /**
@@ -47,11 +49,11 @@ class GreaterThanEqualOperatorTest extends TestCase
 
     public function equalValues()
     {
-        return array(
-            array(42,   42),
-            array(42.1, 42.1),
-            array(0.1,  0.1),
-        );
+        return [
+            [42,   42],
+            [42.1, 42.1],
+            [0.1,  0.1],
+        ];
     }
 
     /**
@@ -66,12 +68,12 @@ class GreaterThanEqualOperatorTest extends TestCase
 
     public function smallerValues()
     {
-        return array(
-            array(43,   42),
-            array(1337, 42),
-            array(42.1, 42),
-            array(0.2,  0.1),
-        );
+        return [
+            [43,   42],
+            [1337, 42],
+            [42.1, 42],
+            [0.2,  0.1],
+        ];
     }
 
     /**

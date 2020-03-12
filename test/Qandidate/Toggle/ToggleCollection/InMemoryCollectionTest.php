@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -11,7 +13,6 @@
 
 namespace Qandidate\Toggle\ToggleCollection;
 
-use Qandidate\Toggle\Toggle;
 use Qandidate\Toggle\ToggleCollectionTest;
 
 class InMemoryCollectionTest extends ToggleCollectionTest

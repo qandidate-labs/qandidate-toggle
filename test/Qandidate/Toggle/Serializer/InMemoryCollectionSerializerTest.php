@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Qandidate\Toggle\ToggleCollection;
 
 use Qandidate\Toggle\Operator\LessThan;
@@ -15,19 +17,19 @@ class InMemoryCollectionSerializerTest extends TestCase
      */
     public function it_unserializes_a_collection_from_an_array()
     {
-        $data = array(
-            array(
+        $data = [
+            [
                 'name' => 'toggling',
-                'conditions' => array(
-                    array(
+                'conditions' => [
+                    [
                         'name' => 'operator-condition',
                         'key' => 'user_id',
-                        'operator' => array('name' => 'greater-than', 'value' => 42),
-                    ),
-                ),
+                        'operator' => ['name' => 'greater-than', 'value' => 42],
+                    ],
+                ],
                 'status' => 'conditionally-active',
-            ),
-        );
+            ],
+        ];
 
         $serializer = new InMemoryCollectionSerializer();
         $collection = $serializer->deserialize($data);
@@ -42,9 +44,9 @@ class InMemoryCollectionSerializerTest extends TestCase
     public function it_serializes_a_collection_to_an_array()
     {
         $collection = new InMemoryCollection();
-        $operator   = new LessThan(42);
-        $condition  = new OperatorCondition('user_id', $operator);
-        $toggle     = new Toggle('toggling', array($condition));
+        $operator = new LessThan(42);
+        $condition = new OperatorCondition('user_id', $operator);
+        $toggle = new Toggle('toggling', [$condition]);
         $collection->set('some-feature', $toggle);
         $serializer = new InMemoryCollectionSerializer();
 
@@ -63,9 +65,9 @@ class InMemoryCollectionSerializerTest extends TestCase
     public function it_serializes_and_deserializes_a_collection()
     {
         $collection = new InMemoryCollection();
-        $operator   = new LessThan(42);
-        $condition  = new OperatorCondition('user_id', $operator);
-        $toggle     = new Toggle('toggling', array($condition));
+        $operator = new LessThan(42);
+        $condition = new OperatorCondition('user_id', $operator);
+        $toggle = new Toggle('toggling', [$condition]);
         $collection->set('toggling', $toggle);
         $serializer = new InMemoryCollectionSerializer();
 

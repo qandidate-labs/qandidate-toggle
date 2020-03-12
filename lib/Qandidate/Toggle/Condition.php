@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -17,8 +19,6 @@ namespace Qandidate\Toggle;
 abstract class Condition
 {
     /**
-     * @param Context $context
-     *
      * @return bool True, if the condition holds for the given context
      */
     abstract public function holdsFor(Context $context);

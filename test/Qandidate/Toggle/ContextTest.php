@@ -1,9 +1,8 @@
 <?php
 
-namespace Qandidate\Toggle;
+declare(strict_types=1);
 
-use Qandidate\Toggle\Operator\GreaterThan;
-use Qandidate\Toggle\Operator\LessThan;
+namespace Qandidate\Toggle;
 
 class ContextTest extends TestCase
 {
@@ -32,14 +31,14 @@ class ContextTest extends TestCase
 
     public function validValues()
     {
-        return array(
-            array(42),
-            array('bar'),
-            array(null),
-            array(true),
-            array(false),
-            array(0.1),
-        );
+        return [
+            [42],
+            ['bar'],
+            [null],
+            [true],
+            [false],
+            [0.1],
+        ];
     }
 
     /**

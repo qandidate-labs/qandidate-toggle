@@ -1,15 +1,17 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+declare(strict_types=1);
+
+require_once __DIR__.'/../vendor/autoload.php';
 
 use Qandidate\Toggle\Context;
 use Qandidate\Toggle\ToggleCollection\PredisCollection;
 use Qandidate\Toggle\ToggleManager;
 
 // Create the ToggleManager
-$predis     = new Predis\Client();
+$predis = new Predis\Client();
 $collection = new PredisCollection('toggle_demo', $predis);
-$manager    = new ToggleManager($collection);
+$manager = new ToggleManager($collection);
 
 // Create and check a new context for a user with id 42
 $context = new Context();

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -16,9 +18,9 @@ use Qandidate\Toggle\Operator\GreaterThan;
 use Qandidate\Toggle\Operator\GreaterThanEqual;
 use Qandidate\Toggle\Operator\HasIntersection;
 use Qandidate\Toggle\Operator\InSet;
-use Qandidate\Toggle\Operator\NotInSet;
 use Qandidate\Toggle\Operator\LessThan;
 use Qandidate\Toggle\Operator\LessThanEqual;
+use Qandidate\Toggle\Operator\NotInSet;
 use Qandidate\Toggle\Operator\Percentage;
 
 class OperatorSerializerTest extends TestCase
@@ -49,16 +51,16 @@ class OperatorSerializerTest extends TestCase
 
     public function knownOperators()
     {
-        return array(
-            array(new GreaterThan(42), array('name' => 'greater-than', 'value' => 42)),
-            array(new GreaterThanEqual(42), array('name' => 'greater-than-equal', 'value' => 42)),
-            array(new LessThan(42), array('name' => 'less-than', 'value' => 42)),
-            array(new LessThanEqual(42), array('name' => 'less-than-equal', 'value' => 42)),
-            array(new Percentage(42, 5), array('name' => 'percentage', 'percentage' => 42, 'shift' => 5)),
-            array(new HasIntersection(array(1, 2, 3)), array('name' => 'has-intersection', 'values' => array(1, 2, 3))),
-            array(new InSet(array(1, 2, 3)), array('name' => 'in-set', 'values' => array(1, 2, 3))),
-            array(new NotInSet(array(1, 2, 3)), array('name' => 'not-in-set', 'values' => array(1, 2, 3)))
-        );
+        return [
+            [new GreaterThan(42), ['name' => 'greater-than', 'value' => 42]],
+            [new GreaterThanEqual(42), ['name' => 'greater-than-equal', 'value' => 42]],
+            [new LessThan(42), ['name' => 'less-than', 'value' => 42]],
+            [new LessThanEqual(42), ['name' => 'less-than-equal', 'value' => 42]],
+            [new Percentage(42, 5), ['name' => 'percentage', 'percentage' => 42, 'shift' => 5]],
+            [new HasIntersection([1, 2, 3]), ['name' => 'has-intersection', 'values' => [1, 2, 3]]],
+            [new InSet([1, 2, 3]), ['name' => 'in-set', 'values' => [1, 2, 3]]],
+            [new NotInSet([1, 2, 3]), ['name' => 'not-in-set', 'values' => [1, 2, 3]]],
+        ];
     }
 
     /**
@@ -87,19 +89,19 @@ class OperatorSerializerTest extends TestCase
 
     public function missingKeys()
     {
-        return array(
-            array(array()),
-            array(array('name' => 'greater-than')),
-            array(array('name' => 'greater-than-equal')),
-            array(array('name' => 'less-than')),
-            array(array('name' => 'less-than-equal')),
-            array(array('name' => 'percentage')),
-            array(array('name' => 'percentage', 'percentage' => 42)),
-            array(array('name' => 'percentage', 'shift' => 5)),
-            array(array('name' => 'in-set')),
-            array(array('name' => 'not-in-set')),
-            array(array('name' => 'has-intersection')),
-        );
+        return [
+            [[]],
+            [['name' => 'greater-than']],
+            [['name' => 'greater-than-equal']],
+            [['name' => 'less-than']],
+            [['name' => 'less-than-equal']],
+            [['name' => 'percentage']],
+            [['name' => 'percentage', 'percentage' => 42]],
+            [['name' => 'percentage', 'shift' => 5]],
+            [['name' => 'in-set']],
+            [['name' => 'not-in-set']],
+            [['name' => 'has-intersection']],
+        ];
     }
 
     /**
@@ -110,7 +112,7 @@ class OperatorSerializerTest extends TestCase
         $this->expectException('RuntimeException');
         $serializer = new OperatorSerializer();
 
-        $operator = $serializer->deserialize(array('name' => 'unknown'));
+        $operator = $serializer->deserialize(['name' => 'unknown']);
     }
 }
 

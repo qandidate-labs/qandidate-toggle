@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -27,10 +29,10 @@ class InSetTest extends TestCase
 
     public function valuesInSet()
     {
-        return array(
-            array(5,     array(1, 1, 2, 3, 5, 8)),
-            array('foo', array('foo', 'bar')),
-        );
+        return [
+            [5,     [1, 1, 2, 3, 5, 8]],
+            ['foo', ['foo', 'bar']],
+        ];
     }
 
     /**
@@ -45,17 +47,17 @@ class InSetTest extends TestCase
 
     public function valuesNotInSet()
     {
-        return array(
-            array(5,     array(1, 1, 2, 3)),
-            array('foo', array('qux', 'bar')),
-        );
+        return [
+            [5,     [1, 1, 2, 3]],
+            ['foo', ['qux', 'bar']],
+        ];
     }
 
     /**
      * @test
      * @dataProvider nullSets
      */
-    public function it_never_accept_NULL_as_part_of_a_set($argument, $set) 
+    public function it_never_accept_NULL_as_part_of_a_set($argument, $set)
     {
         $operator = new InSet($set);
         $this->assertFalse($operator->appliesTo($argument));
@@ -63,10 +65,10 @@ class InSetTest extends TestCase
 
     public function nullSets()
     {
-        return array(
-            array(null, array(null, 1)),
-            array(null, array(0, 1)),
-        );
+        return [
+            [null, [null, 1]],
+            [null, [0, 1]],
+        ];
     }
 
     /**
@@ -74,7 +76,7 @@ class InSetTest extends TestCase
      */
     public function it_exposes_its_values()
     {
-        $values = array(1, 'foo');
+        $values = [1, 'foo'];
         $operator = new InSet($values);
 
         $this->assertEquals($values, $operator->getValues());

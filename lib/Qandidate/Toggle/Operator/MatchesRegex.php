@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -14,10 +16,10 @@ namespace Qandidate\Toggle\Operator;
 class MatchesRegex extends EqualityOperator
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function appliesTo($argument)
     {
         return (bool) preg_match($this->value, $argument);
     }
-} 
+}

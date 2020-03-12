@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -22,7 +24,7 @@ class PredisCollectionTest extends ToggleCollectionTest
 
     public function setUp()
     {
-        $this->client     = new Client();
+        $this->client = new Client();
         $this->collection = new PredisCollection('toggle_predis_test', $this->client);
         try {
             $this->client->connect();

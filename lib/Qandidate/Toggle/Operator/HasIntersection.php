@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -15,9 +17,6 @@ class HasIntersection extends EqualityOperator
 {
     private $values;
 
-    /**
-     * @param array $values
-     */
     public function __construct(array $values)
     {
         $this->values = $values;

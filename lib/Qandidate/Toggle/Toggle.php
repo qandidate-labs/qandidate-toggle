@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -24,17 +26,17 @@ use InvalidArgumentException;
 class Toggle
 {
     const CONDITIONALLY_ACTIVE = 1;
-    const ALWAYS_ACTIVE        = 2;
-    const INACTIVE             = 4;
+    const ALWAYS_ACTIVE = 2;
+    const INACTIVE = 4;
 
     /** At least one of the provided conditions has to be met */
     const STRATEGY_AFFIRMATIVE = 1;
 
     /** At least half of the provided conditions have to be met */
-    const STRATEGY_MAJORITY    = 2;
+    const STRATEGY_MAJORITY = 2;
 
     /** All conditions have to be met */
-    const STRATEGY_UNANIMOUS   = 3;
+    const STRATEGY_UNANIMOUS = 3;
 
     /** @var string */
     private $name;
@@ -55,10 +57,10 @@ class Toggle
      */
     public function __construct($name, array $conditions, $strategy = self::STRATEGY_AFFIRMATIVE)
     {
-        $this->name       = $name;
+        $this->name = $name;
         $this->conditions = $conditions;
         $this->assertValidStrategy($strategy);
-        $this->strategy   = $strategy;
+        $this->strategy = $strategy;
     }
 
     /**
@@ -73,9 +75,7 @@ class Toggle
     /**
      * Checks whether the toggle is active for the given context.
      *
-     * @param Context $context
-     *
-     * @return bool True, if one of conditions hold for the context.
+     * @return bool true, if one of conditions hold for the context
      */
     public function activeFor(Context $context)
     {
@@ -87,11 +87,12 @@ class Toggle
             case self::CONDITIONALLY_ACTIVE:
                 return $this->executeCondition($context);
         }
+
         return false;
     }
 
     /**
-     * Immediately set this toggle's status to inactive
+     * Immediately set this toggle's status to inactive.
      *
      * @return int The status code after deactivation
      */
@@ -145,7 +146,7 @@ class Toggle
      */
     private function assertValidActiveStatus($status)
     {
-        if ($status !== self::ALWAYS_ACTIVE && $status !== self::CONDITIONALLY_ACTIVE) {
+        if (self::ALWAYS_ACTIVE !== $status && self::CONDITIONALLY_ACTIVE !== $status) {
             throw new InvalidArgumentException('No "active" status was provided.');
         }
     }
@@ -155,11 +156,11 @@ class Toggle
      */
     private function assertValidStrategy($strategy)
     {
-        if (! in_array($strategy, array(
+        if (!in_array($strategy, [
             self::STRATEGY_AFFIRMATIVE,
             self::STRATEGY_MAJORITY,
-            self::STRATEGY_UNANIMOUS
-        ))) {
+            self::STRATEGY_UNANIMOUS,
+        ])) {
             throw new InvalidArgumentException('No supported strategy was provided.');
         }
     }
@@ -179,8 +180,6 @@ class Toggle
     }
 
     /**
-     * @param Context $context
-     *
      * @return bool
      */
     private function atLeastOneConditionHolds(Context $context)
@@ -195,8 +194,6 @@ class Toggle
     }
 
     /**
-     * @param Context $context
-     *
      * @return bool
      */
     private function moreThanHalfConditionsHold(Context $context)
@@ -212,8 +209,6 @@ class Toggle
     }
 
     /**
-     * @param Context $context
-     *
      * @return bool
      */
     private function allConditionsHold(Context $context)

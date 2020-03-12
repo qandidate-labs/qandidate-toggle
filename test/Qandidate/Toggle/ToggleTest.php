@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -21,12 +23,12 @@ class ToggleTest extends TestCase
      */
     public function it_is_active_if_one_of_the_conditions_holds_in_affirmative_strategy()
     {
-        $conditions = array(
+        $conditions = [
             new OperatorCondition('age', new LessThan(42)),
             new OperatorCondition('age', new GreaterThan(42)),
-        );
+        ];
 
-        $context   = new Context();
+        $context = new Context();
         $context->set('age', 84);
 
         $toggle = new Toggle('some-feature', $conditions);
@@ -39,12 +41,12 @@ class ToggleTest extends TestCase
      */
     public function it_is_inactive_if_none_of_the_conditions_hold_in_affirmative_strategy()
     {
-        $conditions = array(
+        $conditions = [
             new OperatorCondition('age', new LessThan(42)),
             new OperatorCondition('age', new GreaterThan(42)),
-        );
+        ];
 
-        $context   = new Context();
+        $context = new Context();
         $context->set('age', 42);
 
         $toggle = new Toggle('some-feature', $conditions);
@@ -57,13 +59,13 @@ class ToggleTest extends TestCase
      */
     public function it_is_active_if_more_than_half_of_the_conditions_hold_in_majority_strategy()
     {
-        $conditions = array(
+        $conditions = [
             new OperatorCondition('age', new LessThan(42)),
             new OperatorCondition('height', new GreaterThan(5.7)),
             new OperatorCondition('weight', new GreaterThan(154)),
-        );
+        ];
 
-        $context   = new Context();
+        $context = new Context();
         $context->set('age', 40);
         $context->set('height', 6);
         $context->set('weight', 150);
@@ -78,13 +80,13 @@ class ToggleTest extends TestCase
      */
     public function it_is_inactive_if_more_than_half_of_the_conditions_do_not_hold_in_majority_strategy()
     {
-        $conditions = array(
+        $conditions = [
             new OperatorCondition('age', new LessThan(42)),
             new OperatorCondition('height', new GreaterThan(5.7)),
             new OperatorCondition('weight', new GreaterThan(154)),
-        );
+        ];
 
-        $context   = new Context();
+        $context = new Context();
         $context->set('age', 40);
         $context->set('height', 5.6);
         $context->set('weight', 150);
@@ -99,12 +101,12 @@ class ToggleTest extends TestCase
      */
     public function it_is_inactive_if_exactly_half_of_the_conditions_hold_in_majority_strategy()
     {
-        $conditions = array(
+        $conditions = [
             new OperatorCondition('age', new LessThan(42)),
             new OperatorCondition('height', new GreaterThan(5.7)),
-        );
+        ];
 
-        $context   = new Context();
+        $context = new Context();
         $context->set('age', 40);
         $context->set('height', 5.6);
 
@@ -118,12 +120,12 @@ class ToggleTest extends TestCase
      */
     public function it_is_active_if_all_the_conditions_hold_in_unanimous_strategy()
     {
-        $conditions = array(
+        $conditions = [
             new OperatorCondition('age', new LessThan(42)),
             new OperatorCondition('height', new GreaterThan(5.7)),
-        );
+        ];
 
-        $context   = new Context();
+        $context = new Context();
         $context->set('age', 40);
         $context->set('height', 5.8);
 
@@ -137,12 +139,12 @@ class ToggleTest extends TestCase
      */
     public function it_is_inactive_if_one_of_the_conditions_do_not_hold_in_unanimous_strategy()
     {
-        $conditions = array(
+        $conditions = [
             new OperatorCondition('age', new LessThan(42)),
             new OperatorCondition('height', new GreaterThan(5.7)),
-        );
+        ];
 
-        $context   = new Context();
+        $context = new Context();
         $context->set('age', 40);
         $context->set('height', 5.6);
 
@@ -156,7 +158,7 @@ class ToggleTest extends TestCase
      */
     public function it_exposes_its_name()
     {
-        $toggle = new Toggle('some-feature', array());
+        $toggle = new Toggle('some-feature', []);
 
         $this->assertEquals('some-feature', $toggle->getName());
     }
@@ -169,7 +171,7 @@ class ToggleTest extends TestCase
         $condition = new OperatorCondition('age', new LessThan(42));
         $condition2 = new OperatorCondition('age', new GreaterThan(42));
 
-        $toggle = new Toggle('some-feature', array($condition, $condition2));
+        $toggle = new Toggle('some-feature', [$condition, $condition2]);
 
         $actual = $toggle->getConditions();
 
@@ -183,7 +185,7 @@ class ToggleTest extends TestCase
      */
     public function its_status_is_conditionally_active_by_default()
     {
-        $toggle = new Toggle('some-feature', array());
+        $toggle = new Toggle('some-feature', []);
 
         $this->assertEquals(Toggle::CONDITIONALLY_ACTIVE, $toggle->getStatus());
     }
@@ -193,7 +195,7 @@ class ToggleTest extends TestCase
      */
     public function its_strategy_is_affirmative_by_default()
     {
-        $toggle = new Toggle('some-feature', array());
+        $toggle = new Toggle('some-feature', []);
 
         $this->assertEquals(Toggle::STRATEGY_AFFIRMATIVE, $toggle->getStrategy());
     }
@@ -203,7 +205,7 @@ class ToggleTest extends TestCase
      */
     public function it_can_be_always_activate()
     {
-        $toggle = new Toggle('some-feature', array());
+        $toggle = new Toggle('some-feature', []);
 
         $toggle->activate(Toggle::ALWAYS_ACTIVE);
 
@@ -215,7 +217,7 @@ class ToggleTest extends TestCase
      */
     public function it_can_be_inactive()
     {
-        $toggle = new Toggle('some-feature', array());
+        $toggle = new Toggle('some-feature', []);
 
         $toggle->deactivate();
 
@@ -228,7 +230,7 @@ class ToggleTest extends TestCase
     public function it_cannot_be_activated_as_inactive()
     {
         $this->expectException('InvalidArgumentException');
-        $toggle = new Toggle('some-feature', array());
+        $toggle = new Toggle('some-feature', []);
 
         $toggle->activate(Toggle::INACTIVE);
     }
@@ -239,7 +241,7 @@ class ToggleTest extends TestCase
     public function it_cannot_be_set_with_an_non_existing_strategy()
     {
         $this->expectException('InvalidArgumentException');
-        new Toggle('some-feature', array(), 'some-strategy');
+        new Toggle('some-feature', [], 'some-strategy');
     }
 
     /**
@@ -248,9 +250,9 @@ class ToggleTest extends TestCase
      */
     public function it_is_active_for_every_context_if_activated_as_always_active($context)
     {
-        $conditions = array(
+        $conditions = [
             new OperatorCondition('age', new GreaterThan(42)),
-        );
+        ];
 
         $toggle = new Toggle('some-feature', $conditions);
         $toggle->activate(Toggle::ALWAYS_ACTIVE);
@@ -264,9 +266,9 @@ class ToggleTest extends TestCase
      */
     public function it_is_not_active_for_every_context_if_inactivated($context)
     {
-        $conditions = array(
+        $conditions = [
             new OperatorCondition('age', new GreaterThan(42)),
-        );
+        ];
 
         $toggle = new Toggle('some-feature', $conditions);
         $toggle->deactivate();
@@ -276,10 +278,10 @@ class ToggleTest extends TestCase
 
     public function contextProvider()
     {
-        return array(
-            array($this->createContext(array('age' => 1337))),
-            array($this->createContext(array('age' => 21))),
-        );
+        return [
+            [$this->createContext(['age' => 1337])],
+            [$this->createContext(['age' => 21])],
+        ];
     }
 
     private function createContext(array $properties)

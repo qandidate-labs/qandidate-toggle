@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -17,11 +19,11 @@ use Qandidate\Toggle\Operator\GreaterThan;
 use Qandidate\Toggle\Operator\GreaterThanEqual;
 use Qandidate\Toggle\Operator\HasIntersection;
 use Qandidate\Toggle\Operator\InSet;
-use Qandidate\Toggle\Operator\NotInSet;
 use Qandidate\Toggle\Operator\LessThan;
 use Qandidate\Toggle\Operator\LessThanEqual;
-use Qandidate\Toggle\Operator\Percentage;
 use Qandidate\Toggle\Operator\MatchesRegex;
+use Qandidate\Toggle\Operator\NotInSet;
+use Qandidate\Toggle\Operator\Percentage;
 use RuntimeException;
 
 /**
@@ -30,48 +32,44 @@ use RuntimeException;
 class OperatorSerializer
 {
     /**
-     * @param Operator $operator
-     *
      * @return string
      */
     public function serialize(Operator $operator)
     {
-        switch(get_class($operator)) {
+        switch (get_class($operator)) {
             case EqualTo::class:
-                return array('name' => 'equal-to', 'value' => $operator->getValue());
+                return ['name' => 'equal-to', 'value' => $operator->getValue()];
             case GreaterThan::class:
-                return array('name' => 'greater-than', 'value' => $operator->getValue());
+                return ['name' => 'greater-than', 'value' => $operator->getValue()];
             case GreaterThanEqual::class:
-                return array('name' => 'greater-than-equal', 'value' => $operator->getValue());
+                return ['name' => 'greater-than-equal', 'value' => $operator->getValue()];
             case HasIntersection::class:
-                return array('name' => 'has-intersection', 'values' => $operator->getValues());
+                return ['name' => 'has-intersection', 'values' => $operator->getValues()];
             case InSet::class:
-                return array('name' => 'in-set', 'values' => $operator->getValues());
+                return ['name' => 'in-set', 'values' => $operator->getValues()];
             case NotInSet::class:
-                return array('name' => 'not-in-set', 'values' => $operator->getValues());
+                return ['name' => 'not-in-set', 'values' => $operator->getValues()];
             case LessThan::class:
-                return array('name' => 'less-than', 'value' => $operator->getValue());
+                return ['name' => 'less-than', 'value' => $operator->getValue()];
             case LessThanEqual::class:
-                return array('name' => 'less-than-equal', 'value' => $operator->getValue());
+                return ['name' => 'less-than-equal', 'value' => $operator->getValue()];
             case Percentage::class:
-                return array('name' => 'percentage', 'percentage' => $operator->getPercentage(), 'shift' => $operator->getShift());
+                return ['name' => 'percentage', 'percentage' => $operator->getPercentage(), 'shift' => $operator->getShift()];
             case MatchesRegex::class:
-                return array('name' => 'matches-regex', 'value' => $operator->getValue());
+                return ['name' => 'matches-regex', 'value' => $operator->getValue()];
             default:
                 throw new RuntimeException(sprintf('Unknown operator %s.', get_class($operator)));
         }
     }
 
     /**
-     * @param array $operator
-     *
      * @return Operator
      */
     public function deserialize(array $operator)
     {
         $this->assertHasKey('name', $operator);
 
-        switch($operator['name']) {
+        switch ($operator['name']) {
             case 'equals-to': // Left for backward compatibility, todo: should be removed in future
             case 'equal-to':
                 $this->assertHasKey('value', $operator);
@@ -121,7 +119,7 @@ class OperatorSerializer
 
     private function assertHasKey($key, array $data)
     {
-        if ( ! array_key_exists($key, $data)) {
+        if (!array_key_exists($key, $data)) {
             throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));
         }
     }

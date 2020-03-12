@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -28,7 +30,7 @@ class OperatorCondition extends Condition
      */
     public function __construct($key, Operator $operator)
     {
-        $this->key      = $key;
+        $this->key = $key;
         $this->operator = $operator;
     }
 
@@ -37,7 +39,7 @@ class OperatorCondition extends Condition
      */
     public function holdsFor(Context $context)
     {
-        if ( ! $context->has($this->key)) {
+        if (!$context->has($this->key)) {
             return false;
         }
 

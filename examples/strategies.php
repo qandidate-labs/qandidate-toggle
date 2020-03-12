@@ -1,10 +1,12 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+declare(strict_types=1);
+
+require_once __DIR__.'/../vendor/autoload.php';
 
 use Qandidate\Toggle\Context;
-use Qandidate\Toggle\Operator\LessThan;
 use Qandidate\Toggle\Operator\GreaterThan;
+use Qandidate\Toggle\Operator\LessThan;
 use Qandidate\Toggle\OperatorCondition;
 use Qandidate\Toggle\Toggle;
 use Qandidate\Toggle\ToggleCollection\InMemoryCollection;
@@ -15,12 +17,12 @@ $manager = new ToggleManager(new InMemoryCollection());
 
 // Affirmative strategy
 // A toggle that will be active if the user id is less than 42 or if the age is greater than 24
-$conditions   = [];
-$operator     = new LessThan(42);
+$conditions = [];
+$operator = new LessThan(42);
 $conditions[] = new OperatorCondition('user_id', $operator);
-$operator     = new GreaterThan(24);
+$operator = new GreaterThan(24);
 $conditions[] = new OperatorCondition('age', $operator);
-$toggle       = new Toggle('toggling', $conditions);
+$toggle = new Toggle('toggling', $conditions);
 
 // Add the toggle to the manager
 $manager->add($toggle);
@@ -36,14 +38,14 @@ var_dump($manager->active('toggling', $context)); // true
 // - The user id is less than 42
 // - The user age is greater than 24
 // - The user height is greater than 5.7
-$conditions   = [];
-$operator     = new LessThan(42);
+$conditions = [];
+$operator = new LessThan(42);
 $conditions[] = new OperatorCondition('user_id', $operator);
-$operator     = new GreaterThan(24);
+$operator = new GreaterThan(24);
 $conditions[] = new OperatorCondition('age', $operator);
-$operator     = new GreaterThan(5.7);
+$operator = new GreaterThan(5.7);
 $conditions[] = new OperatorCondition('height', $operator);
-$toggle       = new Toggle('toggling', $conditions, Toggle::STRATEGY_MAJORITY);
+$toggle = new Toggle('toggling', $conditions, Toggle::STRATEGY_MAJORITY);
 $toggle->activate(Toggle::CONDITIONALLY_ACTIVE);
 
 // Add the toggle to the manager
@@ -65,12 +67,12 @@ var_dump($manager->active('toggling', $context)); // false
 
 // Unanimous strategy
 // A toggle that will be active if the user id is less than 42 and if the age is greater than 24
-$conditions   = [];
-$operator     = new LessThan(42);
+$conditions = [];
+$operator = new LessThan(42);
 $conditions[] = new OperatorCondition('user_id', $operator);
-$operator     = new GreaterThan(24);
+$operator = new GreaterThan(24);
 $conditions[] = new OperatorCondition('age', $operator);
-$toggle       = new Toggle('toggling', $conditions, Toggle::STRATEGY_UNANIMOUS);
+$toggle = new Toggle('toggling', $conditions, Toggle::STRATEGY_UNANIMOUS);
 $toggle->activate(Toggle::CONDITIONALLY_ACTIVE);
 
 // Add the toggle to the manager

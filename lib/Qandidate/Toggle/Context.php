@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -18,7 +20,7 @@ namespace Qandidate\Toggle;
 class Context
 {
     /** @var array */
-    private $values = array();
+    private $values = [];
 
     /**
      * @param int|string $key
