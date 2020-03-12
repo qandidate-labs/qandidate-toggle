@@ -18,3 +18,4 @@ script:
   - make test
   - make qa
   - make license
+  - make changelog
