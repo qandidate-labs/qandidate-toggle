@@ -12,6 +12,7 @@ matrix:
     - php: 7.4
 
 install:
-  - composer install
+  - make dependencies
 
-script: vendor/bin/phpunit
+script:
+  - make test
