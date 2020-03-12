@@ -31,10 +31,7 @@ use RuntimeException;
  */
 class OperatorSerializer
 {
-    /**
-     * @return string
-     */
-    public function serialize(Operator $operator)
+    public function serialize(Operator $operator): array
     {
         switch (get_class($operator)) {
             case EqualTo::class:

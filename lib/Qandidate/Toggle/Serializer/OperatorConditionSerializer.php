@@ -28,10 +28,7 @@ class OperatorConditionSerializer
         $this->operatorSerializer = $operatorSerializer;
     }
 
-    /**
-     * @return string
-     */
-    public function serialize(OperatorCondition $condition)
+    public function serialize(OperatorCondition $condition): array
     {
         return [
             'name' => 'operator-condition',

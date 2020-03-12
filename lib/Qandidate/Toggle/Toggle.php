@@ -51,7 +51,7 @@ class Toggle
     private $strategy = self::STRATEGY_AFFIRMATIVE;
 
     /**
-     * @param                   $name
+     * @param string            $name
      * @param array|Condition[] $conditions
      * @param int               $strategy
      */
