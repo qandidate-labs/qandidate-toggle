@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -28,23 +30,19 @@ class ToggleSerializer
     }
 
     /**
-     * @param Toggle $toggle
-     *
      * @return array
      */
     public function serialize(Toggle $toggle)
     {
-        return array(
+        return [
             'name' => $toggle->getName(),
             'conditions' => $this->serializeConditions($toggle->getConditions()),
             'status' => $this->serializeStatus($toggle),
-            'strategy' => $this->serializeStrategy($toggle)
-        );
+            'strategy' => $this->serializeStrategy($toggle),
+        ];
     }
 
     /**
-     * @param array $data
-     *
      * @return Toggle
      */
     public function deserialize(array $data)
@@ -52,7 +50,7 @@ class ToggleSerializer
         $this->assertHasKey('name', $data);
         $this->assertHasKey('conditions', $data);
 
-        if ( ! is_array($data['conditions'])) {
+        if (!is_array($data['conditions'])) {
             throw new RuntimeException('Key "conditions" should be an array.');
         }
 
@@ -71,10 +69,10 @@ class ToggleSerializer
 
     private function serializeConditions(array $conditions)
     {
-        $serialized = array();
+        $serialized = [];
 
         foreach ($conditions as $condition) {
-            if ( ! $condition instanceof OperatorCondition) {
+            if (!$condition instanceof OperatorCondition) {
                 throw new RuntimeException(sprintf('Unable to serialize %s.', get_class($condition)));
             }
 
@@ -86,7 +84,7 @@ class ToggleSerializer
 
     private function deserializeConditions(array $conditions)
     {
-        $deserialized = array();
+        $deserialized = [];
 
         foreach ($conditions as $condition) {
             $deserialized[] = $this->operatorConditionSerializer->deserialize($condition);
@@ -112,12 +110,15 @@ class ToggleSerializer
         switch ($status) {
             case 'always-active':
                 $toggle->activate(Toggle::ALWAYS_ACTIVE);
+
                 return;
             case 'inactive':
                 $toggle->deactivate();
+
                 return;
             case 'conditionally-active':
                 $toggle->activate(Toggle::CONDITIONALLY_ACTIVE);
+
                 return;
         }
 
@@ -125,8 +126,6 @@ class ToggleSerializer
     }
 
     /**
-     * @param Toggle $toggle
-     *
      * @return string
      */
     private function serializeStrategy(Toggle $toggle)
@@ -162,7 +161,7 @@ class ToggleSerializer
 
     private function assertHasKey($key, array $data)
     {
-        if ( ! array_key_exists($key, $data)) {
+        if (!array_key_exists($key, $data)) {
             throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));
         }
     }

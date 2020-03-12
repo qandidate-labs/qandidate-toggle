@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -117,8 +119,8 @@ class ToggleManagerTest extends TestCase
      */
     public function it_exposes_all_toggles()
     {
-        $toggle  = new Toggle('some-feature', array());
-        $toggle2 = new Toggle('some-other-feature', array());
+        $toggle = new Toggle('some-feature', []);
+        $toggle2 = new Toggle('some-other-feature', []);
 
         $manager = new ToggleManager(new InMemoryCollection());
 
@@ -138,7 +140,7 @@ class ToggleManagerTest extends TestCase
     {
         $this->expectException('InvalidArgumentException');
         $collection = new InMemoryCollection();
-        $collection->set('foo', new Toggle('foo-feature', array()));
+        $collection->set('foo', new Toggle('foo-feature', []));
         $manager = new ToggleManager($collection);
 
         $manager->get('bar');
@@ -150,7 +152,7 @@ class ToggleManagerTest extends TestCase
     public function it_returns_toggle_if_toggle_with_given_name_exists()
     {
         $collection = new InMemoryCollection();
-        $collection->set('foo', new Toggle('foo-feature', array()));
+        $collection->set('foo', new Toggle('foo-feature', []));
         $manager = new ToggleManager($collection);
 
         $actual = $manager->get('foo');

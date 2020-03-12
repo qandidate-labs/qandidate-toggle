@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -21,31 +23,24 @@ class OperatorConditionSerializer
 {
     private $operatorSerializer;
 
-    /**
-     * @param OperatorSerializer $operatorSerializer
-     */
     public function __construct(OperatorSerializer $operatorSerializer)
     {
         $this->operatorSerializer = $operatorSerializer;
     }
 
     /**
-     * @param OperatorCondition $condition
-     *
      * @return string
      */
     public function serialize(OperatorCondition $condition)
     {
-        return array(
+        return [
             'name' => 'operator-condition',
-            'key'  => $condition->getKey(),
+            'key' => $condition->getKey(),
             'operator' => $this->operatorSerializer->serialize($condition->getOperator()),
-        );
+        ];
     }
 
     /**
-     * @param array $condition
-     *
      * @return OperatorCondition
      */
     public function deserialize(array $condition)
@@ -54,7 +49,7 @@ class OperatorConditionSerializer
         $this->assertHasKey('key', $condition);
         $this->assertHasKey('operator', $condition);
 
-        if ($condition['name'] !== 'operator-condition') {
+        if ('operator-condition' !== $condition['name']) {
             throw new RuntimeException(sprintf('Unable to deserialize operator with name "%s".', $condition['name']));
         }
 
@@ -65,7 +60,7 @@ class OperatorConditionSerializer
 
     private function assertHasKey($key, array $data)
     {
-        if ( ! array_key_exists($key, $data)) {
+        if (!array_key_exists($key, $data)) {
             throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));
         }
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Qandidate\Toggle\Serializer;
 
 use Qandidate\Toggle\ToggleCollection\InMemoryCollection;
@@ -7,7 +9,6 @@ use Qandidate\Toggle\ToggleCollection\InMemoryCollection;
 class InMemoryCollectionSerializer
 {
     /**
-     * @param array $data
      * @return InMemoryCollection
      */
     public function deserialize(array $data)
@@ -25,13 +26,12 @@ class InMemoryCollectionSerializer
     }
 
     /**
-     * @param InMemoryCollection $toggleCollection
      * @return array
      */
     public function serialize(InMemoryCollection $toggleCollection)
     {
         $serializer = new ToggleSerializer(new OperatorConditionSerializer(new OperatorSerializer()));
-        $ret = array();
+        $ret = [];
         foreach ($toggleCollection->all() as $toggle) {
             $ret[] = $serializer->serialize($toggle);
         }

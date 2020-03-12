@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -11,8 +13,8 @@
 
 namespace Qandidate\Toggle\Serializer;
 
-use Qandidate\Toggle\OperatorCondition;
 use Qandidate\Toggle\Operator\GreaterThan;
+use Qandidate\Toggle\OperatorCondition;
 
 class OperatorConditionSerializerTest extends TestCase
 {
@@ -23,15 +25,15 @@ class OperatorConditionSerializerTest extends TestCase
     {
         $serializer = $this->createOperatorConditionSerializer();
 
-        $operator   = new OperatorCondition('user_id', new GreaterThan(42));
+        $operator = new OperatorCondition('user_id', new GreaterThan(42));
         $data = $serializer->serialize($operator);
 
         $this->assertEquals(
-            array(
+            [
                 'name' => 'operator-condition',
                 'key' => 'user_id',
-                'operator' => array('name' => 'greater-than', 'value' => 42)
-            ),
+                'operator' => ['name' => 'greater-than', 'value' => 42],
+            ],
             $data
         );
     }
@@ -43,11 +45,11 @@ class OperatorConditionSerializerTest extends TestCase
     {
         $serializer = $this->createOperatorConditionSerializer();
 
-        $serialized = array(
+        $serialized = [
             'name' => 'operator-condition',
             'key' => 'user_id',
-            'operator' => array('name' => 'greater-than', 'value' => 42)
-        );
+            'operator' => ['name' => 'greater-than', 'value' => 42],
+        ];
 
         $expected = new OperatorCondition('user_id', new GreaterThan(42));
         $this->assertEquals($expected, $serializer->deserialize($serialized));
@@ -61,11 +63,11 @@ class OperatorConditionSerializerTest extends TestCase
         $this->expectException('RuntimeException');
         $serializer = $this->createOperatorConditionSerializer();
 
-        $serialized = array(
+        $serialized = [
             'name' => 'unknown-name',
             'key' => 'user_id',
-            'operator' => array('name' => 'greater-than', 'value' => 42)
-        );
+            'operator' => ['name' => 'greater-than', 'value' => 42],
+        ];
 
         $serializer->deserialize($serialized);
     }
@@ -84,12 +86,12 @@ class OperatorConditionSerializerTest extends TestCase
 
     public function missingKeys()
     {
-        return array(
-            array(array()),
-            array(array('name')),
-            array(array('name', 'key')),
-            array(array('name', 'operator')),
-        );
+        return [
+            [[]],
+            [['name']],
+            [['name', 'key']],
+            [['name', 'operator']],
+        ];
     }
 
     private function createOperatorConditionSerializer()

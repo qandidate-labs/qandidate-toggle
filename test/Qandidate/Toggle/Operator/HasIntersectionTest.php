@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -27,11 +29,11 @@ class HasIntersectionTest extends TestCase
 
     public function valuesNotMatching()
     {
-        return array(
-            array([4],     [1, 2, 3]),
-            array([5, 6],  [1, 2, 3]),
-            array(['foo'], ['qux', 'bar']),
-        );
+        return [
+            [[4],     [1, 2, 3]],
+            [[5, 6],  [1, 2, 3]],
+            [['foo'], ['qux', 'bar']],
+        ];
     }
 
     /**
@@ -41,17 +43,17 @@ class HasIntersectionTest extends TestCase
     public function it_applies_to_set_matching_values($values, $argument)
     {
         $operator = new HasIntersection($values);
-        $this->assertTrue ($operator->appliesTo($argument));
+        $this->assertTrue($operator->appliesTo($argument));
     }
 
     public function valuesMatching()
     {
-        return array(
-            array([1],     [1, 2, 3]),
-            array([2],     [1, 2, 3]),
-            array([3, 2],  [1, 2, 3]),
-            array(['bar'], ['foo', 'bar']),
-        );
+        return [
+            [[1],     [1, 2, 3]],
+            [[2],     [1, 2, 3]],
+            [[3, 2],  [1, 2, 3]],
+            [['bar'], ['foo', 'bar']],
+        ];
     }
 
     /**

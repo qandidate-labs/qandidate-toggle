@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -21,10 +23,10 @@ use Qandidate\Toggle\ToggleCollection;
 class InMemoryCollection extends ToggleCollection
 {
     /** @var array|Toggle[] */
-    private $toggles = array();
+    private $toggles = [];
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function all()
     {
@@ -32,7 +34,7 @@ class InMemoryCollection extends ToggleCollection
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function get($name)
     {
@@ -44,7 +46,7 @@ class InMemoryCollection extends ToggleCollection
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function set($name, Toggle $toggle)
     {
@@ -52,7 +54,7 @@ class InMemoryCollection extends ToggleCollection
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function remove($name)
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Qandidate\Toggle\Operator;
 
 use Qandidate\Toggle\TestCase;
@@ -18,9 +20,9 @@ class MatchesRegexOperatorTest extends TestCase
 
     public function stringBeginningWith()
     {
-        return array(
-            array("/@foobar.com/",  "barbaz@foobar.com"),
-        );
+        return [
+            ['/@foobar.com/',  'barbaz@foobar.com'],
+        ];
     }
 
     /**
@@ -35,9 +37,9 @@ class MatchesRegexOperatorTest extends TestCase
 
     public function stringNotContaining()
     {
-        return array(
-            array("/^@foobar.com/", "barbaz@foobar.net"),
-        );
+        return [
+            ['/^@foobar.com/', 'barbaz@foobar.net'],
+        ];
     }
 
     /**
@@ -45,7 +47,7 @@ class MatchesRegexOperatorTest extends TestCase
      */
     public function it_exposes_its_value()
     {
-        $operator = new MatchesRegex("/^@foobar.com/");
-        $this->assertEquals("/^@foobar.com/", $operator->getValue());
+        $operator = new MatchesRegex('/^@foobar.com/');
+        $this->assertEquals('/^@foobar.com/', $operator->getValue());
     }
-} 
+}

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Qandidate\Toggle\Operator;
 
 use Qandidate\Toggle\TestCase;
@@ -18,11 +20,11 @@ class EqualToOperatorTest extends TestCase
 
     public function integerValues()
     {
-        return array(
-            array(0,  0),
-            array(42,  42),
-            array(-42,  -42),
-        );
+        return [
+            [0,  0],
+            [42,  42],
+            [-42,  -42],
+        ];
     }
 
     /**
@@ -37,11 +39,11 @@ class EqualToOperatorTest extends TestCase
 
     public function stringValues()
     {
-        return array(
-            array("foo", "foo"),
-            array('bar', 'bar'),
-            array("baz", 'baz'),
-        );
+        return [
+            ['foo', 'foo'],
+            ['bar', 'bar'],
+            ['baz', 'baz'],
+        ];
     }
 
     /**
@@ -56,10 +58,10 @@ class EqualToOperatorTest extends TestCase
 
     public function floatValues()
     {
-        return array(
-            array(3.14, 3.14),
-            array(-3.14, -3.14),
-        );
+        return [
+            [3.14, 3.14],
+            [-3.14, -3.14],
+        ];
     }
 
     /**
@@ -74,15 +76,15 @@ class EqualToOperatorTest extends TestCase
 
     public function notEqualValues()
     {
-        return array(
-            array(42,   43),
-            array(-42, -43),
-            array(-42.1, -43.1),
-            array(false, 0),
-            array(null, 0),
-            array(true, 1),
-            array("0", 0),
-        );
+        return [
+            [42,   43],
+            [-42, -43],
+            [-42.1, -43.1],
+            [false, 0],
+            [null, 0],
+            [true, 1],
+            ['0', 0],
+        ];
     }
 
     /**
@@ -93,4 +95,4 @@ class EqualToOperatorTest extends TestCase
         $operator = new EqualTo(42);
         $this->assertEquals(42, $operator->getValue());
     }
-} 
+}

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -27,13 +29,12 @@ abstract class ToggleCollection
     /**
      * @param string $name
      *
-     * @return null|Toggle
+     * @return Toggle|null
      */
     abstract public function get($name);
 
     /**
      * @param string $name
-     * @param Toggle $toggle
      */
     abstract public function set($name, Toggle $toggle);
 

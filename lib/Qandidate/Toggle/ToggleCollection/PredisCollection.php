@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -26,7 +28,7 @@ class PredisCollection extends ToggleCollection
     public function __construct($namespace, Client $client)
     {
         $this->namespace = $namespace;
-        $this->client    = $client;
+        $this->client = $client;
     }
 
     /**
@@ -34,7 +36,7 @@ class PredisCollection extends ToggleCollection
      */
     public function getClient()
     {
-      return $this->client;
+        return $this->client;
     }
 
     /**
@@ -42,17 +44,17 @@ class PredisCollection extends ToggleCollection
      */
     public function getNamespace()
     {
-      return $this->namespace;
+        return $this->namespace;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function all()
     {
-        $keys = $this->client->keys($this->namespace . '__TOGGLE__*');
+        $keys = $this->client->keys($this->namespace.'__TOGGLE__*');
 
-        $toggles = array();
+        $toggles = [];
 
         foreach ($keys as $key) {
             $toggle = $this->getFromKey($key);
@@ -60,39 +62,38 @@ class PredisCollection extends ToggleCollection
             $toggles[$toggle->getName()] = $toggle;
         }
 
-
         return $toggles;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function get($name)
     {
-        return $this->getFromKey($this->namespace . '__TOGGLE__' . $name);
+        return $this->getFromKey($this->namespace.'__TOGGLE__'.$name);
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function set($name, Toggle $toggle)
     {
-        $this->client->set($this->namespace . '__TOGGLE__' . $name, serialize($toggle));
+        $this->client->set($this->namespace.'__TOGGLE__'.$name, serialize($toggle));
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function remove($name)
     {
-        return 1 === $this->client->del($this->namespace . '__TOGGLE__' . $name);
+        return 1 === $this->client->del($this->namespace.'__TOGGLE__'.$name);
     }
 
     private function getFromKey($key)
     {
         $data = $this->client->get($key);
 
-        if ( ! $data) {
+        if (!$data) {
             return null;
         }
 

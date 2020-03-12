@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Qandidate\Toggle;
 
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 /**
  * A condition written as a symfony language expression that gets evaluated against the
- * full context, allowing access to several keys of the context in a single condition
+ * full context, allowing access to several keys of the context in a single condition.
  */
 class ExpressionCondition extends Condition
 {
@@ -20,14 +22,14 @@ class ExpressionCondition extends Condition
     public function __construct($expression, ExpressionLanguage $language)
     {
         $this->expression = $expression;
-        $this->language   = $language;
+        $this->language = $language;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function holdsFor(Context $context)
     {
-        return $this->language->evaluate($this->expression, $context->toArray()) === true;
+        return true === $this->language->evaluate($this->expression, $context->toArray());
     }
 }

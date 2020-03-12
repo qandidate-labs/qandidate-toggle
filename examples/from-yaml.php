@@ -1,18 +1,19 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+declare(strict_types=1);
 
-use Symfony\Component\Yaml\Yaml;
+require_once __DIR__.'/../vendor/autoload.php';
+
 use Qandidate\Toggle\Context;
-use Qandidate\Toggle\ToggleManager;
 use Qandidate\Toggle\Serializer\InMemoryCollectionSerializer;
+use Qandidate\Toggle\ToggleManager;
+use Symfony\Component\Yaml\Yaml;
 
 /**
- * To parse yml files, make sure you install symfony/yaml otherwise this example won't work. This can be achieved by:
+ * To parse yml files, make sure you install symfony/yaml otherwise this example won't work. This can be achieved by:.
  *
  * $ composer require symfony/yaml
  */
-
 $yaml = <<<YML
 toggles:
   - name: some-feature
@@ -34,10 +35,10 @@ toggles:
 YML;
 
 // Create the ToggleManager
-$array      = Yaml::parse($yaml);
+$array = Yaml::parse($yaml);
 $serializer = new InMemoryCollectionSerializer();
 $collection = $serializer->deserialize($array['toggles']);
-$manager    = new ToggleManager($collection);
+$manager = new ToggleManager($collection);
 
 // Create and check a new context for a user with id 42
 $context = new Context();

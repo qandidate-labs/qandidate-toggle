@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -21,7 +23,7 @@ class Percentage extends Operator
     public function __construct($percentage, $shift = 0)
     {
         $this->percentage = $percentage;
-        $this->shift      = $shift;
+        $this->shift = $shift;
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -10,9 +12,6 @@
  */
 
 namespace Qandidate\Toggle;
-
-use Qandidate\Toggle\TestCase;
-use Qandidate\Toggle\Toggle;
 
 abstract class ToggleCollectionTest extends TestCase
 {
@@ -30,7 +29,7 @@ abstract class ToggleCollectionTest extends TestCase
      */
     public function it_returns_a_set_toggle()
     {
-        $toggle     = new Toggle('some-feature', array());
+        $toggle = new Toggle('some-feature', []);
         $collection = $this->createCollection();
         $collection->set($toggle->getName(), $toggle);
 
@@ -42,7 +41,7 @@ abstract class ToggleCollectionTest extends TestCase
      */
     public function it_removes_a_toggle()
     {
-        $toggle     = new Toggle('some-feature', array());
+        $toggle = new Toggle('some-feature', []);
         $collection = $this->createCollection();
         $collection->set($toggle->getName(), $toggle);
 
@@ -68,11 +67,11 @@ abstract class ToggleCollectionTest extends TestCase
      */
     public function it_exposes_all_toggles()
     {
-        $toggle     = new Toggle('some-feature',       array());
-        $toggle2    = new Toggle('some-other-feature', array());
+        $toggle = new Toggle('some-feature', []);
+        $toggle2 = new Toggle('some-other-feature', []);
         $collection = $this->createCollection();
 
-        $collection->set($toggle->getName(),  $toggle);
+        $collection->set($toggle->getName(), $toggle);
         $collection->set($toggle2->getName(), $toggle2);
 
         $all = $collection->all();
@@ -86,10 +85,10 @@ abstract class ToggleCollectionTest extends TestCase
      */
     public function it_returns_true_on_removing_existing_toggle()
     {
-        $toggle     = new Toggle('some-feature', array());
+        $toggle = new Toggle('some-feature', []);
         $collection = $this->createCollection();
 
-        $collection->set($toggle->getName(),  $toggle);
+        $collection->set($toggle->getName(), $toggle);
 
         $this->assertTrue($collection->remove('some-feature'));
     }

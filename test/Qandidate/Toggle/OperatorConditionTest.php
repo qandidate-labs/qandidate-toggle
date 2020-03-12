@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the qandidate/toggle package.
  *
@@ -21,7 +23,7 @@ class OperatorConditionTest extends TestCase
     public function it_returns_false_if_context_does_not_contain_key()
     {
         $condition = new OperatorCondition('age', new GreaterThan(42));
-        $context   = new Context();
+        $context = new Context();
 
         $this->assertFalse($condition->holdsFor($context));
     }
@@ -33,7 +35,7 @@ class OperatorConditionTest extends TestCase
     public function it_returns_whether_it_operator_holds_for_the_value_if_available($value, $expected)
     {
         $condition = new OperatorCondition('age', new GreaterThan(42));
-        $context   = new Context();
+        $context = new Context();
         $context->set('age', $value);
 
         $this->assertEquals($expected, $condition->holdsFor($context));
@@ -41,10 +43,10 @@ class OperatorConditionTest extends TestCase
 
     public function valueAvailable()
     {
-        return array(
-            array(24, false),
-            array(84, true),
-        );
+        return [
+            [24, false],
+            [84, true],
+        ];
     }
 
     /**
@@ -52,8 +54,8 @@ class OperatorConditionTest extends TestCase
      */
     public function it_exposes_its_key_and_operator()
     {
-        $key       = 'age';
-        $operator  = new GreaterThan(42);
+        $key = 'age';
+        $operator = new GreaterThan(42);
         $condition = new OperatorCondition($key, $operator);
 
         $this->assertEquals($key, $condition->getKey());
