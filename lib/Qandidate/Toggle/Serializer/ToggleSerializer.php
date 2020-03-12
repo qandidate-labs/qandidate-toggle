@@ -103,6 +103,8 @@ class ToggleSerializer
             case Toggle::CONDITIONALLY_ACTIVE:
                 return 'conditionally-active';
         }
+
+        throw new \InvalidArgumentException('unsupported status');
     }
 
     private function deserializeStatus(Toggle $toggle, $status)
@@ -125,10 +127,7 @@ class ToggleSerializer
         throw new RuntimeException(sprintf('Unknown toggle status "%s".', $status));
     }
 
-    /**
-     * @return string
-     */
-    private function serializeStrategy(Toggle $toggle)
+    private function serializeStrategy(Toggle $toggle): string
     {
         switch ($toggle->getStrategy()) {
             case Toggle::STRATEGY_AFFIRMATIVE:
@@ -138,6 +137,8 @@ class ToggleSerializer
             case Toggle::STRATEGY_UNANIMOUS:
                 return 'unanimous';
         }
+
+        throw new \InvalidArgumentException('unsupported strategy');
     }
 
     /**

@@ -20,7 +20,7 @@ class Percentage extends Operator
     private $percentage;
     private $shift;
 
-    public function __construct($percentage, $shift = 0)
+    public function __construct(int $percentage, int $shift = 0)
     {
         $this->percentage = $percentage;
         $this->shift = $shift;
@@ -31,10 +31,10 @@ class Percentage extends Operator
      */
     public function appliesTo($argument)
     {
-        $asPercentage = $argument % 100;
+        $asPercentage = (int) $argument % 100;
 
         return $asPercentage >= $this->shift &&
-            $asPercentage < ($this->percentage + $this->shift);
+            $asPercentage < (int) ($this->percentage + $this->shift);
     }
 
     public function getPercentage()

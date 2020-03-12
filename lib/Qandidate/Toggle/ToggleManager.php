@@ -109,7 +109,7 @@ class ToggleManager
     }
 
     /**
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      *
      * @return Toggle toggle from manager that has given name
      */
