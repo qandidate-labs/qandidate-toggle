@@ -59,10 +59,7 @@ class OperatorSerializer
         }
     }
 
-    /**
-     * @return Operator
-     */
-    public function deserialize(array $operator)
+    public function deserialize(array $operator): Operator
     {
         $this->assertHasKey('name', $operator);
 
@@ -114,7 +111,7 @@ class OperatorSerializer
         }
     }
 
-    private function assertHasKey($key, array $data)
+    private function assertHasKey(string $key, array $data): void
     {
         if (!array_key_exists($key, $data)) {
             throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));

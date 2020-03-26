@@ -17,7 +17,14 @@ use Qandidate\Toggle\Operator;
 
 class Percentage extends Operator
 {
+    /**
+     * @var int
+     */
     private $percentage;
+
+    /**
+     * @var int
+     */
     private $shift;
 
     public function __construct(int $percentage, int $shift = 0)
@@ -29,20 +36,20 @@ class Percentage extends Operator
     /**
      * {@inheritdoc}
      */
-    public function appliesTo($argument)
+    public function appliesTo($argument): bool
     {
         $asPercentage = (int) $argument % 100;
 
         return $asPercentage >= $this->shift &&
-            $asPercentage < (int) ($this->percentage + $this->shift);
+            $asPercentage < ($this->percentage + $this->shift);
     }
 
-    public function getPercentage()
+    public function getPercentage(): int
     {
         return $this->percentage;
     }
 
-    public function getShift()
+    public function getShift(): int
     {
         return $this->shift;
     }

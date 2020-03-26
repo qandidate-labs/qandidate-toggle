@@ -279,7 +279,7 @@ class ToggleSerializerTest extends TestCase
 
 class OtherCondition extends Condition
 {
-    public function holdsFor(Context $context)
+    public function holdsFor(Context $context): bool
     {
         return false;
     }

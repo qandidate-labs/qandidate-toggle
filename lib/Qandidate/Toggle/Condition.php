@@ -21,5 +21,5 @@ abstract class Condition
     /**
      * @return bool True, if the condition holds for the given context
      */
-    abstract public function holdsFor(Context $context);
+    abstract public function holdsFor(Context $context): bool;
 }

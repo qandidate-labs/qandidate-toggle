@@ -22,6 +22,9 @@ use RuntimeException;
  */
 class ToggleSerializer
 {
+    /**
+     * @var OperatorConditionSerializer
+     */
     private $operatorConditionSerializer;
 
     public function __construct(OperatorConditionSerializer $operatorConditionSerializer)
@@ -29,10 +32,7 @@ class ToggleSerializer
         $this->operatorConditionSerializer = $operatorConditionSerializer;
     }
 
-    /**
-     * @return array
-     */
-    public function serialize(Toggle $toggle)
+    public function serialize(Toggle $toggle): array
     {
         return [
             'name' => $toggle->getName(),
@@ -42,10 +42,7 @@ class ToggleSerializer
         ];
     }
 
-    /**
-     * @return Toggle
-     */
-    public function deserialize(array $data)
+    public function deserialize(array $data): Toggle
     {
         $this->assertHasKey('name', $data);
         $this->assertHasKey('conditions', $data);
@@ -67,7 +64,7 @@ class ToggleSerializer
         return $toggle;
     }
 
-    private function serializeConditions(array $conditions)
+    private function serializeConditions(array $conditions): array
     {
         $serialized = [];
 
@@ -82,7 +79,7 @@ class ToggleSerializer
         return $serialized;
     }
 
-    private function deserializeConditions(array $conditions)
+    private function deserializeConditions(array $conditions): array
     {
         $deserialized = [];
 
@@ -93,7 +90,7 @@ class ToggleSerializer
         return $deserialized;
     }
 
-    private function serializeStatus(Toggle $toggle)
+    private function serializeStatus(Toggle $toggle): string
     {
         switch ($toggle->getStatus()) {
             case Toggle::ALWAYS_ACTIVE:
@@ -107,7 +104,7 @@ class ToggleSerializer
         throw new \InvalidArgumentException('unsupported status');
     }
 
-    private function deserializeStatus(Toggle $toggle, $status)
+    private function deserializeStatus(Toggle $toggle, string $status): void
     {
         switch ($status) {
             case 'always-active':
@@ -141,12 +138,7 @@ class ToggleSerializer
         throw new \InvalidArgumentException('unsupported strategy');
     }
 
-    /**
-     * @param string $strategy
-     *
-     * @return int
-     */
-    private function deserializeStrategy($strategy)
+    private function deserializeStrategy(string $strategy): int
     {
         switch ($strategy) {
             case 'affirmative':
@@ -160,7 +152,7 @@ class ToggleSerializer
         throw new RuntimeException(sprintf('Unknown toggle strategy "%s".', $strategy));
     }
 
-    private function assertHasKey($key, array $data)
+    private function assertHasKey(string $key, array $data): void
     {
         if (!array_key_exists($key, $data)) {
             throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));

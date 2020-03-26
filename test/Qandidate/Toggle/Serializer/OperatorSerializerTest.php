@@ -118,7 +118,7 @@ class OperatorSerializerTest extends TestCase
 
 class UnknownOperator extends Operator
 {
-    public function appliesTo($argument)
+    public function appliesTo($argument): bool
     {
         return true;
     }

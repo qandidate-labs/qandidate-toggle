@@ -28,7 +28,7 @@ class OperatorCondition extends Condition
      * @param string   $key      Name of the value
      * @param Operator $operator Operator to run
      */
-    public function __construct($key, Operator $operator)
+    public function __construct(string $key, Operator $operator)
     {
         $this->key = $key;
         $this->operator = $operator;
@@ -37,7 +37,7 @@ class OperatorCondition extends Condition
     /**
      * {@inheritdoc}
      */
-    public function holdsFor(Context $context)
+    public function holdsFor(Context $context): bool
     {
         if (!$context->has($this->key)) {
             return false;
@@ -48,18 +48,12 @@ class OperatorCondition extends Condition
         return $this->operator->appliesTo($argument);
     }
 
-    /**
-     * @return string
-     */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
 
-    /**
-     * @return Operator
-     */
-    public function getOperator()
+    public function getOperator(): Operator
     {
         return $this->operator;
     }

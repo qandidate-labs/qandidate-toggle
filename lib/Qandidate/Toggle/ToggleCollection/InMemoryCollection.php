@@ -22,13 +22,15 @@ use Qandidate\Toggle\ToggleCollection;
  */
 class InMemoryCollection extends ToggleCollection
 {
-    /** @var array|Toggle[] */
+    /**
+     * @var Toggle[]
+     */
     private $toggles = [];
 
     /**
      * {@inheritdoc}
      */
-    public function all()
+    public function all(): array
     {
         return $this->toggles;
     }
@@ -36,7 +38,7 @@ class InMemoryCollection extends ToggleCollection
     /**
      * {@inheritdoc}
      */
-    public function get($name)
+    public function get(string $name): ?Toggle
     {
         if (!array_key_exists($name, $this->toggles)) {
             return null;
@@ -48,7 +50,7 @@ class InMemoryCollection extends ToggleCollection
     /**
      * {@inheritdoc}
      */
-    public function set($name, Toggle $toggle)
+    public function set(string $name, Toggle $toggle): void
     {
         $this->toggles[$name] = $toggle;
     }
@@ -56,14 +58,10 @@ class InMemoryCollection extends ToggleCollection
     /**
      * {@inheritdoc}
      */
-    public function remove($name)
+    public function remove(string $name): void
     {
-        if (!array_key_exists($name, $this->toggles)) {
-            return false;
+        if (array_key_exists($name, $this->toggles)) {
+            unset($this->toggles[$name]);
         }
-
-        unset($this->toggles[$name]);
-
-        return true;
     }
 }

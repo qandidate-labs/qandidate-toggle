@@ -17,6 +17,9 @@ use Qandidate\Toggle\Operator;
 
 class InSet extends Operator
 {
+    /**
+     * @var array
+     */
     private $values;
 
     public function __construct(array $values)
@@ -27,16 +30,13 @@ class InSet extends Operator
     /**
      * {@inheritdoc}
      */
-    public function appliesTo($argument)
+    public function appliesTo($argument): bool
     {
         return null !== $argument
             && in_array($argument, $this->values);
     }
 
-    /**
-     * @return array
-     */
-    public function getValues()
+    public function getValues(): array
     {
         return $this->values;
     }

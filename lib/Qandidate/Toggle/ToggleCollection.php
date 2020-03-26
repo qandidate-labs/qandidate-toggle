@@ -22,26 +22,13 @@ namespace Qandidate\Toggle;
 abstract class ToggleCollection
 {
     /**
-     * @return array|Toggle[]
+     * @return Toggle[]
      */
-    abstract public function all();
+    abstract public function all(): array;
 
-    /**
-     * @param string $name
-     *
-     * @return Toggle|null
-     */
-    abstract public function get($name);
+    abstract public function get(string $name): ?Toggle;
 
-    /**
-     * @param string $name
-     */
-    abstract public function set($name, Toggle $toggle);
+    abstract public function set(string $name, Toggle $toggle): void;
 
-    /**
-     * @param string $name
-     *
-     * @return bool True, if element was removed
-     */
-    abstract public function remove($name);
+    abstract public function remove(string $name): void;
 }

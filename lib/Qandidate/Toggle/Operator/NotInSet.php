@@ -18,7 +18,7 @@ class NotInSet extends InSet
     /**
      * {@inheritdoc}
      */
-    public function appliesTo($argument)
+    public function appliesTo($argument): bool
     {
         return !parent::appliesTo($argument);
     }

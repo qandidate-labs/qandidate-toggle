@@ -34,8 +34,9 @@ To run all the tests you'll need to have redis installed (redis tests wil be ski
 Running the tests:
 
 ```
-$ phpunit
+$ make test
 ```
+
 ## License
 
 MIT, see LICENSE.

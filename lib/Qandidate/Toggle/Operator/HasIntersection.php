@@ -15,6 +15,9 @@ namespace Qandidate\Toggle\Operator;
 
 class HasIntersection extends EqualityOperator
 {
+    /**
+     * @var array
+     */
     private $values;
 
     public function __construct(array $values)
@@ -25,16 +28,13 @@ class HasIntersection extends EqualityOperator
     /**
      * {@inheritdoc}
      */
-    public function appliesTo($argument)
+    public function appliesTo($argument): bool
     {
         return null !== $argument
             && array_intersect($argument, $this->values);
     }
 
-    /**
-     * @return array
-     */
-    public function getValues()
+    public function getValues(): array
     {
         return $this->values;
     }

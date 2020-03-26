@@ -59,7 +59,7 @@ class ToggleManagerTest extends TestCase
 
         $manager->add($this->createToggleMock());
 
-        $this->assertTrue($manager->remove('some-feature'));
+        $manager->remove('some-feature');
         $this->assertFalse($manager->active('some-feature', new Context()));
     }
 
@@ -82,7 +82,7 @@ class ToggleManagerTest extends TestCase
             ->method('getName')
             ->will($this->returnValue('other-feature'));
 
-        $this->assertTrue($manager->rename('some-feature', 'other-feature'));
+        $manager->rename('some-feature', 'other-feature');
         $this->assertFalse($manager->active('some-feature', new Context()));
         $this->assertTrue($manager->active('other-feature', new Context()));
     }

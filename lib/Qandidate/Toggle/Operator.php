@@ -23,5 +23,5 @@ abstract class Operator
      *
      * @return bool True, if the operator applies to the argument
      */
-    abstract public function appliesTo($argument);
+    abstract public function appliesTo($argument): bool;
 }

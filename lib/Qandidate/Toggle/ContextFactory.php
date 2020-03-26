@@ -30,8 +30,5 @@ namespace Qandidate\Toggle;
  */
 abstract class ContextFactory
 {
-    /**
-     * @return Context
-     */
-    abstract public function createContext();
+    abstract public function createContext(): Context;
 }

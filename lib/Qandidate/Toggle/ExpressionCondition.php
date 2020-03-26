@@ -21,14 +21,17 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
  */
 class ExpressionCondition extends Condition
 {
+    /**
+     * @var string
+     */
     protected $expression;
-    protected $language;
 
     /**
-     * @param string             $expression The expression to be evaluated
-     * @param ExpressionLanguage $language   The instance of the Expression Language
+     * @var ExpressionLanguage
      */
-    public function __construct($expression, ExpressionLanguage $language)
+    protected $language;
+
+    public function __construct(string $expression, ExpressionLanguage $language)
     {
         $this->expression = $expression;
         $this->language = $language;
@@ -37,7 +40,7 @@ class ExpressionCondition extends Condition
     /**
      * {@inheritdoc}
      */
-    public function holdsFor(Context $context)
+    public function holdsFor(Context $context): bool
     {
         return true === $this->language->evaluate($this->expression, $context->toArray());
     }

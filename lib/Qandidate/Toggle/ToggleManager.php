@@ -20,6 +20,9 @@ use RuntimeException;
  */
 class ToggleManager
 {
+    /**
+     * @var ToggleCollection
+     */
     private $collection;
 
     public function __construct(ToggleCollection $collection)
@@ -28,11 +31,9 @@ class ToggleManager
     }
 
     /**
-     * @param string $name
-     *
      * @return bool True, if the toggle exists and is active
      */
-    public function active($name, Context $context)
+    public function active(string $name, Context $context): bool
     {
         if (null === $toggle = $this->collection->get($name)) {
             return false;
@@ -43,20 +44,16 @@ class ToggleManager
 
     /**
      * Removes the toggle from the manager.
-     *
-     * @param string $name
-     *
-     * @return bool True, if element was removed
      */
-    public function remove($name)
+    public function remove(string $name): void
     {
-        return $this->collection->remove($name);
+        $this->collection->remove($name);
     }
 
     /**
      * Add the toggle to the manager.
      */
-    public function add(Toggle $toggle)
+    public function add(Toggle $toggle): void
     {
         $this->collection->set($toggle->getName(), $toggle);
     }
@@ -64,7 +61,7 @@ class ToggleManager
     /**
      * Update the toggle.
      */
-    public function update(Toggle $toggle)
+    public function update(Toggle $toggle): void
     {
         $this->collection->set($toggle->getName(), $toggle);
     }
@@ -72,14 +69,9 @@ class ToggleManager
     /**
      * Rename the toggle.
      *
-     * @param string $oldName
-     * @param string $newName
-     *
      * @throws RuntimeException
-     *
-     * @return bool
      */
-    public function rename($oldName, $newName)
+    public function rename(string $oldName, string $newName): void
     {
         if (null !== $this->collection->get($newName)) {
             throw new RuntimeException(sprintf('Could not rename toggle %1$s to %2$s, a toggle with name %2$s already exists', $oldName, $newName));
@@ -93,17 +85,14 @@ class ToggleManager
 
         $currentToggle->rename($newName);
 
-        if (false === $this->add($currentToggle)) {
-            throw new RuntimeException(sprintf('Failed to rename toggle %1$s to %2$s, an error occurred when saving toggle with new name', $oldName, $newName));
-        }
-
-        return $this->remove($oldName);
+        $this->add($currentToggle);
+        $this->remove($oldName);
     }
 
     /**
-     * @return array|Toggle[] all toggles from the manager
+     * @return Toggle[] all toggles from the manager
      */
-    public function all()
+    public function all(): array
     {
         return $this->collection->all();
     }
@@ -113,7 +102,7 @@ class ToggleManager
      *
      * @return Toggle toggle from manager that has given name
      */
-    public function get($name)
+    public function get(string $name): Toggle
     {
         $toggle = $this->collection->get($name);
         if (!$toggle) {

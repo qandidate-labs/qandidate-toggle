@@ -17,10 +17,7 @@ use Qandidate\Toggle\ToggleCollection\InMemoryCollection;
 
 class InMemoryCollectionSerializer
 {
-    /**
-     * @return InMemoryCollection
-     */
-    public function deserialize(array $data)
+    public function deserialize(array $data): InMemoryCollection
     {
         $collection = new InMemoryCollection();
         $serializer = new ToggleSerializer(new OperatorConditionSerializer(new OperatorSerializer()));
@@ -34,10 +31,7 @@ class InMemoryCollectionSerializer
         return $collection;
     }
 
-    /**
-     * @return array
-     */
-    public function serialize(InMemoryCollection $toggleCollection)
+    public function serialize(InMemoryCollection $toggleCollection): array
     {
         $serializer = new ToggleSerializer(new OperatorConditionSerializer(new OperatorSerializer()));
         $ret = [];
