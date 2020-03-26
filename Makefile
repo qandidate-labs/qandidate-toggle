@@ -17,7 +17,7 @@ php-cs-fixer:
 
 PHONY: phpstan
 phpstan:
-	vendor/bin/phpstan analyse --level=5 lib/
+	vendor/bin/phpstan analyse --level=max lib/
 
 .PHONY: changelog
 changelog:

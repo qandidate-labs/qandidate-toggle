@@ -21,6 +21,9 @@ use RuntimeException;
  */
 class OperatorConditionSerializer
 {
+    /**
+     * @var OperatorSerializer
+     */
     private $operatorSerializer;
 
     public function __construct(OperatorSerializer $operatorSerializer)
@@ -37,10 +40,7 @@ class OperatorConditionSerializer
         ];
     }
 
-    /**
-     * @return OperatorCondition
-     */
-    public function deserialize(array $condition)
+    public function deserialize(array $condition): OperatorCondition
     {
         $this->assertHasKey('name', $condition);
         $this->assertHasKey('key', $condition);
@@ -55,7 +55,7 @@ class OperatorConditionSerializer
         return new OperatorCondition($condition['key'], $operator);
     }
 
-    private function assertHasKey($key, array $data)
+    private function assertHasKey(string $key, array $data): void
     {
         if (!array_key_exists($key, $data)) {
             throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));

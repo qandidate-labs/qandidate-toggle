@@ -22,27 +22,28 @@ use Qandidate\Toggle\ToggleCollection;
  */
 class PredisCollection extends ToggleCollection
 {
+    /**
+     * @var Client
+     */
     private $client;
+
+    /**
+     * @var string
+     */
     private $namespace;
 
-    public function __construct($namespace, Client $client)
+    public function __construct(string $namespace, Client $client)
     {
         $this->namespace = $namespace;
         $this->client = $client;
     }
 
-    /**
-     * @return Client
-     */
-    public function getClient()
+    public function getClient(): Client
     {
         return $this->client;
     }
 
-    /**
-     * @return string
-     */
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return $this->namespace;
     }
@@ -50,7 +51,7 @@ class PredisCollection extends ToggleCollection
     /**
      * {@inheritdoc}
      */
-    public function all()
+    public function all(): array
     {
         $keys = $this->client->keys($this->namespace.'__TOGGLE__*');
 
@@ -68,7 +69,7 @@ class PredisCollection extends ToggleCollection
     /**
      * {@inheritdoc}
      */
-    public function get($name)
+    public function get(string $name): ?Toggle
     {
         return $this->getFromKey($this->namespace.'__TOGGLE__'.$name);
     }
@@ -76,7 +77,7 @@ class PredisCollection extends ToggleCollection
     /**
      * {@inheritdoc}
      */
-    public function set($name, Toggle $toggle)
+    public function set(string $name, Toggle $toggle): void
     {
         $this->client->set($this->namespace.'__TOGGLE__'.$name, serialize($toggle));
     }
@@ -84,12 +85,15 @@ class PredisCollection extends ToggleCollection
     /**
      * {@inheritdoc}
      */
-    public function remove($name)
+    public function remove(string $name): void
     {
-        return 1 === $this->client->del($this->namespace.'__TOGGLE__'.$name);
+        $this->client->del([$this->namespace.'__TOGGLE__'.$name]);
     }
 
-    private function getFromKey($key)
+    /**
+     * @return mixed|null
+     */
+    private function getFromKey(string $key)
     {
         $data = $this->client->get($key);
 

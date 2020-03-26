@@ -19,7 +19,9 @@ namespace Qandidate\Toggle;
  */
 class Context
 {
-    /** @var array */
+    /**
+     * @var array
+     */
     private $values = [];
 
     /**
@@ -47,18 +49,13 @@ class Context
 
     /**
      * @param int|string $key
-     *
-     * @return bool
      */
-    public function has($key)
+    public function has($key): bool
     {
         return array_key_exists($key, $this->values);
     }
 
-    /**
-     * @return array|mixed[]
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->values;
     }

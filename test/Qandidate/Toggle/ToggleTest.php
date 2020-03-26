@@ -241,7 +241,7 @@ class ToggleTest extends TestCase
     public function it_cannot_be_set_with_an_non_existing_strategy()
     {
         $this->expectException('InvalidArgumentException');
-        new Toggle('some-feature', [], 'some-strategy');
+        new Toggle('some-feature', [], -1);
     }
 
     /**

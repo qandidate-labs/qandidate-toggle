@@ -41,7 +41,7 @@ class Toggle
     /** @var string */
     private $name;
 
-    /** @var array|Condition[] */
+    /** @var Condition[] */
     private $conditions;
 
     /** @var int */
@@ -51,11 +51,9 @@ class Toggle
     private $strategy = self::STRATEGY_AFFIRMATIVE;
 
     /**
-     * @param string            $name
-     * @param array|Condition[] $conditions
-     * @param int               $strategy
+     * @param Condition[] $conditions
      */
-    public function __construct($name, array $conditions, $strategy = self::STRATEGY_AFFIRMATIVE)
+    public function __construct(string $name, array $conditions, int $strategy = self::STRATEGY_AFFIRMATIVE)
     {
         $this->name = $name;
         $this->conditions = $conditions;
@@ -63,10 +61,7 @@ class Toggle
         $this->strategy = $strategy;
     }
 
-    /**
-     * @param int $status
-     */
-    public function activate($status = self::CONDITIONALLY_ACTIVE)
+    public function activate(int $status = self::CONDITIONALLY_ACTIVE): void
     {
         $this->assertValidActiveStatus($status);
         $this->status = $status;
@@ -77,7 +72,7 @@ class Toggle
      *
      * @return bool true, if one of conditions hold for the context
      */
-    public function activeFor(Context $context)
+    public function activeFor(Context $context): bool
     {
         switch ($this->status) {
             case self::ALWAYS_ACTIVE:
@@ -93,68 +88,48 @@ class Toggle
 
     /**
      * Immediately set this toggle's status to inactive.
-     *
-     * @return int The status code after deactivation
      */
-    public function deactivate()
+    public function deactivate(): void
     {
-        return $this->status = self::INACTIVE;
+        $this->status = self::INACTIVE;
     }
 
     /**
-     * @return array|Condition[]
+     * @return Condition[]
      */
-    public function getConditions()
+    public function getConditions(): array
     {
         return $this->conditions;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $newName
-     */
-    public function rename($newName)
+    public function rename(string $newName): void
     {
         $this->name = $newName;
     }
 
-    /**
-     * @return int
-     */
-    public function getStatus()
+    public function getStatus(): int
     {
         return $this->status;
     }
 
-    /**
-     * @return int
-     */
-    public function getStrategy()
+    public function getStrategy(): int
     {
         return $this->strategy;
     }
 
-    /**
-     * @param int $status
-     */
-    private function assertValidActiveStatus($status)
+    private function assertValidActiveStatus(int $status): void
     {
         if (self::ALWAYS_ACTIVE !== $status && self::CONDITIONALLY_ACTIVE !== $status) {
             throw new InvalidArgumentException('No "active" status was provided.');
         }
     }
 
-    /**
-     * @param int $strategy
-     */
-    private function assertValidStrategy($strategy)
+    private function assertValidStrategy(int $strategy): void
     {
         if (!in_array($strategy, [
             self::STRATEGY_AFFIRMATIVE,
@@ -165,7 +140,7 @@ class Toggle
         }
     }
 
-    private function executeCondition(Context $context)
+    private function executeCondition(Context $context): bool
     {
         switch ($this->strategy) {
           case self::STRATEGY_AFFIRMATIVE:
@@ -179,10 +154,7 @@ class Toggle
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function atLeastOneConditionHolds(Context $context)
+    private function atLeastOneConditionHolds(Context $context): bool
     {
         foreach ($this->conditions as $condition) {
             if ($condition->holdsFor($context)) {
@@ -193,10 +165,7 @@ class Toggle
         return false;
     }
 
-    /**
-     * @return bool
-     */
-    private function moreThanHalfConditionsHold(Context $context)
+    private function moreThanHalfConditionsHold(Context $context): bool
     {
         $nbPositive = 0;
         $nbNegative = 0;
@@ -208,10 +177,7 @@ class Toggle
         return $nbPositive > $nbNegative;
     }
 
-    /**
-     * @return bool
-     */
-    private function allConditionsHold(Context $context)
+    private function allConditionsHold(Context $context): bool
     {
         foreach ($this->conditions as $condition) {
             if (!$condition->holdsFor($context)) {

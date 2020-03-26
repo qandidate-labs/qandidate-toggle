@@ -83,24 +83,30 @@ abstract class ToggleCollectionTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_true_on_removing_existing_toggle()
+    public function it_removes_existing_toggle()
     {
         $toggle = new Toggle('some-feature', []);
         $collection = $this->createCollection();
 
         $collection->set($toggle->getName(), $toggle);
+        $this->assertCount(1, $collection->all());
 
-        $this->assertTrue($collection->remove('some-feature'));
+        $collection->remove('some-feature');
+
+        $this->assertCount(0, $collection->all());
     }
 
     /**
      * @test
      */
-    public function it_returns_false_on_removing_non_existing_toggle()
+    public function it_does_not_throw_when_removing_non_existing_toggle()
     {
         $collection = $this->createCollection();
 
-        $this->assertFalse($collection->remove('some-feature'));
+        $this->assertCount(0, $collection->all());
+
+        $collection->remove('some-feature');
+        $this->assertCount(0, $collection->all());
     }
 
     /**
