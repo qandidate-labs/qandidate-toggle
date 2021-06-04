@@ -15,6 +15,10 @@ qa: php-cs-fixer phpstan
 php-cs-fixer:
 	vendor/bin/php-cs-fixer fix --no-interaction --allow-risky=yes --diff --verbose
 
+.PHONY: php-cs-fixer-ci
+php-cs-fixer-ci:
+	vendor/bin/php-cs-fixer fix --dry-run --no-interaction --allow-risky=yes --diff --verbose
+
 PHONY: phpstan
 phpstan:
 	vendor/bin/phpstan analyse --level=max lib/
