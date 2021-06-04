@@ -57,7 +57,7 @@ class NotInSetTest extends TestCase
      * @test
      * @dataProvider nullSets
      */
-    public function it_considers_NULL_to_not_be_part_of_a_set($argument, $set)
+    public function it_considers_null_to_not_be_part_of_a_set($argument, $set)
     {
         $operator = new NotInSet($set);
         $this->assertTrue($operator->appliesTo($argument));

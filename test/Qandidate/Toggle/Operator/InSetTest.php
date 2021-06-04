@@ -57,7 +57,7 @@ class InSetTest extends TestCase
      * @test
      * @dataProvider nullSets
      */
-    public function it_never_accept_NULL_as_part_of_a_set($argument, $set)
+    public function it_never_accepts_null_as_part_of_a_set($argument, $set)
     {
         $operator = new InSet($set);
         $this->assertFalse($operator->appliesTo($argument));

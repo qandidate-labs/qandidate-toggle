@@ -25,18 +25,18 @@ use InvalidArgumentException;
  */
 class Toggle
 {
-    const CONDITIONALLY_ACTIVE = 1;
-    const ALWAYS_ACTIVE = 2;
-    const INACTIVE = 4;
+    public const CONDITIONALLY_ACTIVE = 1;
+    public const ALWAYS_ACTIVE = 2;
+    public const INACTIVE = 4;
 
     /** At least one of the provided conditions has to be met */
-    const STRATEGY_AFFIRMATIVE = 1;
+    public const STRATEGY_AFFIRMATIVE = 1;
 
     /** At least half of the provided conditions have to be met */
-    const STRATEGY_MAJORITY = 2;
+    public const STRATEGY_MAJORITY = 2;
 
     /** All conditions have to be met */
-    const STRATEGY_UNANIMOUS = 3;
+    public const STRATEGY_UNANIMOUS = 3;
 
     /** @var string */
     private $name;
