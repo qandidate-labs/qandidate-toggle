@@ -1,0 +1,4 @@
+# see https://probot.github.io/apps/stale/
+
+# inherit settings from https://github.com/qandidate-labs/.github/blob/main/.github/stale.yml
+_extends: .github
