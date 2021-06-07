@@ -3,7 +3,7 @@ Toggle
 
 Feature toggling for PHP.
 
-[![Build Status](https://travis-ci.com/qandidate-labs/qandidate-toggle.svg?branch=master)](https://travis-ci.com/qandidate-labs/qandidate-toggle)
+![build status](https://github.com/qandidate-labs/qandidate-toggle/actions/workflows/ci.yml/badge.svg)
 
 ## About
 
