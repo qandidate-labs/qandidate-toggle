@@ -19,7 +19,7 @@
     "require-dev": {
         "predis/predis": "^1.1",
         "symfony/expression-language": "^3.4||^4.4||^5.0",
-        "phpunit/phpunit": "^8.0",
+        "phpunit/phpunit": "^9.5",
         "broadway/coding-standard": "^1.2",
         "phpstan/phpstan": "@stable"
     },
