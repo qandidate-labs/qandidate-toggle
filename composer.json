@@ -17,7 +17,7 @@
         "php": ">=7.2"
     },
     "require-dev": {
-        "predis/predis": "^1.1",
+        "predis/predis": "^2.0",
         "symfony/expression-language": "^3.4||^4.4||^5.0",
         "phpunit/phpunit": "^9.5",
         "broadway/coding-standard": "^1.2",
