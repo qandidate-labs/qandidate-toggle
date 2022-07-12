@@ -143,14 +143,14 @@ class Toggle
     private function executeCondition(Context $context): bool
     {
         switch ($this->strategy) {
-          case self::STRATEGY_AFFIRMATIVE:
-            return $this->atLeastOneConditionHolds($context);
-          case self::STRATEGY_MAJORITY:
-            return $this->moreThanHalfConditionsHold($context);
-          case self::STRATEGY_UNANIMOUS:
-            return $this->allConditionsHold($context);
-          default:
-            return false;
+            case self::STRATEGY_AFFIRMATIVE:
+                return $this->atLeastOneConditionHolds($context);
+            case self::STRATEGY_MAJORITY:
+                return $this->moreThanHalfConditionsHold($context);
+            case self::STRATEGY_UNANIMOUS:
+                return $this->allConditionsHold($context);
+            default:
+                return false;
         }
     }
 
