@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\ToggleCollection;
 
-use Predis\Client;
+use Predis\ClientInterface;
 use Qandidate\Toggle\Toggle;
 use Qandidate\Toggle\ToggleCollection;
 
@@ -23,7 +23,7 @@ use Qandidate\Toggle\ToggleCollection;
 class PredisCollection extends ToggleCollection
 {
     /**
-     * @var Client
+     * @var ClientInterface
      */
     private $client;
 
@@ -32,13 +32,13 @@ class PredisCollection extends ToggleCollection
      */
     private $namespace;
 
-    public function __construct(string $namespace, Client $client)
+    public function __construct(string $namespace, ClientInterface $client)
     {
         $this->namespace = $namespace;
         $this->client = $client;
     }
 
-    public function getClient(): Client
+    public function getClient(): ClientInterface
     {
         return $this->client;
     }
