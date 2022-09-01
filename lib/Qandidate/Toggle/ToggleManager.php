@@ -98,9 +98,9 @@ class ToggleManager
     }
 
     /**
-     * @throws \InvalidArgumentException
-     *
      * @return Toggle toggle from manager that has given name
+     *
+     * @throws \InvalidArgumentException
      */
     public function get(string $name): Toggle
     {
