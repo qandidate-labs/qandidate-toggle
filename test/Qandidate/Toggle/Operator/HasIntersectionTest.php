@@ -19,6 +19,7 @@ class HasIntersectionTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider valuesNotMatching
      */
     public function it_not_applies_to_set_not_matching_values($values, $argument)
@@ -38,6 +39,7 @@ class HasIntersectionTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider valuesMatching
      */
     public function it_applies_to_set_matching_values($values, $argument)

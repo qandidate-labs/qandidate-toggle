@@ -19,6 +19,7 @@ class PercentageTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider valuesInPercentage
      */
     public function it_applies_if_value_in_percentage($percentage, $argument)
@@ -40,6 +41,7 @@ class PercentageTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider valuesNotInPercentage
      */
     public function it_does_not_apply_if_value_not_in_percentage($percentage, $argument)
@@ -60,6 +62,7 @@ class PercentageTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider valuesInPercentageShifted
      */
     public function it_applies_if_value_in_shifted_percentage($percentage, $argument)
@@ -81,6 +84,7 @@ class PercentageTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider valuesNotInPercentageShifted
      */
     public function it_does_not_apply_if_value_in_shifted_percentage($percentage, $argument)

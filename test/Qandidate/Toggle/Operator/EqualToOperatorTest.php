@@ -19,6 +19,7 @@ class EqualToOperatorTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider integerValues
      */
     public function it_applies_to_integer_values($value, $argument)
@@ -38,6 +39,7 @@ class EqualToOperatorTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider stringValues
      */
     public function it_applies_to_string_values($value, $argument)
@@ -57,6 +59,7 @@ class EqualToOperatorTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider floatValues
      */
     public function it_applies_to_float_values($value, $argument)
@@ -75,6 +78,7 @@ class EqualToOperatorTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider notEqualValues
      */
     public function it_does_not_apply_to_not_equal_values($value, $argument)

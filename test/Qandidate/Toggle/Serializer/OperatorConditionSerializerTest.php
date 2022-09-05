@@ -74,6 +74,7 @@ class OperatorConditionSerializerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider missingKeys
      */
     public function it_throws_exception_on_missing_key($serialized)

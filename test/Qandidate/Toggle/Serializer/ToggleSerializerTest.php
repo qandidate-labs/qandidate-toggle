@@ -93,6 +93,7 @@ class ToggleSerializerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider missingKeys
      */
     public function it_throws_exception_on_missing_key($serialized)
@@ -130,6 +131,7 @@ class ToggleSerializerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider toggleStatuses
      */
     public function it_serializes_all_statuses($toggle, $expectedStatus)
@@ -143,6 +145,7 @@ class ToggleSerializerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider toggleStatuses
      */
     public function it_deserializes_to_the_appropriate_status($toggle)
@@ -178,6 +181,7 @@ class ToggleSerializerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider toggleStrategies
      */
     public function it_serializes_all_strategies($toggle, $expectedStrategy)
@@ -191,6 +195,7 @@ class ToggleSerializerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider toggleStrategies
      */
     public function it_deserializes_to_the_appropriate_strategies($toggle)

@@ -246,6 +246,7 @@ class ToggleTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider contextProvider
      */
     public function it_is_active_for_every_context_if_activated_as_always_active($context)
@@ -262,6 +263,7 @@ class ToggleTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider contextProvider
      */
     public function it_is_not_active_for_every_context_if_inactivated($context)

@@ -19,6 +19,7 @@ class LessThanEqualOperatorTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider greaterValues
      */
     public function it_does_not_apply_to_greater_values($value, $argument)
@@ -39,6 +40,7 @@ class LessThanEqualOperatorTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider equalValues
      */
     public function it_applies_to_equal_values($value, $argument)
@@ -58,6 +60,7 @@ class LessThanEqualOperatorTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider smallerValues
      */
     public function it_applies_to_smaller_values($value, $argument)

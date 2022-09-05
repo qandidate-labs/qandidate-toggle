@@ -39,6 +39,7 @@ class OperatorSerializerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider knownOperators
      */
     public function it_serializes_known_operators($operator, $expected)
@@ -65,6 +66,7 @@ class OperatorSerializerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider knownOperators
      */
     public function it_deserializes_known_operators($expected, $serialized)
@@ -77,6 +79,7 @@ class OperatorSerializerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider missingKeys
      */
     public function it_throws_an_exception_if_a_key_is_missing_from_the_data($serialized)
