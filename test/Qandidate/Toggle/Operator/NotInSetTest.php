@@ -19,6 +19,7 @@ class NotInSetTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider valuesNotInSet
      */
     public function it_applies_if_value_not_in_set($argument, $values)
@@ -37,6 +38,7 @@ class NotInSetTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider valuesInSet
      */
     public function it_does_not_apply_if_value_in_set($argument, $set)
@@ -55,6 +57,7 @@ class NotInSetTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider nullSets
      */
     public function it_considers_null_to_not_be_part_of_a_set($argument, $set)

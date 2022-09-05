@@ -28,6 +28,7 @@ class ContextTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider validValues
      */
     public function it_exposes_whether_it_has_a_value($value)

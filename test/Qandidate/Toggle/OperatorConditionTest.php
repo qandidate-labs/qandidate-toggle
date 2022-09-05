@@ -30,6 +30,7 @@ class OperatorConditionTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider valueAvailable
      */
     public function it_returns_whether_it_operator_holds_for_the_value_if_available($value, $expected)

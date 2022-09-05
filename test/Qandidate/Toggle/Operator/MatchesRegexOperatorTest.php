@@ -19,6 +19,7 @@ class MatchesRegexOperatorTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider stringBeginningWith
      */
     public function it_applies_to_strings_matching_regex($value, $argument)
@@ -36,6 +37,7 @@ class MatchesRegexOperatorTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider stringNotContaining
      */
     public function it_does_not_apply_to_strings_not_matching_regex($value, $argument)
