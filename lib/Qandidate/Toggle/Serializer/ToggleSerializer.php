@@ -15,7 +15,6 @@ namespace Qandidate\Toggle\Serializer;
 
 use Qandidate\Toggle\OperatorCondition;
 use Qandidate\Toggle\Toggle;
-use RuntimeException;
 
 /**
  * Hand written serializer to serialize a Toggle to a php array.
@@ -48,7 +47,7 @@ class ToggleSerializer
         $this->assertHasKey('conditions', $data);
 
         if (!is_array($data['conditions'])) {
-            throw new RuntimeException('Key "conditions" should be an array.');
+            throw new \RuntimeException('Key "conditions" should be an array.');
         }
 
         $toggle = new Toggle(
@@ -70,7 +69,7 @@ class ToggleSerializer
 
         foreach ($conditions as $condition) {
             if (!$condition instanceof OperatorCondition) {
-                throw new RuntimeException(sprintf('Unable to serialize %s.', get_class($condition)));
+                throw new \RuntimeException(sprintf('Unable to serialize %s.', get_class($condition)));
             }
 
             $serialized[] = $this->operatorConditionSerializer->serialize($condition);
@@ -121,7 +120,7 @@ class ToggleSerializer
                 return;
         }
 
-        throw new RuntimeException(sprintf('Unknown toggle status "%s".', $status));
+        throw new \RuntimeException(sprintf('Unknown toggle status "%s".', $status));
     }
 
     private function serializeStrategy(Toggle $toggle): string
@@ -149,13 +148,13 @@ class ToggleSerializer
                 return Toggle::STRATEGY_UNANIMOUS;
         }
 
-        throw new RuntimeException(sprintf('Unknown toggle strategy "%s".', $strategy));
+        throw new \RuntimeException(sprintf('Unknown toggle strategy "%s".', $strategy));
     }
 
     private function assertHasKey(string $key, array $data): void
     {
         if (!array_key_exists($key, $data)) {
-            throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));
+            throw new \RuntimeException(sprintf('Missing key "%s" in data.', $key));
         }
     }
 }

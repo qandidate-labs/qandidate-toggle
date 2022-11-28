@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
-use InvalidArgumentException;
-
 /**
  * Representation of a feature toggle.
  *
@@ -125,7 +123,7 @@ class Toggle
     private function assertValidActiveStatus(int $status): void
     {
         if (self::ALWAYS_ACTIVE !== $status && self::CONDITIONALLY_ACTIVE !== $status) {
-            throw new InvalidArgumentException('No "active" status was provided.');
+            throw new \InvalidArgumentException('No "active" status was provided.');
         }
     }
 
@@ -136,7 +134,7 @@ class Toggle
             self::STRATEGY_MAJORITY,
             self::STRATEGY_UNANIMOUS,
         ])) {
-            throw new InvalidArgumentException('No supported strategy was provided.');
+            throw new \InvalidArgumentException('No supported strategy was provided.');
         }
     }
 

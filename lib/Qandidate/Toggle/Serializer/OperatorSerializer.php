@@ -24,7 +24,6 @@ use Qandidate\Toggle\Operator\LessThanEqual;
 use Qandidate\Toggle\Operator\MatchesRegex;
 use Qandidate\Toggle\Operator\NotInSet;
 use Qandidate\Toggle\Operator\Percentage;
-use RuntimeException;
 
 /**
  * Hand written serializer to serialize an Operator to a php array.
@@ -55,7 +54,7 @@ class OperatorSerializer
             case MatchesRegex::class:
                 return ['name' => 'matches-regex', 'value' => $operator->getValue()];
             default:
-                throw new RuntimeException(sprintf('Unknown operator %s.', get_class($operator)));
+                throw new \RuntimeException(sprintf('Unknown operator %s.', get_class($operator)));
         }
     }
 
@@ -107,14 +106,14 @@ class OperatorSerializer
 
                 return new MatchesRegex($operator['value']);
             default:
-                throw new RuntimeException(sprintf('Unknown operator with name "%s".', $operator['name']));
+                throw new \RuntimeException(sprintf('Unknown operator with name "%s".', $operator['name']));
         }
     }
 
     private function assertHasKey(string $key, array $data): void
     {
         if (!array_key_exists($key, $data)) {
-            throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));
+            throw new \RuntimeException(sprintf('Missing key "%s" in data.', $key));
         }
     }
 }

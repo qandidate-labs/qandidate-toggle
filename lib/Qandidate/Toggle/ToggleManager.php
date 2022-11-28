@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
-use RuntimeException;
-
 /**
  * Manages the toggles of an application.
  */
@@ -69,18 +67,18 @@ class ToggleManager
     /**
      * Rename the toggle.
      *
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     public function rename(string $oldName, string $newName): void
     {
         if (null !== $this->collection->get($newName)) {
-            throw new RuntimeException(sprintf('Could not rename toggle %1$s to %2$s, a toggle with name %2$s already exists', $oldName, $newName));
+            throw new \RuntimeException(sprintf('Could not rename toggle %1$s to %2$s, a toggle with name %2$s already exists', $oldName, $newName));
         }
 
         $currentToggle = $this->collection->get($oldName);
 
         if (null === $currentToggle) {
-            throw new RuntimeException(sprintf('Could not rename toggle %1$s to %2$s, toggle with name %1$s does not exists', $oldName, $newName));
+            throw new \RuntimeException(sprintf('Could not rename toggle %1$s to %2$s, toggle with name %1$s does not exists', $oldName, $newName));
         }
 
         $currentToggle->rename($newName);
