@@ -37,9 +37,6 @@ class ExpressionCondition extends Condition
         $this->language = $language;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function holdsFor(Context $context): bool
     {
         return true === $this->language->evaluate($this->expression, $context->toArray());

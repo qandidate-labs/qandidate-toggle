@@ -33,15 +33,12 @@ class Percentage extends Operator
         $this->shift = $shift;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function appliesTo($argument): bool
     {
         $asPercentage = (int) $argument % 100;
 
-        return $asPercentage >= $this->shift &&
-            $asPercentage < ($this->percentage + $this->shift);
+        return $asPercentage >= $this->shift
+            && $asPercentage < ($this->percentage + $this->shift);
     }
 
     public function getPercentage(): int

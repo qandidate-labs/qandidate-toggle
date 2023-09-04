@@ -15,9 +15,6 @@ namespace Qandidate\Toggle\Operator;
 
 class MatchesRegex extends EqualityOperator
 {
-    /**
-     * {@inheritdoc}
-     */
     public function appliesTo($argument): bool
     {
         return (bool) preg_match($this->value, $argument);

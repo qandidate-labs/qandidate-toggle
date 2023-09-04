@@ -27,17 +27,11 @@ class InMemoryCollection extends ToggleCollection
      */
     private $toggles = [];
 
-    /**
-     * {@inheritdoc}
-     */
     public function all(): array
     {
         return $this->toggles;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function get(string $name): ?Toggle
     {
         if (!array_key_exists($name, $this->toggles)) {
@@ -47,17 +41,11 @@ class InMemoryCollection extends ToggleCollection
         return $this->toggles[$name];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function set(string $name, Toggle $toggle): void
     {
         $this->toggles[$name] = $toggle;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function remove(string $name): void
     {
         if (array_key_exists($name, $this->toggles)) {

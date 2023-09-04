@@ -15,9 +15,6 @@ namespace Qandidate\Toggle\Operator;
 
 class LessThan extends EqualityOperator
 {
-    /**
-     * {@inheritdoc}
-     */
     public function appliesTo($argument): bool
     {
         return $argument < $this->value;

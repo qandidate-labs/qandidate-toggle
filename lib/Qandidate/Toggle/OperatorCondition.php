@@ -34,9 +34,6 @@ class OperatorCondition extends Condition
         $this->operator = $operator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function holdsFor(Context $context): bool
     {
         if (!$context->has($this->key)) {
