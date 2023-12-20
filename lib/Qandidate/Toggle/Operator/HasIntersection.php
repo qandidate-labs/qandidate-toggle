@@ -25,9 +25,6 @@ class HasIntersection extends EqualityOperator
         $this->values = $values;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function appliesTo($argument): bool
     {
         return null !== $argument

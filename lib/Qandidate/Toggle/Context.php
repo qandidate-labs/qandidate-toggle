@@ -26,8 +26,6 @@ class Context
 
     /**
      * @param int|string $key
-     *
-     * @return mixed
      */
     public function get($key)
     {
@@ -36,7 +34,6 @@ class Context
 
     /**
      * @param int|string $key
-     * @param mixed      $value
      *
      * @return $this
      */
