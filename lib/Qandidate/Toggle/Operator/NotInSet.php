@@ -15,9 +15,6 @@ namespace Qandidate\Toggle\Operator;
 
 class NotInSet extends InSet
 {
-    /**
-     * {@inheritdoc}
-     */
     public function appliesTo($argument): bool
     {
         return !parent::appliesTo($argument);

@@ -15,9 +15,6 @@ namespace Qandidate\Toggle\Operator;
 
 class EqualTo extends EqualityOperator
 {
-    /**
-     * {@inheritdoc}
-     */
     public function appliesTo($argument): bool
     {
         return $argument === $this->value;

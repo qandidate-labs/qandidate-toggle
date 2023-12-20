@@ -48,9 +48,6 @@ class PredisCollection extends ToggleCollection
         return $this->namespace;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function all(): array
     {
         $keys = $this->client->keys($this->namespace.'__TOGGLE__*');
@@ -66,25 +63,16 @@ class PredisCollection extends ToggleCollection
         return $toggles;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function get(string $name): ?Toggle
     {
         return $this->getFromKey($this->namespace.'__TOGGLE__'.$name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function set(string $name, Toggle $toggle): void
     {
         $this->client->set($this->namespace.'__TOGGLE__'.$name, serialize($toggle));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function remove(string $name): void
     {
         $this->client->del([$this->namespace.'__TOGGLE__'.$name]);

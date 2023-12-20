@@ -19,8 +19,6 @@ namespace Qandidate\Toggle;
 abstract class Operator
 {
     /**
-     * @param mixed $argument
-     *
      * @return bool True, if the operator applies to the argument
      */
     abstract public function appliesTo($argument): bool;
