@@ -13,14 +13,13 @@ on:
 jobs:
   tests:
     name: "Run tests"
-    runs-on: "ubuntu-20.04"
+    runs-on: "ubuntu-22.04"
     strategy:
       matrix:
         php-version:
-          - "7.4"
-          - "8.0"
           - "8.1"
           - "8.2"
+          - "8.3"
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v4"
@@ -40,14 +39,14 @@ jobs:
 
   coding-standards:
     name: "Coding standards"
-    runs-on: "ubuntu-20.04"
+    runs-on: "ubuntu-22.04"
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v4"
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "8.0"
+          php-version: "8.3"
           coverage: "none"
       - name: "Install dependencies with Composer"
         uses: "ramsey/composer-install@v3"
@@ -66,14 +65,14 @@ jobs:
 
   static-analysis:
     name: "Static analysis"
-    runs-on: "ubuntu-20.04"
+    runs-on: "ubuntu-22.04"
     steps:
       - name: "Checkout"
         uses: "actions/checkout@v4"
       - name: "Install PHP"
         uses: "shivammathur/setup-php@v2"
         with:
-          php-version: "8.0"
+          php-version: "8.3"
           coverage: "none"
       - name: "Install dependencies with Composer"
         uses: "ramsey/composer-install@v3"
