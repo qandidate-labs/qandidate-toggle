@@ -21,20 +21,8 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
  */
 class ExpressionCondition extends Condition
 {
-    /**
-     * @var string
-     */
-    protected $expression;
-
-    /**
-     * @var ExpressionLanguage
-     */
-    protected $language;
-
-    public function __construct(string $expression, ExpressionLanguage $language)
+    public function __construct(protected string $expression, protected ExpressionLanguage $language)
     {
-        $this->expression = $expression;
-        $this->language = $language;
     }
 
     public function holdsFor(Context $context): bool

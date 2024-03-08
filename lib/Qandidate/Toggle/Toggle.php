@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
+use InvalidArgumentException;
 /**
  * Representation of a feature toggle.
  *
@@ -36,25 +37,15 @@ class Toggle
     /** All conditions have to be met */
     public const STRATEGY_UNANIMOUS = 3;
 
-    /** @var string */
-    private $name;
+    private int $status = self::CONDITIONALLY_ACTIVE;
 
-    /** @var Condition[] */
-    private $conditions;
-
-    /** @var int */
-    private $status = self::CONDITIONALLY_ACTIVE;
-
-    /** @var int */
-    private $strategy = self::STRATEGY_AFFIRMATIVE;
+    private readonly int $strategy;
 
     /**
      * @param Condition[] $conditions
      */
-    public function __construct(string $name, array $conditions, int $strategy = self::STRATEGY_AFFIRMATIVE)
+    public function __construct(private string $name, private readonly array $conditions, int $strategy = self::STRATEGY_AFFIRMATIVE)
     {
-        $this->name = $name;
-        $this->conditions = $conditions;
         $this->assertValidStrategy($strategy);
         $this->strategy = $strategy;
     }
@@ -72,16 +63,12 @@ class Toggle
      */
     public function activeFor(Context $context): bool
     {
-        switch ($this->status) {
-            case self::ALWAYS_ACTIVE:
-                return true;
-            case self::INACTIVE:
-                return false;
-            case self::CONDITIONALLY_ACTIVE:
-                return $this->executeCondition($context);
-        }
-
-        return false;
+        return match ($this->status) {
+            self::ALWAYS_ACTIVE => true,
+            self::INACTIVE => false,
+            self::CONDITIONALLY_ACTIVE => $this->executeCondition($context),
+            default => false,
+        };
     }
 
     /**
@@ -123,7 +110,7 @@ class Toggle
     private function assertValidActiveStatus(int $status): void
     {
         if (self::ALWAYS_ACTIVE !== $status && self::CONDITIONALLY_ACTIVE !== $status) {
-            throw new \InvalidArgumentException('No "active" status was provided.');
+            throw new InvalidArgumentException('No "active" status was provided.');
         }
     }
 
@@ -134,22 +121,18 @@ class Toggle
             self::STRATEGY_MAJORITY,
             self::STRATEGY_UNANIMOUS,
         ])) {
-            throw new \InvalidArgumentException('No supported strategy was provided.');
+            throw new InvalidArgumentException('No supported strategy was provided.');
         }
     }
 
     private function executeCondition(Context $context): bool
     {
-        switch ($this->strategy) {
-            case self::STRATEGY_AFFIRMATIVE:
-                return $this->atLeastOneConditionHolds($context);
-            case self::STRATEGY_MAJORITY:
-                return $this->moreThanHalfConditionsHold($context);
-            case self::STRATEGY_UNANIMOUS:
-                return $this->allConditionsHold($context);
-            default:
-                return false;
-        }
+        return match ($this->strategy) {
+            self::STRATEGY_AFFIRMATIVE => $this->atLeastOneConditionHolds($context),
+            self::STRATEGY_MAJORITY => $this->moreThanHalfConditionsHold($context),
+            self::STRATEGY_UNANIMOUS => $this->allConditionsHold($context),
+            default => false,
+        };
     }
 
     private function atLeastOneConditionHolds(Context $context): bool

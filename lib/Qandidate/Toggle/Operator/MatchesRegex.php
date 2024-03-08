@@ -17,6 +17,6 @@ class MatchesRegex extends EqualityOperator
 {
     public function appliesTo($argument): bool
     {
-        return (bool) preg_match($this->value, $argument);
+        return (bool) preg_match($this->value, (string) $argument);
     }
 }

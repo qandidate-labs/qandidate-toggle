@@ -25,7 +25,7 @@ class InMemoryCollection extends ToggleCollection
     /**
      * @var Toggle[]
      */
-    private $toggles = [];
+    private array $toggles = [];
 
     public function all(): array
     {

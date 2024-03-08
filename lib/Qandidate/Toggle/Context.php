@@ -19,10 +19,7 @@ namespace Qandidate\Toggle;
  */
 class Context
 {
-    /**
-     * @var array
-     */
-    private $values = [];
+    private array $values = [];
 
     /**
      * @param int|string $key
@@ -37,7 +34,7 @@ class Context
      *
      * @return $this
      */
-    public function set($key, $value)
+    public function set($key, $value): static
     {
         $this->values[$key] = $value;
 

@@ -20,11 +20,8 @@ use Qandidate\Toggle\Operator;
  */
 abstract class EqualityOperator extends Operator
 {
-    protected $value;
-
-    public function __construct($value)
+    public function __construct(protected $value)
     {
-        $this->value = $value;
     }
 
     /**

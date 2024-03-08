@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Serializer;
 
+use RuntimeException;
 use Qandidate\Toggle\Operator;
 use Qandidate\Toggle\Operator\EqualTo;
 use Qandidate\Toggle\Operator\GreaterThan;
@@ -32,7 +33,7 @@ class OperatorSerializer
 {
     public function serialize(Operator $operator): array
     {
-        switch (get_class($operator)) {
+        switch ($operator::class) {
             case EqualTo::class:
                 return ['name' => 'equal-to', 'value' => $operator->getValue()];
             case GreaterThan::class:
@@ -54,7 +55,7 @@ class OperatorSerializer
             case MatchesRegex::class:
                 return ['name' => 'matches-regex', 'value' => $operator->getValue()];
             default:
-                throw new \RuntimeException(sprintf('Unknown operator %s.', get_class($operator)));
+                throw new RuntimeException(sprintf('Unknown operator %s.', $operator::class));
         }
     }
 
@@ -106,14 +107,14 @@ class OperatorSerializer
 
                 return new MatchesRegex($operator['value']);
             default:
-                throw new \RuntimeException(sprintf('Unknown operator with name "%s".', $operator['name']));
+                throw new RuntimeException(sprintf('Unknown operator with name "%s".', $operator['name']));
         }
     }
 
     private function assertHasKey(string $key, array $data): void
     {
         if (!array_key_exists($key, $data)) {
-            throw new \RuntimeException(sprintf('Missing key "%s" in data.', $key));
+            throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));
         }
     }
 }

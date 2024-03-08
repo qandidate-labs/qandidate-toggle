@@ -17,20 +17,8 @@ use Qandidate\Toggle\Operator;
 
 class Percentage extends Operator
 {
-    /**
-     * @var int
-     */
-    private $percentage;
-
-    /**
-     * @var int
-     */
-    private $shift;
-
-    public function __construct(int $percentage, int $shift = 0)
+    public function __construct(private readonly int $percentage, private readonly int $shift = 0)
     {
-        $this->percentage = $percentage;
-        $this->shift = $shift;
     }
 
     public function appliesTo($argument): bool

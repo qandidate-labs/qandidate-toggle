@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Serializer;
 
+use RuntimeException;
 use Qandidate\Toggle\OperatorCondition;
 
 /**
@@ -20,14 +21,8 @@ use Qandidate\Toggle\OperatorCondition;
  */
 class OperatorConditionSerializer
 {
-    /**
-     * @var OperatorSerializer
-     */
-    private $operatorSerializer;
-
-    public function __construct(OperatorSerializer $operatorSerializer)
+    public function __construct(private readonly OperatorSerializer $operatorSerializer)
     {
-        $this->operatorSerializer = $operatorSerializer;
     }
 
     public function serialize(OperatorCondition $condition): array
@@ -46,7 +41,7 @@ class OperatorConditionSerializer
         $this->assertHasKey('operator', $condition);
 
         if ('operator-condition' !== $condition['name']) {
-            throw new \RuntimeException(sprintf('Unable to deserialize operator with name "%s".', $condition['name']));
+            throw new RuntimeException(sprintf('Unable to deserialize operator with name "%s".', $condition['name']));
         }
 
         $operator = $this->operatorSerializer->deserialize($condition['operator']);
@@ -57,7 +52,7 @@ class OperatorConditionSerializer
     private function assertHasKey(string $key, array $data): void
     {
         if (!array_key_exists($key, $data)) {
-            throw new \RuntimeException(sprintf('Missing key "%s" in data.', $key));
+            throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));
         }
     }
 }

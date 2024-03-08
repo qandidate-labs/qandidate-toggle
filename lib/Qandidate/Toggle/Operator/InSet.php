@@ -17,14 +17,8 @@ use Qandidate\Toggle\Operator;
 
 class InSet extends Operator
 {
-    /**
-     * @var array
-     */
-    private $values;
-
-    public function __construct(array $values)
+    public function __construct(private readonly array $values)
     {
-        $this->values = $values;
     }
 
     public function appliesTo($argument): bool

@@ -13,19 +13,15 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
+use RuntimeException;
+use InvalidArgumentException;
 /**
  * Manages the toggles of an application.
  */
 class ToggleManager
 {
-    /**
-     * @var ToggleCollection
-     */
-    private $collection;
-
-    public function __construct(ToggleCollection $collection)
+    public function __construct(private readonly ToggleCollection $collection)
     {
-        $this->collection = $collection;
     }
 
     /**
@@ -67,18 +63,18 @@ class ToggleManager
     /**
      * Rename the toggle.
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function rename(string $oldName, string $newName): void
     {
         if (null !== $this->collection->get($newName)) {
-            throw new \RuntimeException(sprintf('Could not rename toggle %1$s to %2$s, a toggle with name %2$s already exists', $oldName, $newName));
+            throw new RuntimeException(sprintf('Could not rename toggle %1$s to %2$s, a toggle with name %2$s already exists', $oldName, $newName));
         }
 
         $currentToggle = $this->collection->get($oldName);
 
         if (null === $currentToggle) {
-            throw new \RuntimeException(sprintf('Could not rename toggle %1$s to %2$s, toggle with name %1$s does not exists', $oldName, $newName));
+            throw new RuntimeException(sprintf('Could not rename toggle %1$s to %2$s, toggle with name %1$s does not exists', $oldName, $newName));
         }
 
         $currentToggle->rename($newName);
@@ -98,13 +94,13 @@ class ToggleManager
     /**
      * @return Toggle toggle from manager that has given name
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function get(string $name): Toggle
     {
         $toggle = $this->collection->get($name);
         if (!$toggle) {
-            throw new \InvalidArgumentException("Cannot find Toggle with name $name");
+            throw new InvalidArgumentException("Cannot find Toggle with name $name");
         }
 
         return $toggle;
