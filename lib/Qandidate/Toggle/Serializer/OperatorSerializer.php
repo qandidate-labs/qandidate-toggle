@@ -32,7 +32,7 @@ class OperatorSerializer
 {
     public function serialize(Operator $operator): array
     {
-        switch (get_class($operator)) {
+        switch ($operator::class) {
             case EqualTo::class:
                 return ['name' => 'equal-to', 'value' => $operator->getValue()];
             case GreaterThan::class:
@@ -54,7 +54,7 @@ class OperatorSerializer
             case MatchesRegex::class:
                 return ['name' => 'matches-regex', 'value' => $operator->getValue()];
             default:
-                throw new \RuntimeException(sprintf('Unknown operator %s.', get_class($operator)));
+                throw new \RuntimeException(sprintf('Unknown operator %s.', $operator::class));
         }
     }
 

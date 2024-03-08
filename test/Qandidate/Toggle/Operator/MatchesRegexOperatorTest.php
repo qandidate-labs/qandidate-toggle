@@ -22,13 +22,13 @@ class MatchesRegexOperatorTest extends TestCase
      *
      * @dataProvider stringBeginningWith
      */
-    public function it_applies_to_strings_matching_regex($value, $argument)
+    public function it_applies_to_strings_matching_regex(string $value, string $argument): void
     {
         $operator = new MatchesRegex($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function stringBeginningWith()
+    public function stringBeginningWith(): array
     {
         return [
             ['/@foobar.com/',  'barbaz@foobar.com'],
@@ -40,13 +40,13 @@ class MatchesRegexOperatorTest extends TestCase
      *
      * @dataProvider stringNotContaining
      */
-    public function it_does_not_apply_to_strings_not_matching_regex($value, $argument)
+    public function it_does_not_apply_to_strings_not_matching_regex(string $value, string $argument): void
     {
         $operator = new MatchesRegex($value);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function stringNotContaining()
+    public function stringNotContaining(): array
     {
         return [
             ['/^@foobar.com/', 'barbaz@foobar.net'],
@@ -56,7 +56,7 @@ class MatchesRegexOperatorTest extends TestCase
     /**
      * @test
      */
-    public function it_exposes_its_value()
+    public function it_exposes_its_value(): void
     {
         $operator = new MatchesRegex('/^@foobar.com/');
         $this->assertEquals('/^@foobar.com/', $operator->getValue());

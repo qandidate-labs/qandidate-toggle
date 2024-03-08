@@ -18,7 +18,7 @@ abstract class ToggleCollectionTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_null_if_toggle_not_in_collection()
+    public function it_returns_null_if_toggle_not_in_collection(): void
     {
         $collection = $this->createCollection();
         $this->assertNull($collection->get('some-feature'));
@@ -27,7 +27,7 @@ abstract class ToggleCollectionTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_a_set_toggle()
+    public function it_returns_a_set_toggle(): void
     {
         $toggle = new Toggle('some-feature', []);
         $collection = $this->createCollection();
@@ -39,7 +39,7 @@ abstract class ToggleCollectionTest extends TestCase
     /**
      * @test
      */
-    public function it_removes_a_toggle()
+    public function it_removes_a_toggle(): void
     {
         $toggle = new Toggle('some-feature', []);
         $collection = $this->createCollection();
@@ -53,7 +53,7 @@ abstract class ToggleCollectionTest extends TestCase
     /**
      * @test
      */
-    public function it_does_not_complain_when_removing_a_non_existing_toggle()
+    public function it_does_not_complain_when_removing_a_non_existing_toggle(): void
     {
         $collection = $this->createCollection();
 
@@ -65,7 +65,7 @@ abstract class ToggleCollectionTest extends TestCase
     /**
      * @test
      */
-    public function it_exposes_all_toggles()
+    public function it_exposes_all_toggles(): void
     {
         $toggle = new Toggle('some-feature', []);
         $toggle2 = new Toggle('some-other-feature', []);
@@ -83,7 +83,7 @@ abstract class ToggleCollectionTest extends TestCase
     /**
      * @test
      */
-    public function it_removes_existing_toggle()
+    public function it_removes_existing_toggle(): void
     {
         $toggle = new Toggle('some-feature', []);
         $collection = $this->createCollection();
@@ -99,7 +99,7 @@ abstract class ToggleCollectionTest extends TestCase
     /**
      * @test
      */
-    public function it_does_not_throw_when_removing_non_existing_toggle()
+    public function it_does_not_throw_when_removing_non_existing_toggle(): void
     {
         $collection = $this->createCollection();
 

@@ -22,13 +22,13 @@ class InSetTest extends TestCase
      *
      * @dataProvider valuesInSet
      */
-    public function it_applies_if_value_in_set($argument, $values)
+    public function it_applies_if_value_in_set(int|string $argument, array $values): void
     {
         $operator = new InSet($values);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function valuesInSet()
+    public function valuesInSet(): array
     {
         return [
             [5,     [1, 1, 2, 3, 5, 8]],
@@ -41,13 +41,13 @@ class InSetTest extends TestCase
      *
      * @dataProvider valuesNotInSet
      */
-    public function it_does_not_apply_if_value_not_in_set($argument, $set)
+    public function it_does_not_apply_if_value_not_in_set(int|string $argument, array $set): void
     {
         $operator = new InSet($set);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function valuesNotInSet()
+    public function valuesNotInSet(): array
     {
         return [
             [5,     [1, 1, 2, 3]],
@@ -60,13 +60,13 @@ class InSetTest extends TestCase
      *
      * @dataProvider nullSets
      */
-    public function it_never_accepts_null_as_part_of_a_set($argument, $set)
+    public function it_never_accepts_null_as_part_of_a_set(mixed $argument, array $set): void
     {
         $operator = new InSet($set);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function nullSets()
+    public function nullSets(): array
     {
         return [
             [null, [null, 1]],
@@ -77,7 +77,7 @@ class InSetTest extends TestCase
     /**
      * @test
      */
-    public function it_exposes_its_values()
+    public function it_exposes_its_values(): void
     {
         $values = [1, 'foo'];
         $operator = new InSet($values);

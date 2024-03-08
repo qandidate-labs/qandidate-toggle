@@ -19,8 +19,8 @@ use Qandidate\Toggle\ToggleCollectionTest;
 
 class PredisCollectionTest extends ToggleCollectionTest
 {
-    private $client;
-    private $collection;
+    private Client $client;
+    private PredisCollection $collection;
 
     public function setUp(): void
     {
@@ -28,7 +28,7 @@ class PredisCollectionTest extends ToggleCollectionTest
         $this->collection = new PredisCollection('toggle_predis_test', $this->client);
         try {
             $this->client->connect();
-        } catch (ConnectionException $e) {
+        } catch (ConnectionException) {
             $this->markTestSkipped('Failed to connect to redis.');
         }
     }
@@ -42,7 +42,7 @@ class PredisCollectionTest extends ToggleCollectionTest
         }
     }
 
-    public function createCollection()
+    public function createCollection(): PredisCollection
     {
         return $this->collection;
     }

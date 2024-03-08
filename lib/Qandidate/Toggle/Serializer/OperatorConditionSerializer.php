@@ -20,14 +20,8 @@ use Qandidate\Toggle\OperatorCondition;
  */
 class OperatorConditionSerializer
 {
-    /**
-     * @var OperatorSerializer
-     */
-    private $operatorSerializer;
-
-    public function __construct(OperatorSerializer $operatorSerializer)
+    public function __construct(private readonly OperatorSerializer $operatorSerializer)
     {
-        $this->operatorSerializer = $operatorSerializer;
     }
 
     public function serialize(OperatorCondition $condition): array

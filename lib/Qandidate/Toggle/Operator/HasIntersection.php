@@ -13,20 +13,26 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+/**
+ * @template T
+ *
+ * @template-extends EqualityOperator<T>
+ */
 class HasIntersection extends EqualityOperator
 {
     /**
-     * @var array
+     * @param array<T> $values
      */
-    private $values;
-
-    public function __construct(array $values)
+    public function __construct(private readonly array $values)
     {
-        $this->values = $values;
     }
 
-    public function appliesTo($argument): bool
+    public function appliesTo(mixed $argument): bool
     {
+        if (!is_array($argument)) {
+            throw new \InvalidArgumentException('HasIntersection can only be compared against array values');
+        }
+
         return null !== $argument
             && array_intersect($argument, $this->values);
     }

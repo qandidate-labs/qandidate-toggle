@@ -24,7 +24,7 @@ class InMemoryCollectionSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_unserializes_a_collection_from_an_array()
+    public function it_unserializes_a_collection_from_an_array(): void
     {
         $data = [
             [
@@ -43,14 +43,14 @@ class InMemoryCollectionSerializerTest extends TestCase
         $serializer = new InMemoryCollectionSerializer();
         $collection = $serializer->deserialize($data);
 
-        $this->assertInstanceOf('Qandidate\Toggle\Toggle', $collection->get('toggling'));
+        $this->assertInstanceOf(Toggle::class, $collection->get('toggling'));
         $this->assertCount(1, $collection->all());
     }
 
     /**
      * @test
      */
-    public function it_serializes_a_collection_to_an_array()
+    public function it_serializes_a_collection_to_an_array(): void
     {
         $collection = new InMemoryCollection();
         $operator = new LessThan(42);
@@ -71,7 +71,7 @@ class InMemoryCollectionSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_serializes_and_deserializes_a_collection()
+    public function it_serializes_and_deserializes_a_collection(): void
     {
         $collection = new InMemoryCollection();
         $operator = new LessThan(42);

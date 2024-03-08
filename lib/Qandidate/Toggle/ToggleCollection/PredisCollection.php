@@ -20,22 +20,10 @@ use Qandidate\Toggle\ToggleCollection;
 /**
  * Collection persisted in redis using the Predis client.
  */
-class PredisCollection extends ToggleCollection
+class PredisCollection implements ToggleCollection
 {
-    /**
-     * @var ClientInterface
-     */
-    private $client;
-
-    /**
-     * @var string
-     */
-    private $namespace;
-
-    public function __construct(string $namespace, ClientInterface $client)
+    public function __construct(private readonly string $namespace, private readonly ClientInterface $client)
     {
-        $this->namespace = $namespace;
-        $this->client = $client;
     }
 
     public function getClient(): ClientInterface

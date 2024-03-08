@@ -20,12 +20,12 @@ use Qandidate\Toggle\ToggleCollection;
  * In memory collection useful for testing or when toggles are loaded
  * "statically" from for example configuration.
  */
-class InMemoryCollection extends ToggleCollection
+class InMemoryCollection implements ToggleCollection
 {
     /**
      * @var Toggle[]
      */
-    private $toggles = [];
+    private array $toggles = [];
 
     public function all(): array
     {

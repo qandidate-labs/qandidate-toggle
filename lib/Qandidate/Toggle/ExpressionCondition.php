@@ -19,22 +19,10 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
  * A condition written as a symfony language expression that gets evaluated against the
  * full context, allowing access to several keys of the context in a single condition.
  */
-class ExpressionCondition extends Condition
+class ExpressionCondition implements Condition
 {
-    /**
-     * @var string
-     */
-    protected $expression;
-
-    /**
-     * @var ExpressionLanguage
-     */
-    protected $language;
-
-    public function __construct(string $expression, ExpressionLanguage $language)
+    public function __construct(protected string $expression, protected ExpressionLanguage $language)
     {
-        $this->expression = $expression;
-        $this->language = $language;
     }
 
     public function holdsFor(Context $context): bool

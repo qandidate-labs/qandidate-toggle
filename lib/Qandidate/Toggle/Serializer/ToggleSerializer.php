@@ -21,14 +21,8 @@ use Qandidate\Toggle\Toggle;
  */
 class ToggleSerializer
 {
-    /**
-     * @var OperatorConditionSerializer
-     */
-    private $operatorConditionSerializer;
-
-    public function __construct(OperatorConditionSerializer $operatorConditionSerializer)
+    public function __construct(private readonly OperatorConditionSerializer $operatorConditionSerializer)
     {
-        $this->operatorConditionSerializer = $operatorConditionSerializer;
     }
 
     public function serialize(Toggle $toggle): array
@@ -69,7 +63,7 @@ class ToggleSerializer
 
         foreach ($conditions as $condition) {
             if (!$condition instanceof OperatorCondition) {
-                throw new \RuntimeException(sprintf('Unable to serialize %s.', get_class($condition)));
+                throw new \RuntimeException(sprintf('Unable to serialize %s.', $condition::class));
             }
 
             $serialized[] = $this->operatorConditionSerializer->serialize($condition);
@@ -91,16 +85,12 @@ class ToggleSerializer
 
     private function serializeStatus(Toggle $toggle): string
     {
-        switch ($toggle->getStatus()) {
-            case Toggle::ALWAYS_ACTIVE:
-                return 'always-active';
-            case Toggle::INACTIVE:
-                return 'inactive';
-            case Toggle::CONDITIONALLY_ACTIVE:
-                return 'conditionally-active';
-        }
-
-        throw new \InvalidArgumentException('unsupported status');
+        return match ($toggle->getStatus()) {
+            Toggle::ALWAYS_ACTIVE => 'always-active',
+            Toggle::INACTIVE => 'inactive',
+            Toggle::CONDITIONALLY_ACTIVE => 'conditionally-active',
+            default => throw new \InvalidArgumentException('unsupported status'),
+        };
     }
 
     private function deserializeStatus(Toggle $toggle, string $status): void
@@ -125,30 +115,22 @@ class ToggleSerializer
 
     private function serializeStrategy(Toggle $toggle): string
     {
-        switch ($toggle->getStrategy()) {
-            case Toggle::STRATEGY_AFFIRMATIVE:
-                return 'affirmative';
-            case Toggle::STRATEGY_MAJORITY:
-                return 'majority';
-            case Toggle::STRATEGY_UNANIMOUS:
-                return 'unanimous';
-        }
-
-        throw new \InvalidArgumentException('unsupported strategy');
+        return match ($toggle->getStrategy()) {
+            Toggle::STRATEGY_AFFIRMATIVE => 'affirmative',
+            Toggle::STRATEGY_MAJORITY => 'majority',
+            Toggle::STRATEGY_UNANIMOUS => 'unanimous',
+            default => throw new \InvalidArgumentException('unsupported strategy'),
+        };
     }
 
     private function deserializeStrategy(string $strategy): int
     {
-        switch ($strategy) {
-            case 'affirmative':
-                return Toggle::STRATEGY_AFFIRMATIVE;
-            case 'majority':
-                return Toggle::STRATEGY_MAJORITY;
-            case 'unanimous':
-                return Toggle::STRATEGY_UNANIMOUS;
-        }
-
-        throw new \RuntimeException(sprintf('Unknown toggle strategy "%s".', $strategy));
+        return match ($strategy) {
+            'affirmative' => Toggle::STRATEGY_AFFIRMATIVE,
+            'majority' => Toggle::STRATEGY_MAJORITY,
+            'unanimous' => Toggle::STRATEGY_UNANIMOUS,
+            default => throw new \RuntimeException(sprintf('Unknown toggle strategy "%s".', $strategy)),
+        };
     }
 
     private function assertHasKey(string $key, array $data): void

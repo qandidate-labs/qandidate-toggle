@@ -15,11 +15,15 @@ namespace Qandidate\Toggle;
 
 /**
  * Operator calculates whether it applies to an argument or not.
+ *
+ * @template T
  */
-abstract class Operator
+interface Operator
 {
     /**
-     * @return bool True, if the operator applies to the argument
+     * @param T $argument
+     *
+     * @return bool returns true if the operator applies to the argument
      */
-    abstract public function appliesTo($argument): bool;
+    public function appliesTo(mixed $argument): bool;
 }

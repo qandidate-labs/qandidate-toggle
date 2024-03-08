@@ -22,13 +22,13 @@ class PercentageTest extends TestCase
      *
      * @dataProvider valuesInPercentage
      */
-    public function it_applies_if_value_in_percentage($percentage, $argument)
+    public function it_applies_if_value_in_percentage(int $percentage, int $argument): void
     {
         $operator = new Percentage($percentage);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function valuesInPercentage()
+    public function valuesInPercentage(): array
     {
         return [
             [5, 4],
@@ -44,13 +44,13 @@ class PercentageTest extends TestCase
      *
      * @dataProvider valuesNotInPercentage
      */
-    public function it_does_not_apply_if_value_not_in_percentage($percentage, $argument)
+    public function it_does_not_apply_if_value_not_in_percentage(int $percentage, int $argument): void
     {
         $operator = new Percentage($percentage);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function valuesNotInPercentage()
+    public function valuesNotInPercentage(): array
     {
         return [
             [5, 5],
@@ -65,13 +65,13 @@ class PercentageTest extends TestCase
      *
      * @dataProvider valuesInPercentageShifted
      */
-    public function it_applies_if_value_in_shifted_percentage($percentage, $argument)
+    public function it_applies_if_value_in_shifted_percentage(int $percentage, int $argument): void
     {
         $operator = new Percentage($percentage, 42);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function valuesInPercentageShifted()
+    public function valuesInPercentageShifted(): array
     {
         return [
             [5, 46],
@@ -87,13 +87,13 @@ class PercentageTest extends TestCase
      *
      * @dataProvider valuesNotInPercentageShifted
      */
-    public function it_does_not_apply_if_value_in_shifted_percentage($percentage, $argument)
+    public function it_does_not_apply_if_value_in_shifted_percentage(int $percentage, int $argument): void
     {
         $operator = new Percentage($percentage, 42);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function valuesNotInPercentageShifted()
+    public function valuesNotInPercentageShifted(): array
     {
         return [
             [5, 47],
@@ -106,7 +106,7 @@ class PercentageTest extends TestCase
     /**
      * @test
      */
-    public function it_exposes_its_percentage_and_shift()
+    public function it_exposes_its_percentage_and_shift(): void
     {
         $operator = new Percentage(42, 5);
 

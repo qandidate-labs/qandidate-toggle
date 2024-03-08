@@ -19,16 +19,16 @@ namespace Qandidate\Toggle;
  * Abstraction to allow for different storage backends of toggles (e.g. redis,
  * sql, ...).
  */
-abstract class ToggleCollection
+interface ToggleCollection
 {
     /**
      * @return Toggle[]
      */
-    abstract public function all(): array;
+    public function all(): array;
 
-    abstract public function get(string $name): ?Toggle;
+    public function get(string $name): ?Toggle;
 
-    abstract public function set(string $name, Toggle $toggle): void;
+    public function set(string $name, Toggle $toggle): void;
 
-    abstract public function remove(string $name): void;
+    public function remove(string $name): void;
 }

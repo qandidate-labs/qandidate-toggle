@@ -15,7 +15,7 @@ namespace Qandidate\Toggle\Operator;
 
 class EqualTo extends EqualityOperator
 {
-    public function appliesTo($argument): bool
+    public function appliesTo(mixed $argument): bool
     {
         return $argument === $this->value;
     }

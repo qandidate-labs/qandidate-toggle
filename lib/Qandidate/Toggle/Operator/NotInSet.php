@@ -13,9 +13,14 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+/**
+ * @template T
+ *
+ * @extends InSet<T>
+ */
 class NotInSet extends InSet
 {
-    public function appliesTo($argument): bool
+    public function appliesTo(mixed $argument): bool
     {
         return !parent::appliesTo($argument);
     }

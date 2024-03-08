@@ -22,13 +22,13 @@ class EqualToOperatorTest extends TestCase
      *
      * @dataProvider integerValues
      */
-    public function it_applies_to_integer_values($value, $argument)
+    public function it_applies_to_integer_values(int $value, int $argument): void
     {
         $operator = new EqualTo($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function integerValues()
+    public function integerValues(): array
     {
         return [
             [0,  0],
@@ -42,13 +42,13 @@ class EqualToOperatorTest extends TestCase
      *
      * @dataProvider stringValues
      */
-    public function it_applies_to_string_values($value, $argument)
+    public function it_applies_to_string_values(string $value, string $argument): void
     {
         $operator = new EqualTo($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function stringValues()
+    public function stringValues(): array
     {
         return [
             ['foo', 'foo'],
@@ -62,13 +62,13 @@ class EqualToOperatorTest extends TestCase
      *
      * @dataProvider floatValues
      */
-    public function it_applies_to_float_values($value, $argument)
+    public function it_applies_to_float_values(float $value, float $argument): void
     {
         $operator = new EqualTo($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function floatValues()
+    public function floatValues(): array
     {
         return [
             [3.14, 3.14],
@@ -81,13 +81,13 @@ class EqualToOperatorTest extends TestCase
      *
      * @dataProvider notEqualValues
      */
-    public function it_does_not_apply_to_not_equal_values($value, $argument)
+    public function it_does_not_apply_to_not_equal_values(int|float|bool|string|null $value, int|float $argument): void
     {
         $operator = new EqualTo($value);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function notEqualValues()
+    public function notEqualValues(): array
     {
         return [
             [42,   43],
@@ -103,7 +103,7 @@ class EqualToOperatorTest extends TestCase
     /**
      * @test
      */
-    public function it_exposes_its_value()
+    public function it_exposes_its_value(): void
     {
         $operator = new EqualTo(42);
         $this->assertEquals(42, $operator->getValue());

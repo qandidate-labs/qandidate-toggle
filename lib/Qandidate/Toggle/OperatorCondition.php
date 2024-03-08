@@ -16,22 +16,14 @@ namespace Qandidate\Toggle;
 /**
  * A condition based on the name of the value from the context and an operator.
  */
-class OperatorCondition extends Condition
+class OperatorCondition implements Condition
 {
-    /** @var string */
-    private $key;
-
-    /** @var Operator */
-    private $operator;
-
     /**
      * @param string   $key      Name of the value
      * @param Operator $operator Operator to run
      */
-    public function __construct(string $key, Operator $operator)
+    public function __construct(private readonly string $key, private readonly Operator $operator)
     {
-        $this->key = $key;
-        $this->operator = $operator;
     }
 
     public function holdsFor(Context $context): bool

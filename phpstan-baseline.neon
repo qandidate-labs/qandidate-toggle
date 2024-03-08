@@ -1,26 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$array of function array_intersect expects array, mixed given\\.$#"
-			count: 1
-			path: lib/Qandidate/Toggle/Operator/HasIntersection.php
-
-		-
-			message: "#^Parameter \\#1 \\$pattern of function preg_match expects string, mixed given\\.$#"
-			count: 1
-			path: lib/Qandidate/Toggle/Operator/MatchesRegex.php
-
-		-
-			message: "#^Parameter \\#2 \\$subject of function preg_match expects string, mixed given\\.$#"
-			count: 1
-			path: lib/Qandidate/Toggle/Operator/MatchesRegex.php
-
-		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 1
-			path: lib/Qandidate/Toggle/Operator/Percentage.php
-
-		-
 			message: "#^Cannot call method getName\\(\\) on mixed\\.$#"
 			count: 1
 			path: lib/Qandidate/Toggle/ToggleCollection/PredisCollection.php

@@ -24,7 +24,7 @@ class ToggleSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_serializes_a_toggle()
+    public function it_serializes_a_toggle(): void
     {
         $serializer = $this->createToggleSerializer();
 
@@ -53,7 +53,7 @@ class ToggleSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_deserializes_a_toggle()
+    public function it_deserializes_a_toggle(): void
     {
         $serializer = $this->createToggleSerializer();
 
@@ -81,7 +81,7 @@ class ToggleSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_exception_on_unsupport_condition()
+    public function it_throws_exception_on_unsupport_condition(): void
     {
         $this->expectException('RuntimeException');
         $operator = new OtherCondition();
@@ -96,7 +96,7 @@ class ToggleSerializerTest extends TestCase
      *
      * @dataProvider missingKeys
      */
-    public function it_throws_exception_on_missing_key($serialized)
+    public function it_throws_exception_on_missing_key(array $serialized): void
     {
         $this->expectException('RuntimeException');
         $serializer = $this->createToggleSerializer();
@@ -104,7 +104,7 @@ class ToggleSerializerTest extends TestCase
         $serializer->deserialize($serialized);
     }
 
-    public function missingKeys()
+    public function missingKeys(): array
     {
         return [
             [[]],
@@ -121,7 +121,7 @@ class ToggleSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_exception_if_conditions_key_is_not_an_array()
+    public function it_throws_exception_if_conditions_key_is_not_an_array(): void
     {
         $this->expectException('RuntimeException');
         $serializer = $this->createToggleSerializer();
@@ -134,7 +134,7 @@ class ToggleSerializerTest extends TestCase
      *
      * @dataProvider toggleStatuses
      */
-    public function it_serializes_all_statuses($toggle, $expectedStatus)
+    public function it_serializes_all_statuses(Toggle $toggle, string $expectedStatus): void
     {
         $serializer = $this->createToggleSerializer();
 
@@ -148,7 +148,7 @@ class ToggleSerializerTest extends TestCase
      *
      * @dataProvider toggleStatuses
      */
-    public function it_deserializes_to_the_appropriate_status($toggle)
+    public function it_deserializes_to_the_appropriate_status(Toggle $toggle): void
     {
         $serializer = $this->createToggleSerializer();
         $status = $toggle->getStatus();
@@ -159,7 +159,7 @@ class ToggleSerializerTest extends TestCase
         $this->assertEquals($status, $deserializedToggle->getStatus());
     }
 
-    public function toggleStatuses()
+    public function toggleStatuses(): array
     {
         return [
             [$this->createAlwaysActiveToggle(), 'always-active'],
@@ -171,7 +171,7 @@ class ToggleSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_exception_on_invalid_status_data()
+    public function it_throws_exception_on_invalid_status_data(): void
     {
         $this->expectException('RuntimeException');
         $serializer = $this->createToggleSerializer();
@@ -184,7 +184,7 @@ class ToggleSerializerTest extends TestCase
      *
      * @dataProvider toggleStrategies
      */
-    public function it_serializes_all_strategies($toggle, $expectedStrategy)
+    public function it_serializes_all_strategies(Toggle $toggle, string $expectedStrategy): void
     {
         $serializer = $this->createToggleSerializer();
 
@@ -198,7 +198,7 @@ class ToggleSerializerTest extends TestCase
      *
      * @dataProvider toggleStrategies
      */
-    public function it_deserializes_to_the_appropriate_strategies($toggle)
+    public function it_deserializes_to_the_appropriate_strategies(Toggle $toggle): void
     {
         $serializer = $this->createToggleSerializer();
         $strategy = $toggle->getStrategy();
@@ -212,7 +212,7 @@ class ToggleSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_exception_on_invalid_strategy_data()
+    public function it_throws_exception_on_invalid_strategy_data(): void
     {
         $this->expectException('RuntimeException');
         $serializer = $this->createToggleSerializer();
@@ -220,7 +220,7 @@ class ToggleSerializerTest extends TestCase
         $serializer->deserialize(['name' => 'foo', 'status' => 'conditionally-active', 'strategy' => 'invalid', 'conditions' => []]);
     }
 
-    public function toggleStrategies()
+    public function toggleStrategies(): array
     {
         return [
             [$this->createAffirmativeToggle(), 'affirmative'],
@@ -229,7 +229,7 @@ class ToggleSerializerTest extends TestCase
         ];
     }
 
-    private function createToggleSerializer()
+    private function createToggleSerializer(): ToggleSerializer
     {
         $operatorSerializer = new OperatorSerializer();
         $operatorConditionSerializer = new OperatorConditionSerializer($operatorSerializer);
@@ -237,7 +237,7 @@ class ToggleSerializerTest extends TestCase
         return new ToggleSerializer($operatorConditionSerializer);
     }
 
-    private function createAlwaysActiveToggle()
+    private function createAlwaysActiveToggle(): Toggle
     {
         $toggle = new Toggle('some-feature', []);
         $toggle->activate(Toggle::ALWAYS_ACTIVE);
@@ -245,14 +245,12 @@ class ToggleSerializerTest extends TestCase
         return $toggle;
     }
 
-    private function createConditionallyActiveToggle()
+    private function createConditionallyActiveToggle(): Toggle
     {
-        $toggle = new Toggle('some-feature', []);
-
-        return $toggle;
+        return new Toggle('some-feature', []);
     }
 
-    private function createInactiveToggle()
+    private function createInactiveToggle(): Toggle
     {
         $toggle = new Toggle('some-feature', []);
         $toggle->deactivate();
@@ -260,29 +258,23 @@ class ToggleSerializerTest extends TestCase
         return $toggle;
     }
 
-    private function createAffirmativeToggle()
+    private function createAffirmativeToggle(): Toggle
     {
-        $toggle = new Toggle('some-feature', [], Toggle::STRATEGY_AFFIRMATIVE);
-
-        return $toggle;
+        return new Toggle('some-feature', [], Toggle::STRATEGY_AFFIRMATIVE);
     }
 
-    private function createMajorityToggle()
+    private function createMajorityToggle(): Toggle
     {
-        $toggle = new Toggle('some-feature', [], Toggle::STRATEGY_MAJORITY);
-
-        return $toggle;
+        return new Toggle('some-feature', [], Toggle::STRATEGY_MAJORITY);
     }
 
-    private function createUnanimousToggle()
+    private function createUnanimousToggle(): Toggle
     {
-        $toggle = new Toggle('some-feature', [], Toggle::STRATEGY_UNANIMOUS);
-
-        return $toggle;
+        return new Toggle('some-feature', [], Toggle::STRATEGY_UNANIMOUS);
     }
 }
 
-class OtherCondition extends Condition
+class OtherCondition implements Condition
 {
     public function holdsFor(Context $context): bool
     {
