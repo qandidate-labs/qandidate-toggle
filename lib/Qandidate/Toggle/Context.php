@@ -21,30 +21,19 @@ class Context
 {
     private array $values = [];
 
-    /**
-     * @param int|string $key
-     */
-    public function get($key)
+    public function get(int|string $key): mixed
     {
         return $this->values[$key];
     }
 
-    /**
-     * @param int|string $key
-     *
-     * @return $this
-     */
-    public function set($key, $value): static
+    public function set(int|string $key, mixed $value): static
     {
         $this->values[$key] = $value;
 
         return $this;
     }
 
-    /**
-     * @param int|string $key
-     */
-    public function has($key): bool
+    public function has(int|string $key): bool
     {
         return array_key_exists($key, $this->values);
     }

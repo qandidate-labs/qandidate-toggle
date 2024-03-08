@@ -13,16 +13,21 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+use InvalidArgumentException;
 use Qandidate\Toggle\Operator;
 
-class Percentage extends Operator
+class Percentage implements Operator
 {
     public function __construct(private readonly int $percentage, private readonly int $shift = 0)
     {
     }
 
-    public function appliesTo($argument): bool
+    public function appliesTo(mixed $argument): bool
     {
+        if (!is_int($argument)) {
+            throw new InvalidArgumentException('Percentage only accepts integers');
+        }
+
         $asPercentage = (int) $argument % 100;
 
         return $asPercentage >= $this->shift

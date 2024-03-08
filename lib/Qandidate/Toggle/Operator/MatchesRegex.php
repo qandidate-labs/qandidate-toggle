@@ -13,10 +13,20 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+use InvalidArgumentException;
+
+
+/**
+ * @template-extends EqualityOperator<string> 
+ */
 class MatchesRegex extends EqualityOperator
 {
-    public function appliesTo($argument): bool
+    public function appliesTo(mixed $argument): bool
     {
-        return (bool) preg_match($this->value, (string) $argument);
+        if (!is_string($argument)) {
+            throw new InvalidArgumentException('MatchesRegex can only be matched against strings');
+        }
+
+        return (bool) preg_match($this->value, $argument);
     }
 }

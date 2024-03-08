@@ -15,18 +15,30 @@ namespace Qandidate\Toggle\Operator;
 
 use Qandidate\Toggle\Operator;
 
-class InSet extends Operator
+/**
+ * @template T
+ */
+class InSet implements Operator
 {
+    /**
+     * @param array<T> $values
+     */
     public function __construct(private readonly array $values)
     {
     }
 
-    public function appliesTo($argument): bool
+    /**
+     * @param T $argument
+     */
+    public function appliesTo(mixed $argument): bool
     {
         return null !== $argument
             && in_array($argument, $this->values);
     }
 
+    /**
+     * @return array<T>
+     */
     public function getValues(): array
     {
         return $this->values;

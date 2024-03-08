@@ -13,9 +13,13 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+/**
+ * @template T
+ * @template-extends EqualityOperator<T> 
+ */
 class LessThan extends EqualityOperator
 {
-    public function appliesTo($argument): bool
+    public function appliesTo(mixed $argument): bool
     {
         return $argument < $this->value;
     }

@@ -16,18 +16,23 @@ namespace Qandidate\Toggle\Operator;
 use Qandidate\Toggle\Operator;
 
 /**
+ * @template T
+ *
  * Operator that compare the given argument on equality based on a value.
  */
-abstract class EqualityOperator extends Operator
+abstract class EqualityOperator implements Operator
 {
+    /**
+     * @param T $value
+     */
     public function __construct(protected $value)
     {
     }
 
     /**
-     * @return mixed The value compared to
+     * @return T The value compared to
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
