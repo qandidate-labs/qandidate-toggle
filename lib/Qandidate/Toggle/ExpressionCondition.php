@@ -19,7 +19,7 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
  * A condition written as a symfony language expression that gets evaluated against the
  * full context, allowing access to several keys of the context in a single condition.
  */
-class ExpressionCondition extends Condition
+class ExpressionCondition implements Condition
 {
     public function __construct(protected string $expression, protected ExpressionLanguage $language)
     {

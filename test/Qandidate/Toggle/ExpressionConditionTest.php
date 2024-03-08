@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
+use Symfony\Component\ExpressionLanguage\SyntaxError;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class ExpressionConditionTest extends TestCase
 {
-    protected $language;
+    protected ExpressionLanguage $language;
 
     protected function setUp(): void
     {
@@ -27,9 +28,9 @@ class ExpressionConditionTest extends TestCase
     /**
      * @test
      */
-    public function it_should_fire_a_syntax_error_exception()
+    public function it_should_fire_a_syntax_error_exception(): void
     {
-        $this->expectException('Symfony\Component\ExpressionLanguage\SyntaxError');
+        $this->expectException(SyntaxError::class);
         $condition = new ExpressionCondition('price < 5', $this->language);
         $context = new Context();
 
@@ -39,7 +40,7 @@ class ExpressionConditionTest extends TestCase
     /**
      * @test
      */
-    public function it_should_evaluate_a_correct_expression()
+    public function it_should_evaluate_a_correct_expression(): void
     {
         $condition = new ExpressionCondition('user["active"] and product["price"] >= 25', $this->language);
         $context = new Context();
@@ -59,7 +60,7 @@ class ExpressionConditionTest extends TestCase
     /**
      * @test
      */
-    public function it_should_returns_false_if_the_conditions_are_not_met()
+    public function it_should_returns_false_if_the_conditions_are_not_met(): void
     {
         $condition = new ExpressionCondition('"bootstrap" in user["tags"]', $this->language);
         $context = new Context();
@@ -75,7 +76,7 @@ class ExpressionConditionTest extends TestCase
     /**
      * @test
      */
-    public function it_should_return_false_if_the_expression_does_not_return_boolean()
+    public function it_should_return_false_if_the_expression_does_not_return_boolean(): void
     {
         $condition = new ExpressionCondition('user["tags"]', $this->language);
         $context = new Context();

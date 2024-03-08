@@ -21,7 +21,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_is_active_if_one_of_the_conditions_holds_in_affirmative_strategy()
+    public function it_is_active_if_one_of_the_conditions_holds_in_affirmative_strategy(): void
     {
         $conditions = [
             new OperatorCondition('age', new LessThan(42)),
@@ -39,7 +39,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_is_inactive_if_none_of_the_conditions_hold_in_affirmative_strategy()
+    public function it_is_inactive_if_none_of_the_conditions_hold_in_affirmative_strategy(): void
     {
         $conditions = [
             new OperatorCondition('age', new LessThan(42)),
@@ -57,7 +57,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_is_active_if_more_than_half_of_the_conditions_hold_in_majority_strategy()
+    public function it_is_active_if_more_than_half_of_the_conditions_hold_in_majority_strategy(): void
     {
         $conditions = [
             new OperatorCondition('age', new LessThan(42)),
@@ -78,7 +78,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_is_inactive_if_more_than_half_of_the_conditions_do_not_hold_in_majority_strategy()
+    public function it_is_inactive_if_more_than_half_of_the_conditions_do_not_hold_in_majority_strategy(): void
     {
         $conditions = [
             new OperatorCondition('age', new LessThan(42)),
@@ -99,7 +99,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_is_inactive_if_exactly_half_of_the_conditions_hold_in_majority_strategy()
+    public function it_is_inactive_if_exactly_half_of_the_conditions_hold_in_majority_strategy(): void
     {
         $conditions = [
             new OperatorCondition('age', new LessThan(42)),
@@ -118,7 +118,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_is_active_if_all_the_conditions_hold_in_unanimous_strategy()
+    public function it_is_active_if_all_the_conditions_hold_in_unanimous_strategy(): void
     {
         $conditions = [
             new OperatorCondition('age', new LessThan(42)),
@@ -137,7 +137,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_is_inactive_if_one_of_the_conditions_do_not_hold_in_unanimous_strategy()
+    public function it_is_inactive_if_one_of_the_conditions_do_not_hold_in_unanimous_strategy(): void
     {
         $conditions = [
             new OperatorCondition('age', new LessThan(42)),
@@ -156,7 +156,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_exposes_its_name()
+    public function it_exposes_its_name(): void
     {
         $toggle = new Toggle('some-feature', []);
 
@@ -166,7 +166,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_exposes_its_conditions()
+    public function it_exposes_its_conditions(): void
     {
         $condition = new OperatorCondition('age', new LessThan(42));
         $condition2 = new OperatorCondition('age', new GreaterThan(42));
@@ -183,7 +183,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function its_status_is_conditionally_active_by_default()
+    public function its_status_is_conditionally_active_by_default(): void
     {
         $toggle = new Toggle('some-feature', []);
 
@@ -193,7 +193,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function its_strategy_is_affirmative_by_default()
+    public function its_strategy_is_affirmative_by_default(): void
     {
         $toggle = new Toggle('some-feature', []);
 
@@ -203,7 +203,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_can_be_always_activate()
+    public function it_can_be_always_activate(): void
     {
         $toggle = new Toggle('some-feature', []);
 
@@ -215,7 +215,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_can_be_inactive()
+    public function it_can_be_inactive(): void
     {
         $toggle = new Toggle('some-feature', []);
 
@@ -227,7 +227,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_cannot_be_activated_as_inactive()
+    public function it_cannot_be_activated_as_inactive(): void
     {
         $this->expectException('InvalidArgumentException');
         $toggle = new Toggle('some-feature', []);
@@ -238,7 +238,7 @@ class ToggleTest extends TestCase
     /**
      * @test
      */
-    public function it_cannot_be_set_with_an_non_existing_strategy()
+    public function it_cannot_be_set_with_an_non_existing_strategy(): void
     {
         $this->expectException('InvalidArgumentException');
         new Toggle('some-feature', [], -1);
@@ -249,7 +249,7 @@ class ToggleTest extends TestCase
      *
      * @dataProvider contextProvider
      */
-    public function it_is_active_for_every_context_if_activated_as_always_active($context)
+    public function it_is_active_for_every_context_if_activated_as_always_active(Context $context): void
     {
         $conditions = [
             new OperatorCondition('age', new GreaterThan(42)),
@@ -266,7 +266,7 @@ class ToggleTest extends TestCase
      *
      * @dataProvider contextProvider
      */
-    public function it_is_not_active_for_every_context_if_inactivated($context)
+    public function it_is_not_active_for_every_context_if_inactivated(Context $context): void
     {
         $conditions = [
             new OperatorCondition('age', new GreaterThan(42)),
@@ -278,7 +278,7 @@ class ToggleTest extends TestCase
         $this->assertFalse($toggle->activeFor($context));
     }
 
-    public function contextProvider()
+    public function contextProvider(): array
     {
         return [
             [$this->createContext(['age' => 1337])],
@@ -286,7 +286,7 @@ class ToggleTest extends TestCase
         ];
     }
 
-    private function createContext(array $properties)
+    private function createContext(array $properties): Context
     {
         $context = new Context();
 

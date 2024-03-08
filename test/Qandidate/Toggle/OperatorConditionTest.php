@@ -20,7 +20,7 @@ class OperatorConditionTest extends TestCase
     /**
      * @test
      */
-    public function it_returns_false_if_context_does_not_contain_key()
+    public function it_returns_false_if_context_does_not_contain_key(): void
     {
         $condition = new OperatorCondition('age', new GreaterThan(42));
         $context = new Context();
@@ -33,7 +33,7 @@ class OperatorConditionTest extends TestCase
      *
      * @dataProvider valueAvailable
      */
-    public function it_returns_whether_it_operator_holds_for_the_value_if_available($value, $expected)
+    public function it_returns_whether_it_operator_holds_for_the_value_if_available(int $value, bool $expected): void
     {
         $condition = new OperatorCondition('age', new GreaterThan(42));
         $context = new Context();
@@ -42,7 +42,7 @@ class OperatorConditionTest extends TestCase
         $this->assertEquals($expected, $condition->holdsFor($context));
     }
 
-    public function valueAvailable()
+    public function valueAvailable(): array
     {
         return [
             [24, false],
@@ -53,7 +53,7 @@ class OperatorConditionTest extends TestCase
     /**
      * @test
      */
-    public function it_exposes_its_key_and_operator()
+    public function it_exposes_its_key_and_operator(): void
     {
         $key = 'age';
         $operator = new GreaterThan(42);

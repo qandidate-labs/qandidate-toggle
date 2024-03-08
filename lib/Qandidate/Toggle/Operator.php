@@ -25,5 +25,5 @@ interface Operator
      *
      * @return bool returns true if the operator applies to the argument
      */
-    public function appliesTo($argument): bool;
+    public function appliesTo(mixed $argument): bool;
 }

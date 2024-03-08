@@ -20,7 +20,7 @@ use Qandidate\Toggle\ToggleCollection;
 /**
  * Collection persisted in redis using the Predis client.
  */
-class PredisCollection extends ToggleCollection
+class PredisCollection implements ToggleCollection
 {
     public function __construct(private readonly string $namespace, private readonly ClientInterface $client)
     {

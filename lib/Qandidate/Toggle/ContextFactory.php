@@ -28,7 +28,7 @@ namespace Qandidate\Toggle;
  *     $context->set('company_id', $user->getCompanyId());
  *     $context->set('ip', $request->getClientIp());
  */
-abstract class ContextFactory
+interface ContextFactory
 {
-    abstract public function createContext(): Context;
+    public function createContext(): Context;
 }

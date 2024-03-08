@@ -29,7 +29,7 @@ class ToggleManager
      */
     public function active(string $name, Context $context): bool
     {
-        if (null === $toggle = $this->collection->get($name)) {
+        if (!($toggle = $this->collection->get($name)) instanceof Toggle) {
             return false;
         }
 
@@ -67,13 +67,13 @@ class ToggleManager
      */
     public function rename(string $oldName, string $newName): void
     {
-        if (null !== $this->collection->get($newName)) {
+        if ($this->collection->get($newName) instanceof Toggle) {
             throw new RuntimeException(sprintf('Could not rename toggle %1$s to %2$s, a toggle with name %2$s already exists', $oldName, $newName));
         }
 
         $currentToggle = $this->collection->get($oldName);
 
-        if (null === $currentToggle) {
+        if (!$currentToggle instanceof Toggle) {
             throw new RuntimeException(sprintf('Could not rename toggle %1$s to %2$s, toggle with name %1$s does not exists', $oldName, $newName));
         }
 
@@ -99,7 +99,7 @@ class ToggleManager
     public function get(string $name): Toggle
     {
         $toggle = $this->collection->get($name);
-        if (!$toggle) {
+        if (!$toggle instanceof Toggle) {
             throw new InvalidArgumentException("Cannot find Toggle with name $name");
         }
 

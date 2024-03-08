@@ -17,7 +17,7 @@ use Qandidate\Toggle\ToggleCollectionTest;
 
 class InMemoryCollectionTest extends ToggleCollectionTest
 {
-    protected function createCollection()
+    protected function createCollection(): InMemoryCollection
     {
         return new InMemoryCollection();
     }

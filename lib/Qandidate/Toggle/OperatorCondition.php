@@ -16,7 +16,7 @@ namespace Qandidate\Toggle;
 /**
  * A condition based on the name of the value from the context and an operator.
  */
-class OperatorCondition extends Condition
+class OperatorCondition implements Condition
 {
     /**
      * @param string   $key      Name of the value

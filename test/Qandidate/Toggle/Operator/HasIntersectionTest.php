@@ -22,13 +22,13 @@ class HasIntersectionTest extends TestCase
      *
      * @dataProvider valuesNotMatching
      */
-    public function it_not_applies_to_set_not_matching_values($values, $argument)
+    public function it_not_applies_to_set_not_matching_values(array $values, array $argument): void
     {
         $operator = new HasIntersection($values);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function valuesNotMatching()
+    public function valuesNotMatching(): array
     {
         return [
             [[4],     [1, 2, 3]],
@@ -42,13 +42,13 @@ class HasIntersectionTest extends TestCase
      *
      * @dataProvider valuesMatching
      */
-    public function it_applies_to_set_matching_values($values, $argument)
+    public function it_applies_to_set_matching_values(array $values, array $argument): void
     {
         $operator = new HasIntersection($values);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function valuesMatching()
+    public function valuesMatching(): array
     {
         return [
             [[1],     [1, 2, 3]],
@@ -61,7 +61,7 @@ class HasIntersectionTest extends TestCase
     /**
      * @test
      */
-    public function it_exposes_its_value()
+    public function it_exposes_its_value(): void
     {
         $operator = new HasIntersection(['a', 'b', 'c']);
         $this->assertEquals(['a', 'b', 'c'], $operator->getValues());

@@ -22,13 +22,13 @@ class LessThanEqualOperatorTest extends TestCase
      *
      * @dataProvider greaterValues
      */
-    public function it_does_not_apply_to_greater_values($value, $argument)
+    public function it_does_not_apply_to_greater_values(int|float $value, int|float $argument): void
     {
         $operator = new LessThanEqual($value);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function greaterValues()
+    public function greaterValues(): array
     {
         return [
             [42,  43],
@@ -43,13 +43,13 @@ class LessThanEqualOperatorTest extends TestCase
      *
      * @dataProvider equalValues
      */
-    public function it_applies_to_equal_values($value, $argument)
+    public function it_applies_to_equal_values(int|float $value, int|float $argument): void
     {
         $operator = new LessThanEqual($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function equalValues()
+    public function equalValues(): array
     {
         return [
             [42,   42],
@@ -63,13 +63,13 @@ class LessThanEqualOperatorTest extends TestCase
      *
      * @dataProvider smallerValues
      */
-    public function it_applies_to_smaller_values($value, $argument)
+    public function it_applies_to_smaller_values(int|float $value, int|float $argument): void
     {
         $operator = new LessThanEqual($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function smallerValues()
+    public function smallerValues(): array
     {
         return [
             [43,   42],
@@ -82,7 +82,7 @@ class LessThanEqualOperatorTest extends TestCase
     /**
      * @test
      */
-    public function it_exposes_its_value()
+    public function it_exposes_its_value(): void
     {
         $operator = new LessThanEqual(42);
         $this->assertEquals(42, $operator->getValue());

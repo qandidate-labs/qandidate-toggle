@@ -28,7 +28,7 @@ class OperatorSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_exception_on_unknown_operator()
+    public function it_throws_exception_on_unknown_operator(): void
     {
         $this->expectException('RuntimeException');
         $this->expectExceptionMessage('Unknown operator Qandidate\Toggle\Serializer\UnknownOperator.');
@@ -42,7 +42,7 @@ class OperatorSerializerTest extends TestCase
      *
      * @dataProvider knownOperators
      */
-    public function it_serializes_known_operators($operator, $expected)
+    public function it_serializes_known_operators(GreaterThan|GreaterThanEqual|LessThan|LessThanEqual|Percentage|HasIntersection|InSet $operator, array $expected): void
     {
         $serializer = new OperatorSerializer();
 
@@ -50,7 +50,7 @@ class OperatorSerializerTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function knownOperators()
+    public function knownOperators(): array
     {
         return [
             [new GreaterThan(42), ['name' => 'greater-than', 'value' => 42]],
@@ -69,7 +69,7 @@ class OperatorSerializerTest extends TestCase
      *
      * @dataProvider knownOperators
      */
-    public function it_deserializes_known_operators($expected, $serialized)
+    public function it_deserializes_known_operators(GreaterThan|GreaterThanEqual|LessThan|LessThanEqual|Percentage|HasIntersection|InSet $expected, array $serialized): void
     {
         $serializer = new OperatorSerializer();
 
@@ -82,7 +82,7 @@ class OperatorSerializerTest extends TestCase
      *
      * @dataProvider missingKeys
      */
-    public function it_throws_an_exception_if_a_key_is_missing_from_the_data($serialized)
+    public function it_throws_an_exception_if_a_key_is_missing_from_the_data(array $serialized): void
     {
         $this->expectException('RuntimeException');
         $serializer = new OperatorSerializer();
@@ -90,7 +90,7 @@ class OperatorSerializerTest extends TestCase
         $operator = $serializer->deserialize($serialized);
     }
 
-    public function missingKeys()
+    public function missingKeys(): array
     {
         return [
             [[]],
@@ -110,7 +110,7 @@ class OperatorSerializerTest extends TestCase
     /**
      * @test
      */
-    public function it_throws_an_exception_on_deserializing_unknown_operator()
+    public function it_throws_an_exception_on_deserializing_unknown_operator(): void
     {
         $this->expectException('RuntimeException');
         $serializer = new OperatorSerializer();
@@ -119,9 +119,9 @@ class OperatorSerializerTest extends TestCase
     }
 }
 
-class UnknownOperator extends Operator
+class UnknownOperator implements Operator
 {
-    public function appliesTo($argument): bool
+    public function appliesTo(mixed $argument): bool
     {
         return true;
     }

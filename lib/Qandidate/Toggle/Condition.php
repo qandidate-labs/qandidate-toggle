@@ -16,10 +16,10 @@ namespace Qandidate\Toggle;
 /**
  * For a condition it can be checked if it holds for a given context.
  */
-abstract class Condition
+interface Condition
 {
     /**
      * @return bool True, if the condition holds for the given context
      */
-    abstract public function holdsFor(Context $context): bool;
+    public function holdsFor(Context $context): bool;
 }
