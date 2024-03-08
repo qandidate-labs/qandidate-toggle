@@ -15,6 +15,7 @@ namespace Qandidate\Toggle\Operator;
 
 /**
  * @template T
+ *
  * @extends InSet<T>
  */
 class NotInSet extends InSet

@@ -42,7 +42,7 @@ class PredisCollectionTest extends ToggleCollectionTest
         }
     }
 
-    public function createCollection()
+    public function createCollection(): PredisCollection
     {
         return $this->collection;
     }

@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
-use InvalidArgumentException;
-
-
 /**
  * @template T
+ *
  * @template-extends EqualityOperator<T>
  */
 class HasIntersection extends EqualityOperator
@@ -32,7 +30,7 @@ class HasIntersection extends EqualityOperator
     public function appliesTo(mixed $argument): bool
     {
         if (!is_array($argument)) {
-            throw new InvalidArgumentException('HasIntersection can only be compared against array values');
+            throw new \InvalidArgumentException('HasIntersection can only be compared against array values');
         }
 
         return null !== $argument

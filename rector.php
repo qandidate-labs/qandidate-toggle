@@ -13,6 +13,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->importNames();
+    $rectorConfig->importShortClasses(false);
 
     $rectorConfig->sets([
         LevelSetList::UP_TO_PHP_81,

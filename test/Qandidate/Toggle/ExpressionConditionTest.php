@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
-use Symfony\Component\ExpressionLanguage\SyntaxError;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Symfony\Component\ExpressionLanguage\SyntaxError;
 
 class ExpressionConditionTest extends TestCase
 {

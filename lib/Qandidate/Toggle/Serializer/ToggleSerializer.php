@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Serializer;
 
-use RuntimeException;
-use InvalidArgumentException;
 use Qandidate\Toggle\OperatorCondition;
 use Qandidate\Toggle\Toggle;
 
@@ -43,7 +41,7 @@ class ToggleSerializer
         $this->assertHasKey('conditions', $data);
 
         if (!is_array($data['conditions'])) {
-            throw new RuntimeException('Key "conditions" should be an array.');
+            throw new \RuntimeException('Key "conditions" should be an array.');
         }
 
         $toggle = new Toggle(
@@ -65,7 +63,7 @@ class ToggleSerializer
 
         foreach ($conditions as $condition) {
             if (!$condition instanceof OperatorCondition) {
-                throw new RuntimeException(sprintf('Unable to serialize %s.', $condition::class));
+                throw new \RuntimeException(sprintf('Unable to serialize %s.', $condition::class));
             }
 
             $serialized[] = $this->operatorConditionSerializer->serialize($condition);
@@ -91,7 +89,7 @@ class ToggleSerializer
             Toggle::ALWAYS_ACTIVE => 'always-active',
             Toggle::INACTIVE => 'inactive',
             Toggle::CONDITIONALLY_ACTIVE => 'conditionally-active',
-            default => throw new InvalidArgumentException('unsupported status'),
+            default => throw new \InvalidArgumentException('unsupported status'),
         };
     }
 
@@ -112,7 +110,7 @@ class ToggleSerializer
                 return;
         }
 
-        throw new RuntimeException(sprintf('Unknown toggle status "%s".', $status));
+        throw new \RuntimeException(sprintf('Unknown toggle status "%s".', $status));
     }
 
     private function serializeStrategy(Toggle $toggle): string
@@ -121,7 +119,7 @@ class ToggleSerializer
             Toggle::STRATEGY_AFFIRMATIVE => 'affirmative',
             Toggle::STRATEGY_MAJORITY => 'majority',
             Toggle::STRATEGY_UNANIMOUS => 'unanimous',
-            default => throw new InvalidArgumentException('unsupported strategy'),
+            default => throw new \InvalidArgumentException('unsupported strategy'),
         };
     }
 
@@ -131,14 +129,14 @@ class ToggleSerializer
             'affirmative' => Toggle::STRATEGY_AFFIRMATIVE,
             'majority' => Toggle::STRATEGY_MAJORITY,
             'unanimous' => Toggle::STRATEGY_UNANIMOUS,
-            default => throw new RuntimeException(sprintf('Unknown toggle strategy "%s".', $strategy)),
+            default => throw new \RuntimeException(sprintf('Unknown toggle strategy "%s".', $strategy)),
         };
     }
 
     private function assertHasKey(string $key, array $data): void
     {
         if (!array_key_exists($key, $data)) {
-            throw new RuntimeException(sprintf('Missing key "%s" in data.', $key));
+            throw new \RuntimeException(sprintf('Missing key "%s" in data.', $key));
         }
     }
 }

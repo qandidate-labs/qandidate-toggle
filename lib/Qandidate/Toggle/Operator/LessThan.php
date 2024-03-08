@@ -15,7 +15,8 @@ namespace Qandidate\Toggle\Operator;
 
 /**
  * @template T
- * @template-extends EqualityOperator<T> 
+ *
+ * @template-extends EqualityOperator<T>
  */
 class LessThan extends EqualityOperator
 {

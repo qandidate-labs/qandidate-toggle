@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
-use InvalidArgumentException;
 use Qandidate\Toggle\Operator;
 
 class Percentage implements Operator
@@ -25,7 +24,7 @@ class Percentage implements Operator
     public function appliesTo(mixed $argument): bool
     {
         if (!is_int($argument)) {
-            throw new InvalidArgumentException('Percentage only accepts integers');
+            throw new \InvalidArgumentException('Percentage only accepts integers');
         }
 
         $asPercentage = (int) $argument % 100;
