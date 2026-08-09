@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
+use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\ToggleCollection\InMemoryCollection;
 
 class ToggleManagerTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_false_if_toggle_not_added_to_manager_before()
     {
         $manager = new ToggleManager(new InMemoryCollection());
@@ -27,9 +26,7 @@ class ToggleManagerTest extends TestCase
         $this->assertFalse($manager->active('foo', new Context()));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_the_value_of_the_toggle_if_available()
     {
         $manager = new ToggleManager(new InMemoryCollection());
@@ -38,9 +35,7 @@ class ToggleManagerTest extends TestCase
         $this->assertTrue($manager->active('some-feature', new Context()));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_updates_a_toggle()
     {
         $manager = new ToggleManager(new InMemoryCollection());
@@ -50,9 +45,7 @@ class ToggleManagerTest extends TestCase
         $this->assertFalse($manager->active('some-feature', new Context()));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_removes_a_toggle()
     {
         $manager = new ToggleManager(new InMemoryCollection());
@@ -63,14 +56,18 @@ class ToggleManagerTest extends TestCase
         $this->assertFalse($manager->active('some-feature', new Context()));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_renames_a_toggle()
     {
         $manager = new ToggleManager(new InMemoryCollection());
 
-        $toggle = $this->createToggleMock();
+        $toggle = $this->createMock('Qandidate\\Toggle\\Toggle');
+        $toggle->expects($this->any())
+            ->method('activeFor')
+            ->willReturn(true);
+        $toggle->expects($this->any())
+            ->method('getName')
+            ->willReturnOnConsecutiveCalls('some-feature', 'other-feature');
 
         $manager->add($toggle);
 
@@ -78,18 +75,12 @@ class ToggleManagerTest extends TestCase
             ->method('rename')
             ->with('other-feature');
 
-        $toggle->expects($this->at(1))
-            ->method('getName')
-            ->will($this->returnValue('other-feature'));
-
         $manager->rename('some-feature', 'other-feature');
         $this->assertFalse($manager->active('some-feature', new Context()));
         $this->assertTrue($manager->active('other-feature', new Context()));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_if_new_name_is_already_in_use()
     {
         $this->expectException('RuntimeException');
@@ -103,9 +94,7 @@ class ToggleManagerTest extends TestCase
         $manager->rename('foo', 'some-feature');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_when_to_be_renamed_toggle_doesnt_exists()
     {
         $this->expectException('RuntimeException');
@@ -114,9 +103,7 @@ class ToggleManagerTest extends TestCase
         $manager->rename('foo', 'some-feature');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_exposes_all_toggles()
     {
         $toggle = new Toggle('some-feature', []);
@@ -133,9 +120,7 @@ class ToggleManagerTest extends TestCase
         $this->assertEquals($all['some-other-feature'], $toggle2);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_when_given_name_does_not_exists()
     {
         $this->expectException('InvalidArgumentException');
@@ -146,9 +131,7 @@ class ToggleManagerTest extends TestCase
         $manager->get('bar');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_toggle_if_toggle_with_given_name_exists()
     {
         $collection = new InMemoryCollection();
@@ -165,11 +148,11 @@ class ToggleManagerTest extends TestCase
 
         $toggleMock->expects($this->any())
             ->method('activeFor')
-            ->will($this->returnValue($active));
+            ->willReturn($active);
 
-        $toggleMock->expects($this->at(0))
+        $toggleMock->expects($this->any())
             ->method('getName')
-            ->will($this->returnValue($getName));
+            ->willReturn($getName);
 
         return $toggleMock;
     }

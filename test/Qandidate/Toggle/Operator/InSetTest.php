@@ -13,22 +13,21 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\TestCase;
 
 class InSetTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider valuesInSet
-     */
+    #[Test]
+    #[DataProvider('valuesInSet')]
     public function it_applies_if_value_in_set($argument, $values)
     {
         $operator = new InSet($values);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function valuesInSet()
+    public static function valuesInSet()
     {
         return [
             [5,     [1, 1, 2, 3, 5, 8]],
@@ -36,18 +35,15 @@ class InSetTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider valuesNotInSet
-     */
+    #[Test]
+    #[DataProvider('valuesNotInSet')]
     public function it_does_not_apply_if_value_not_in_set($argument, $set)
     {
         $operator = new InSet($set);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function valuesNotInSet()
+    public static function valuesNotInSet()
     {
         return [
             [5,     [1, 1, 2, 3]],
@@ -55,18 +51,15 @@ class InSetTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider nullSets
-     */
+    #[Test]
+    #[DataProvider('nullSets')]
     public function it_never_accepts_null_as_part_of_a_set($argument, $set)
     {
         $operator = new InSet($set);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function nullSets()
+    public static function nullSets()
     {
         return [
             [null, [null, 1]],
@@ -74,9 +67,7 @@ class InSetTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_exposes_its_values()
     {
         $values = [1, 'foo'];

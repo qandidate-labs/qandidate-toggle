@@ -15,9 +15,9 @@ namespace Qandidate\Toggle\ToggleCollection;
 
 use Predis\Client;
 use Predis\Connection\ConnectionException;
-use Qandidate\Toggle\ToggleCollectionTest;
+use Qandidate\Toggle\ToggleCollectionTestCase;
 
-class PredisCollectionTest extends ToggleCollectionTest
+class PredisCollectionTest extends ToggleCollectionTestCase
 {
     private $client;
     private $collection;
@@ -35,6 +35,10 @@ class PredisCollectionTest extends ToggleCollectionTest
 
     public function tearDown(): void
     {
+        if (!$this->client->isConnected()) {
+            return;
+        }
+
         $keys = $this->client->keys('toggle_predis_test*');
 
         foreach ($keys as $key) {

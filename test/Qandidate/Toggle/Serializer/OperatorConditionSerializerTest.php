@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Serializer;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\Operator\GreaterThan;
 use Qandidate\Toggle\OperatorCondition;
 
 class OperatorConditionSerializerTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_serializes_an_operator()
     {
         $serializer = $this->createOperatorConditionSerializer();
@@ -38,9 +38,7 @@ class OperatorConditionSerializerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_deserializes_an_operator()
     {
         $serializer = $this->createOperatorConditionSerializer();
@@ -55,9 +53,7 @@ class OperatorConditionSerializerTest extends TestCase
         $this->assertEquals($expected, $serializer->deserialize($serialized));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_throws_exception_on_unknown_name()
     {
         $this->expectException('RuntimeException');
@@ -72,11 +68,8 @@ class OperatorConditionSerializerTest extends TestCase
         $serializer->deserialize($serialized);
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider missingKeys
-     */
+    #[Test]
+    #[DataProvider('missingKeys')]
     public function it_throws_exception_on_missing_key($serialized)
     {
         $this->expectException('RuntimeException');
@@ -85,7 +78,7 @@ class OperatorConditionSerializerTest extends TestCase
         $serializer->deserialize($serialized);
     }
 
-    public function missingKeys()
+    public static function missingKeys()
     {
         return [
             [[]],

@@ -13,22 +13,21 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\TestCase;
 
 class EqualToOperatorTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider integerValues
-     */
+    #[Test]
+    #[DataProvider('integerValues')]
     public function it_applies_to_integer_values($value, $argument)
     {
         $operator = new EqualTo($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function integerValues()
+    public static function integerValues()
     {
         return [
             [0,  0],
@@ -37,18 +36,15 @@ class EqualToOperatorTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider stringValues
-     */
+    #[Test]
+    #[DataProvider('stringValues')]
     public function it_applies_to_string_values($value, $argument)
     {
         $operator = new EqualTo($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function stringValues()
+    public static function stringValues()
     {
         return [
             ['foo', 'foo'],
@@ -57,18 +53,15 @@ class EqualToOperatorTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider floatValues
-     */
+    #[Test]
+    #[DataProvider('floatValues')]
     public function it_applies_to_float_values($value, $argument)
     {
         $operator = new EqualTo($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function floatValues()
+    public static function floatValues()
     {
         return [
             [3.14, 3.14],
@@ -76,18 +69,15 @@ class EqualToOperatorTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider notEqualValues
-     */
+    #[Test]
+    #[DataProvider('notEqualValues')]
     public function it_does_not_apply_to_not_equal_values($value, $argument)
     {
         $operator = new EqualTo($value);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function notEqualValues()
+    public static function notEqualValues()
     {
         return [
             [42,   43],
@@ -100,9 +90,7 @@ class EqualToOperatorTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_exposes_its_value()
     {
         $operator = new EqualTo(42);

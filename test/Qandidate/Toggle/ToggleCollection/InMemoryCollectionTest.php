@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\ToggleCollection;
 
-use Qandidate\Toggle\ToggleCollectionTest;
+use Qandidate\Toggle\ToggleCollectionTestCase;
 
-class InMemoryCollectionTest extends ToggleCollectionTest
+class InMemoryCollectionTest extends ToggleCollectionTestCase
 {
     protected function createCollection()
     {
