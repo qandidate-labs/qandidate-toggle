@@ -13,22 +13,21 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\TestCase;
 
 class HasIntersectionTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider valuesNotMatching
-     */
+    #[Test]
+    #[DataProvider('valuesNotMatching')]
     public function it_not_applies_to_set_not_matching_values($values, $argument)
     {
         $operator = new HasIntersection($values);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function valuesNotMatching()
+    public static function valuesNotMatching()
     {
         return [
             [[4],     [1, 2, 3]],
@@ -37,18 +36,15 @@ class HasIntersectionTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider valuesMatching
-     */
+    #[Test]
+    #[DataProvider('valuesMatching')]
     public function it_applies_to_set_matching_values($values, $argument)
     {
         $operator = new HasIntersection($values);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function valuesMatching()
+    public static function valuesMatching()
     {
         return [
             [[1],     [1, 2, 3]],
@@ -58,9 +54,7 @@ class HasIntersectionTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_exposes_its_value()
     {
         $operator = new HasIntersection(['a', 'b', 'c']);

@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\Operator\GreaterThan;
 
 class OperatorConditionTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_false_if_context_does_not_contain_key()
     {
         $condition = new OperatorCondition('age', new GreaterThan(42));
@@ -28,11 +28,8 @@ class OperatorConditionTest extends TestCase
         $this->assertFalse($condition->holdsFor($context));
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider valueAvailable
-     */
+    #[Test]
+    #[DataProvider('valueAvailable')]
     public function it_returns_whether_it_operator_holds_for_the_value_if_available($value, $expected)
     {
         $condition = new OperatorCondition('age', new GreaterThan(42));
@@ -42,7 +39,7 @@ class OperatorConditionTest extends TestCase
         $this->assertEquals($expected, $condition->holdsFor($context));
     }
 
-    public function valueAvailable()
+    public static function valueAvailable()
     {
         return [
             [24, false],
@@ -50,9 +47,7 @@ class OperatorConditionTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_exposes_its_key_and_operator()
     {
         $key = 'age';

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Serializer;
 
+use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\Operator\LessThan;
 use Qandidate\Toggle\OperatorCondition;
 use Qandidate\Toggle\TestCase;
@@ -21,9 +22,7 @@ use Qandidate\Toggle\ToggleCollection\InMemoryCollection;
 
 class InMemoryCollectionSerializerTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_unserializes_a_collection_from_an_array()
     {
         $data = [
@@ -47,9 +46,7 @@ class InMemoryCollectionSerializerTest extends TestCase
         $this->assertCount(1, $collection->all());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_serializes_a_collection_to_an_array()
     {
         $collection = new InMemoryCollection();
@@ -68,9 +65,7 @@ class InMemoryCollectionSerializerTest extends TestCase
         $this->assertSame('toggling', $serialized[0]['name']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_serializes_and_deserializes_a_collection()
     {
         $collection = new InMemoryCollection();

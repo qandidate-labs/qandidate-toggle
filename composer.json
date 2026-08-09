@@ -14,18 +14,18 @@
       }
     ],
     "require": {
-        "php": ">=7.2"
+        "php": "^8.2"
     },
     "require-dev": {
-        "predis/predis": "^1.1||^2.0",
-        "symfony/expression-language": "^3.4||^4.4||^5.0",
-        "phpunit/phpunit": "^9.5",
-        "broadway/coding-standard": "^1.2",
-        "phpstan/phpstan": "@stable"
+        "predis/predis": "^2.0",
+        "symfony/expression-language": "^6.4 || ^7.4 || ^8.0",
+        "phpunit/phpunit": "^11.5",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpstan/phpstan": "^2.0"
     },
     "suggest": {
-        "predis/predis": "To use the PredisCollection to persist toggles in redis",
-        "symfony/expression-language": "To use the ExpressionCondition to add conditions as a symfony language expression"
+        "predis/predis": "^2.0",
+        "symfony/expression-language": "^6.4 || ^7.4 || ^8.0"
     },
     "autoload": {
         "psr-4": {

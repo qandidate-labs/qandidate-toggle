@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\Operator\GreaterThan;
 use Qandidate\Toggle\Operator\LessThan;
 
 class ToggleTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_is_active_if_one_of_the_conditions_holds_in_affirmative_strategy()
     {
         $conditions = [
@@ -36,9 +36,7 @@ class ToggleTest extends TestCase
         $this->assertTrue($toggle->activeFor($context));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_is_inactive_if_none_of_the_conditions_hold_in_affirmative_strategy()
     {
         $conditions = [
@@ -54,9 +52,7 @@ class ToggleTest extends TestCase
         $this->assertFalse($toggle->activeFor($context));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_is_active_if_more_than_half_of_the_conditions_hold_in_majority_strategy()
     {
         $conditions = [
@@ -75,9 +71,7 @@ class ToggleTest extends TestCase
         $this->assertTrue($toggle->activeFor($context));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_is_inactive_if_more_than_half_of_the_conditions_do_not_hold_in_majority_strategy()
     {
         $conditions = [
@@ -96,9 +90,7 @@ class ToggleTest extends TestCase
         $this->assertFalse($toggle->activeFor($context));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_is_inactive_if_exactly_half_of_the_conditions_hold_in_majority_strategy()
     {
         $conditions = [
@@ -115,9 +107,7 @@ class ToggleTest extends TestCase
         $this->assertFalse($toggle->activeFor($context));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_is_active_if_all_the_conditions_hold_in_unanimous_strategy()
     {
         $conditions = [
@@ -134,9 +124,7 @@ class ToggleTest extends TestCase
         $this->assertTrue($toggle->activeFor($context));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_is_inactive_if_one_of_the_conditions_do_not_hold_in_unanimous_strategy()
     {
         $conditions = [
@@ -153,9 +141,7 @@ class ToggleTest extends TestCase
         $this->assertFalse($toggle->activeFor($context));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_exposes_its_name()
     {
         $toggle = new Toggle('some-feature', []);
@@ -163,9 +149,7 @@ class ToggleTest extends TestCase
         $this->assertEquals('some-feature', $toggle->getName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_exposes_its_conditions()
     {
         $condition = new OperatorCondition('age', new LessThan(42));
@@ -180,9 +164,7 @@ class ToggleTest extends TestCase
         $this->assertEquals($condition2, $actual[1]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function its_status_is_conditionally_active_by_default()
     {
         $toggle = new Toggle('some-feature', []);
@@ -190,9 +172,7 @@ class ToggleTest extends TestCase
         $this->assertEquals(Toggle::CONDITIONALLY_ACTIVE, $toggle->getStatus());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function its_strategy_is_affirmative_by_default()
     {
         $toggle = new Toggle('some-feature', []);
@@ -200,9 +180,7 @@ class ToggleTest extends TestCase
         $this->assertEquals(Toggle::STRATEGY_AFFIRMATIVE, $toggle->getStrategy());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_be_always_activate()
     {
         $toggle = new Toggle('some-feature', []);
@@ -212,9 +190,7 @@ class ToggleTest extends TestCase
         $this->assertEquals(Toggle::ALWAYS_ACTIVE, $toggle->getStatus());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_can_be_inactive()
     {
         $toggle = new Toggle('some-feature', []);
@@ -224,9 +200,7 @@ class ToggleTest extends TestCase
         $this->assertEquals(Toggle::INACTIVE, $toggle->getStatus());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_cannot_be_activated_as_inactive()
     {
         $this->expectException('InvalidArgumentException');
@@ -235,20 +209,15 @@ class ToggleTest extends TestCase
         $toggle->activate(Toggle::INACTIVE);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_cannot_be_set_with_an_non_existing_strategy()
     {
         $this->expectException('InvalidArgumentException');
         new Toggle('some-feature', [], -1);
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider contextProvider
-     */
+    #[Test]
+    #[DataProvider('contextProvider')]
     public function it_is_active_for_every_context_if_activated_as_always_active($context)
     {
         $conditions = [
@@ -261,11 +230,8 @@ class ToggleTest extends TestCase
         $this->assertTrue($toggle->activeFor($context));
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider contextProvider
-     */
+    #[Test]
+    #[DataProvider('contextProvider')]
     public function it_is_not_active_for_every_context_if_inactivated($context)
     {
         $conditions = [
@@ -278,15 +244,15 @@ class ToggleTest extends TestCase
         $this->assertFalse($toggle->activeFor($context));
     }
 
-    public function contextProvider()
+    public static function contextProvider()
     {
         return [
-            [$this->createContext(['age' => 1337])],
-            [$this->createContext(['age' => 21])],
+            [self::createContext(['age' => 1337])],
+            [self::createContext(['age' => 21])],
         ];
     }
 
-    private function createContext(array $properties)
+    private static function createContext(array $properties)
     {
         $context = new Context();
 

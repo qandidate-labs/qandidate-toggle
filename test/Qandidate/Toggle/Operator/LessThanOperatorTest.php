@@ -13,22 +13,21 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\TestCase;
 
 class LessThanOperatorTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider greaterValues
-     */
+    #[Test]
+    #[DataProvider('greaterValues')]
     public function it_does_not_apply_to_greater_values($value, $argument)
     {
         $operator = new LessThan($value);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function greaterValues()
+    public static function greaterValues()
     {
         return [
             [42,  43],
@@ -38,18 +37,15 @@ class LessThanOperatorTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider equalValues
-     */
+    #[Test]
+    #[DataProvider('equalValues')]
     public function it_does_not_apply_to_equal_values($value, $argument)
     {
         $operator = new LessThan($value);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function equalValues()
+    public static function equalValues()
     {
         return [
             [42,   42],
@@ -58,18 +54,15 @@ class LessThanOperatorTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider smallerValues
-     */
+    #[Test]
+    #[DataProvider('smallerValues')]
     public function it_applies_to_smaller_values($value, $argument)
     {
         $operator = new LessThan($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function smallerValues()
+    public static function smallerValues()
     {
         return [
             [43,   42],
@@ -79,9 +72,7 @@ class LessThanOperatorTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_exposes_its_value()
     {
         $operator = new LessThan(42);

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 class ExpressionConditionTest extends TestCase
@@ -24,9 +25,7 @@ class ExpressionConditionTest extends TestCase
         $this->language = new ExpressionLanguage();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_fire_a_syntax_error_exception()
     {
         $this->expectException('Symfony\Component\ExpressionLanguage\SyntaxError');
@@ -36,9 +35,7 @@ class ExpressionConditionTest extends TestCase
         $condition->holdsFor($context);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_evaluate_a_correct_expression()
     {
         $condition = new ExpressionCondition('user["active"] and product["price"] >= 25', $this->language);
@@ -56,9 +53,7 @@ class ExpressionConditionTest extends TestCase
         $this->assertTrue($condition->holdsFor($context));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_returns_false_if_the_conditions_are_not_met()
     {
         $condition = new ExpressionCondition('"bootstrap" in user["tags"]', $this->language);
@@ -72,9 +67,7 @@ class ExpressionConditionTest extends TestCase
         $this->assertFalse($condition->holdsFor($context));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_should_return_false_if_the_expression_does_not_return_boolean()
     {
         $condition = new ExpressionCondition('user["tags"]', $this->language);

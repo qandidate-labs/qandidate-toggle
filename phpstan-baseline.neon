@@ -1,37 +1,385 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$array of function array_intersect expects array, mixed given\\.$#"
+			message: '#^Method Qandidate\\Toggle\\Context\:\:get\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: lib/Qandidate/Toggle/Context.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Context\:\:set\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Context.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Context\:\:toArray\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Context.php
+
+		-
+			message: '#^Property Qandidate\\Toggle\\Context\:\:\$values type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Context.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\:\:appliesTo\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Operator.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\EqualTo\:\:appliesTo\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/EqualTo.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\EqualityOperator\:\:__construct\(\) has parameter \$value with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/EqualityOperator.php
+
+		-
+			message: '#^Property Qandidate\\Toggle\\Operator\\EqualityOperator\:\:\$value has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/EqualityOperator.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\GreaterThan\:\:appliesTo\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/GreaterThan.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\GreaterThanEqual\:\:appliesTo\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/GreaterThanEqual.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\HasIntersection\:\:__construct\(\) has parameter \$values with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: lib/Qandidate/Toggle/Operator/HasIntersection.php
 
 		-
-			message: "#^Parameter \\#1 \\$pattern of function preg_match expects string, mixed given\\.$#"
+			message: '#^Method Qandidate\\Toggle\\Operator\\HasIntersection\:\:appliesTo\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/HasIntersection.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\HasIntersection\:\:getValues\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/HasIntersection.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_intersect expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/HasIntersection.php
+
+		-
+			message: '#^Parameter \#2 \$arrays of function array_intersect expects an array of values castable to string, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/HasIntersection.php
+
+		-
+			message: '#^Property Qandidate\\Toggle\\Operator\\HasIntersection\:\:\$values type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/HasIntersection.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\InSet\:\:__construct\(\) has parameter \$values with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/InSet.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\InSet\:\:appliesTo\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/InSet.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\InSet\:\:getValues\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/InSet.php
+
+		-
+			message: '#^Property Qandidate\\Toggle\\Operator\\InSet\:\:\$values type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/InSet.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\LessThan\:\:appliesTo\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/LessThan.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\LessThanEqual\:\:appliesTo\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/LessThanEqual.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\MatchesRegex\:\:appliesTo\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
 			count: 1
 			path: lib/Qandidate/Toggle/Operator/MatchesRegex.php
 
 		-
-			message: "#^Parameter \\#2 \\$subject of function preg_match expects string, mixed given\\.$#"
+			message: '#^Parameter \#1 \$pattern of function preg_match expects string, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: lib/Qandidate/Toggle/Operator/MatchesRegex.php
 
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
+			message: '#^Parameter \#2 \$subject of function preg_match expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/MatchesRegex.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Operator\\NotInSet\:\:appliesTo\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/NotInSet.php
+
+		-
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
 			count: 1
 			path: lib/Qandidate/Toggle/Operator/Percentage.php
 
 		-
-			message: "#^Cannot call method getName\\(\\) on mixed\\.$#"
+			message: '#^Method Qandidate\\Toggle\\Operator\\Percentage\:\:appliesTo\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: lib/Qandidate/Toggle/Operator/Percentage.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\InMemoryCollectionSerializer\:\:deserialize\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/InMemoryCollectionSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\InMemoryCollectionSerializer\:\:serialize\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/InMemoryCollectionSerializer.php
+
+		-
+			message: '#^Parameter \#1 \$data of method Qandidate\\Toggle\\Serializer\\ToggleSerializer\:\:deserialize\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/InMemoryCollectionSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\OperatorConditionSerializer\:\:assertHasKey\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorConditionSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\OperatorConditionSerializer\:\:deserialize\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorConditionSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\OperatorConditionSerializer\:\:serialize\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorConditionSerializer.php
+
+		-
+			message: '#^Parameter \#1 \$key of class Qandidate\\Toggle\\OperatorCondition constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorConditionSerializer.php
+
+		-
+			message: '#^Parameter \#1 \$operator of method Qandidate\\Toggle\\Serializer\\OperatorSerializer\:\:deserialize\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorConditionSerializer.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorConditionSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\OperatorSerializer\:\:assertHasKey\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\OperatorSerializer\:\:deserialize\(\) has parameter \$operator with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\OperatorSerializer\:\:serialize\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorSerializer.php
+
+		-
+			message: '#^Parameter \#1 \$percentage of class Qandidate\\Toggle\\Operator\\Percentage constructor expects int, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorSerializer.php
+
+		-
+			message: '#^Parameter \#1 \$values of class Qandidate\\Toggle\\Operator\\HasIntersection constructor expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorSerializer.php
+
+		-
+			message: '#^Parameter \#1 \$values of class Qandidate\\Toggle\\Operator\\InSet constructor expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorSerializer.php
+
+		-
+			message: '#^Parameter \#1 \$values of class Qandidate\\Toggle\\Operator\\NotInSet constructor expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorSerializer.php
+
+		-
+			message: '#^Parameter \#2 \$shift of class Qandidate\\Toggle\\Operator\\Percentage constructor expects int, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorSerializer.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/OperatorSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\ToggleSerializer\:\:assertHasKey\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\ToggleSerializer\:\:deserialize\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\ToggleSerializer\:\:deserializeConditions\(\) has parameter \$conditions with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\ToggleSerializer\:\:deserializeConditions\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\ToggleSerializer\:\:serialize\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\ToggleSerializer\:\:serializeConditions\(\) has parameter \$conditions with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Method Qandidate\\Toggle\\Serializer\\ToggleSerializer\:\:serializeConditions\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Parameter \#1 \$condition of method Qandidate\\Toggle\\Serializer\\OperatorConditionSerializer\:\:deserialize\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Parameter \#1 \$name of class Qandidate\\Toggle\\Toggle constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Parameter \#1 \$object of function get_class expects object, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Parameter \#1 \$strategy of method Qandidate\\Toggle\\Serializer\\ToggleSerializer\:\:deserializeStrategy\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Parameter \#2 \$conditions of class Qandidate\\Toggle\\Toggle constructor expects array\<Qandidate\\Toggle\\Condition\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Parameter \#2 \$status of method Qandidate\\Toggle\\Serializer\\ToggleSerializer\:\:deserializeStatus\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/Serializer/ToggleSerializer.php
+
+		-
+			message: '#^Cannot call method getName\(\) on mixed\.$#'
+			identifier: method.nonObject
 			count: 1
 			path: lib/Qandidate/Toggle/ToggleCollection/PredisCollection.php
 
 		-
-			message: "#^Method Qandidate\\\\Toggle\\\\ToggleCollection\\\\PredisCollection\\:\\:all\\(\\) should return array\\<Qandidate\\\\Toggle\\\\Toggle\\> but returns array\\<int\\|string, mixed\\>\\.$#"
+			message: '#^Method Qandidate\\Toggle\\ToggleCollection\\PredisCollection\:\:all\(\) should return array\<Qandidate\\Toggle\\Toggle\> but returns array\<mixed\>\.$#'
+			identifier: return.type
 			count: 1
 			path: lib/Qandidate/Toggle/ToggleCollection/PredisCollection.php
 
 		-
-			message: "#^Method Qandidate\\\\Toggle\\\\ToggleCollection\\\\PredisCollection\\:\\:get\\(\\) should return Qandidate\\\\Toggle\\\\Toggle\\|null but returns mixed\\.$#"
+			message: '#^Method Qandidate\\Toggle\\ToggleCollection\\PredisCollection\:\:get\(\) should return Qandidate\\Toggle\\Toggle\|null but returns mixed\.$#'
+			identifier: return.type
 			count: 1
 			path: lib/Qandidate/Toggle/ToggleCollection/PredisCollection.php
 
+		-
+			message: '#^Parameter \#1 \$key of method Qandidate\\Toggle\\ToggleCollection\\PredisCollection\:\:getFromKey\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: lib/Qandidate/Toggle/ToggleCollection/PredisCollection.php
+
+		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: lib/Qandidate/Toggle/ToggleCollection/PredisCollection.php

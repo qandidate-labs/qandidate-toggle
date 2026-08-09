@@ -13,20 +13,18 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
-abstract class ToggleCollectionTest extends TestCase
+use PHPUnit\Framework\Attributes\Test;
+
+abstract class ToggleCollectionTestCase extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_null_if_toggle_not_in_collection()
     {
         $collection = $this->createCollection();
         $this->assertNull($collection->get('some-feature'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_returns_a_set_toggle()
     {
         $toggle = new Toggle('some-feature', []);
@@ -36,9 +34,7 @@ abstract class ToggleCollectionTest extends TestCase
         $this->assertEquals($toggle, $collection->get('some-feature'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_removes_a_toggle()
     {
         $toggle = new Toggle('some-feature', []);
@@ -50,9 +46,7 @@ abstract class ToggleCollectionTest extends TestCase
         $this->assertNull($collection->get('some-feature'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_does_not_complain_when_removing_a_non_existing_toggle()
     {
         $collection = $this->createCollection();
@@ -62,9 +56,7 @@ abstract class ToggleCollectionTest extends TestCase
         $this->assertNull($collection->get('some-feature'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_exposes_all_toggles()
     {
         $toggle = new Toggle('some-feature', []);
@@ -80,9 +72,7 @@ abstract class ToggleCollectionTest extends TestCase
         $this->assertEquals($all['some-other-feature'], $toggle2);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_removes_existing_toggle()
     {
         $toggle = new Toggle('some-feature', []);
@@ -96,9 +86,7 @@ abstract class ToggleCollectionTest extends TestCase
         $this->assertCount(0, $collection->all());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_does_not_throw_when_removing_non_existing_toggle()
     {
         $collection = $this->createCollection();

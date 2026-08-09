@@ -13,22 +13,21 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\TestCase;
 
 class PercentageTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider valuesInPercentage
-     */
+    #[Test]
+    #[DataProvider('valuesInPercentage')]
     public function it_applies_if_value_in_percentage($percentage, $argument)
     {
         $operator = new Percentage($percentage);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function valuesInPercentage()
+    public static function valuesInPercentage()
     {
         return [
             [5, 4],
@@ -39,18 +38,15 @@ class PercentageTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider valuesNotInPercentage
-     */
+    #[Test]
+    #[DataProvider('valuesNotInPercentage')]
     public function it_does_not_apply_if_value_not_in_percentage($percentage, $argument)
     {
         $operator = new Percentage($percentage);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function valuesNotInPercentage()
+    public static function valuesNotInPercentage()
     {
         return [
             [5, 5],
@@ -60,18 +56,15 @@ class PercentageTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider valuesInPercentageShifted
-     */
+    #[Test]
+    #[DataProvider('valuesInPercentageShifted')]
     public function it_applies_if_value_in_shifted_percentage($percentage, $argument)
     {
         $operator = new Percentage($percentage, 42);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public function valuesInPercentageShifted()
+    public static function valuesInPercentageShifted()
     {
         return [
             [5, 46],
@@ -82,18 +75,15 @@ class PercentageTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider valuesNotInPercentageShifted
-     */
+    #[Test]
+    #[DataProvider('valuesNotInPercentageShifted')]
     public function it_does_not_apply_if_value_in_shifted_percentage($percentage, $argument)
     {
         $operator = new Percentage($percentage, 42);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public function valuesNotInPercentageShifted()
+    public static function valuesNotInPercentageShifted()
     {
         return [
             [5, 47],
@@ -103,9 +93,7 @@ class PercentageTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_exposes_its_percentage_and_shift()
     {
         $operator = new Percentage(42, 5);
