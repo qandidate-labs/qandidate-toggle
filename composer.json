@@ -17,14 +17,14 @@
         "php": "^8.2"
     },
     "require-dev": {
-        "predis/predis": "^2.0",
+        "predis/predis": "^3.5",
         "symfony/expression-language": "^6.4 || ^7.4 || ^8.0",
         "phpunit/phpunit": "^11.5",
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpstan/phpstan": "^2.0"
     },
     "suggest": {
-        "predis/predis": "^2.0",
+        "predis/predis": "^3.5",
         "symfony/expression-language": "^6.4 || ^7.4 || ^8.0"
     },
     "autoload": {
