@@ -24,8 +24,8 @@
         "phpstan/phpstan": "^2.0"
     },
     "suggest": {
-        "predis/predis": "^3.5",
-        "symfony/expression-language": "^6.4 || ^7.4 || ^8.0"
+        "predis/predis": "To use the PredisCollection to persist toggles in redis",
+        "symfony/expression-language": "To use the ExpressionCondition to add conditions as a symfony language expression"
     },
     "autoload": {
         "psr-4": {
