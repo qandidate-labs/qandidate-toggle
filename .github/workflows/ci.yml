@@ -1,6 +1,7 @@
 name: "CI"
 
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - "master"
@@ -58,16 +59,6 @@ jobs:
         uses: "ramsey/composer-install@v4"
       - name: "Check coding standards"
         run: "make php-cs-fixer-ci"
-      - name: Create Pull Request
-        if: github.ref == 'refs/heads/master'
-        uses: peter-evans/create-pull-request@v6
-        with:
-          commit-message: Apply coding standards
-          branch: php-cs-fixer
-          delete-branch: true
-          title: 'Apply coding standards'
-          draft: false
-          base: master
 
   static-analysis:
     name: "Static analysis"
