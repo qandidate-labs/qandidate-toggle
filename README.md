@@ -16,7 +16,7 @@ Read our blog post series about this repository at:
 Add the library to your project:
 
 ```
-$ composer require qandidate/toggle ^1.0
+$ composer require qandidate/toggle
 ```
 
 ## How to use
