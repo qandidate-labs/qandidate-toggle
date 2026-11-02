@@ -13,21 +13,26 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\TestCase;
 
+#[CoversClass(LessThanEqual::class)]
 class LessThanEqualOperatorTest extends TestCase
 {
     #[Test]
     #[DataProvider('greaterValues')]
-    public function it_does_not_apply_to_greater_values($value, $argument)
+    public function it_does_not_apply_to_greater_values(mixed $value, mixed $argument): void
     {
         $operator = new LessThanEqual($value);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public static function greaterValues()
+    /**
+     * @return iterable<array{mixed, mixed}>
+     */
+    public static function greaterValues(): iterable
     {
         return [
             [42,  43],
@@ -39,13 +44,16 @@ class LessThanEqualOperatorTest extends TestCase
 
     #[Test]
     #[DataProvider('equalValues')]
-    public function it_applies_to_equal_values($value, $argument)
+    public function it_applies_to_equal_values(mixed $value, mixed $argument): void
     {
         $operator = new LessThanEqual($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public static function equalValues()
+    /**
+     * @return iterable<array{mixed, mixed}>
+     */
+    public static function equalValues(): iterable
     {
         return [
             [42,   42],
@@ -56,13 +64,16 @@ class LessThanEqualOperatorTest extends TestCase
 
     #[Test]
     #[DataProvider('smallerValues')]
-    public function it_applies_to_smaller_values($value, $argument)
+    public function it_applies_to_smaller_values(mixed $value, mixed $argument): void
     {
         $operator = new LessThanEqual($value);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public static function smallerValues()
+    /**
+     * @return iterable<array{mixed, mixed}>
+     */
+    public static function smallerValues(): iterable
     {
         return [
             [43,   42],
@@ -73,9 +84,9 @@ class LessThanEqualOperatorTest extends TestCase
     }
 
     #[Test]
-    public function it_exposes_its_value()
+    public function it_exposes_its_value(): void
     {
         $operator = new LessThanEqual(42);
-        $this->assertEquals(42, $operator->getValue());
+        $this->assertSame(42, $operator->getValue());
     }
 }

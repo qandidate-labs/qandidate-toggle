@@ -13,14 +13,16 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\Operator\GreaterThan;
 
+#[CoversClass(OperatorCondition::class)]
 class OperatorConditionTest extends TestCase
 {
     #[Test]
-    public function it_returns_false_if_context_does_not_contain_key()
+    public function it_returns_false_if_context_does_not_contain_key(): void
     {
         $condition = new OperatorCondition('age', new GreaterThan(42));
         $context = new Context();
@@ -30,16 +32,19 @@ class OperatorConditionTest extends TestCase
 
     #[Test]
     #[DataProvider('valueAvailable')]
-    public function it_returns_whether_it_operator_holds_for_the_value_if_available($value, $expected)
+    public function it_returns_whether_it_operator_holds_for_the_value_if_available(int $value, bool $expected): void
     {
         $condition = new OperatorCondition('age', new GreaterThan(42));
         $context = new Context();
         $context->set('age', $value);
 
-        $this->assertEquals($expected, $condition->holdsFor($context));
+        $this->assertSame($expected, $condition->holdsFor($context));
     }
 
-    public static function valueAvailable()
+    /**
+     * @return iterable<array{int, bool}>
+     */
+    public static function valueAvailable(): iterable
     {
         return [
             [24, false],
@@ -48,13 +53,13 @@ class OperatorConditionTest extends TestCase
     }
 
     #[Test]
-    public function it_exposes_its_key_and_operator()
+    public function it_exposes_its_key_and_operator(): void
     {
         $key = 'age';
         $operator = new GreaterThan(42);
         $condition = new OperatorCondition($key, $operator);
 
-        $this->assertEquals($key, $condition->getKey());
-        $this->assertEquals($operator, $condition->getOperator());
+        $this->assertSame($key, $condition->getKey());
+        $this->assertSame($operator, $condition->getOperator());
     }
 }

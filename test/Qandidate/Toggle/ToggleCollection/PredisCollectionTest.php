@@ -13,14 +13,17 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\ToggleCollection;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use Predis\Client;
 use Predis\PredisException;
+use Qandidate\Toggle\ToggleCollection;
 use Qandidate\Toggle\ToggleCollectionTestCase;
 
+#[CoversClass(PredisCollection::class)]
 class PredisCollectionTest extends ToggleCollectionTestCase
 {
-    private $client;
-    private $collection;
+    private Client $client;
+    private PredisCollection $collection;
 
     public function setUp(): void
     {
@@ -39,14 +42,14 @@ class PredisCollectionTest extends ToggleCollectionTestCase
             return;
         }
 
-        $keys = $this->client->keys('toggle_predis_test*');
-
-        foreach ($keys as $key) {
-            $this->client->del($key);
+        foreach ($this->client->keys('toggle_predis_test*') as $key) {
+            if (\is_string($key)) {
+                $this->client->del($key);
+            }
         }
     }
 
-    public function createCollection()
+    protected function createCollection(): ToggleCollection
     {
         return $this->collection;
     }

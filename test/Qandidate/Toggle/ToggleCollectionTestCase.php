@@ -18,14 +18,14 @@ use PHPUnit\Framework\Attributes\Test;
 abstract class ToggleCollectionTestCase extends TestCase
 {
     #[Test]
-    public function it_returns_null_if_toggle_not_in_collection()
+    public function it_returns_null_if_toggle_not_in_collection(): void
     {
         $collection = $this->createCollection();
         $this->assertNull($collection->get('some-feature'));
     }
 
     #[Test]
-    public function it_returns_a_set_toggle()
+    public function it_returns_a_set_toggle(): void
     {
         $toggle = new Toggle('some-feature', []);
         $collection = $this->createCollection();
@@ -35,7 +35,7 @@ abstract class ToggleCollectionTestCase extends TestCase
     }
 
     #[Test]
-    public function it_removes_a_toggle()
+    public function it_removes_a_toggle(): void
     {
         $toggle = new Toggle('some-feature', []);
         $collection = $this->createCollection();
@@ -47,7 +47,7 @@ abstract class ToggleCollectionTestCase extends TestCase
     }
 
     #[Test]
-    public function it_does_not_complain_when_removing_a_non_existing_toggle()
+    public function it_does_not_complain_when_removing_a_non_existing_toggle(): void
     {
         $collection = $this->createCollection();
 
@@ -57,7 +57,7 @@ abstract class ToggleCollectionTestCase extends TestCase
     }
 
     #[Test]
-    public function it_exposes_all_toggles()
+    public function it_exposes_all_toggles(): void
     {
         $toggle = new Toggle('some-feature', []);
         $toggle2 = new Toggle('some-other-feature', []);
@@ -68,12 +68,12 @@ abstract class ToggleCollectionTestCase extends TestCase
 
         $all = $collection->all();
         $this->assertCount(2, $all);
-        $this->assertEquals($all['some-feature'], $toggle);
-        $this->assertEquals($all['some-other-feature'], $toggle2);
+        $this->assertEquals($toggle, $all['some-feature']);
+        $this->assertEquals($toggle2, $all['some-other-feature']);
     }
 
     #[Test]
-    public function it_removes_existing_toggle()
+    public function it_removes_existing_toggle(): void
     {
         $toggle = new Toggle('some-feature', []);
         $collection = $this->createCollection();
@@ -87,7 +87,7 @@ abstract class ToggleCollectionTestCase extends TestCase
     }
 
     #[Test]
-    public function it_does_not_throw_when_removing_non_existing_toggle()
+    public function it_does_not_throw_when_removing_non_existing_toggle(): void
     {
         $collection = $this->createCollection();
 
@@ -97,8 +97,5 @@ abstract class ToggleCollectionTestCase extends TestCase
         $this->assertCount(0, $collection->all());
     }
 
-    /**
-     * @return ToggleCollection
-     */
-    abstract protected function createCollection();
+    abstract protected function createCollection(): ToggleCollection;
 }

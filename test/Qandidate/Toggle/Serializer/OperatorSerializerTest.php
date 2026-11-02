@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Serializer;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\Operator;
@@ -25,29 +26,36 @@ use Qandidate\Toggle\Operator\LessThanEqual;
 use Qandidate\Toggle\Operator\NotInSet;
 use Qandidate\Toggle\Operator\Percentage;
 
+#[CoversClass(OperatorSerializer::class)]
 class OperatorSerializerTest extends TestCase
 {
     #[Test]
-    public function it_throws_exception_on_unknown_operator()
+    public function it_throws_exception_on_unknown_operator(): void
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Unknown operator Qandidate\Toggle\Serializer\UnknownOperator.');
         $serializer = new OperatorSerializer();
 
         $serializer->serialize(new UnknownOperator());
     }
 
+    /**
+     * @param array<string, mixed> $expected
+     */
     #[Test]
     #[DataProvider('knownOperators')]
-    public function it_serializes_known_operators($operator, $expected)
+    public function it_serializes_known_operators(Operator $operator, array $expected): void
     {
         $serializer = new OperatorSerializer();
 
         $data = $serializer->serialize($operator);
-        $this->assertEquals($expected, $data);
+        $this->assertSame($expected, $data);
     }
 
-    public static function knownOperators()
+    /**
+     * @return iterable<array{Operator, array<string, mixed>}>
+     */
+    public static function knownOperators(): iterable
     {
         return [
             [new GreaterThan(42), ['name' => 'greater-than', 'value' => 42]],
@@ -61,9 +69,12 @@ class OperatorSerializerTest extends TestCase
         ];
     }
 
+    /**
+     * @param array<string, mixed> $serialized
+     */
     #[Test]
     #[DataProvider('knownOperators')]
-    public function it_deserializes_known_operators($expected, $serialized)
+    public function it_deserializes_known_operators(Operator $expected, array $serialized): void
     {
         $serializer = new OperatorSerializer();
 
@@ -71,17 +82,23 @@ class OperatorSerializerTest extends TestCase
         $this->assertEquals($expected, $operator);
     }
 
+    /**
+     * @param array<string, mixed> $serialized
+     */
     #[Test]
     #[DataProvider('missingKeys')]
-    public function it_throws_an_exception_if_a_key_is_missing_from_the_data($serialized)
+    public function it_throws_an_exception_if_a_key_is_missing_from_the_data(array $serialized): void
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
         $serializer = new OperatorSerializer();
 
-        $operator = $serializer->deserialize($serialized);
+        $serializer->deserialize($serialized);
     }
 
-    public static function missingKeys()
+    /**
+     * @return iterable<array{array<string, mixed>}>
+     */
+    public static function missingKeys(): iterable
     {
         return [
             [[]],
@@ -99,18 +116,18 @@ class OperatorSerializerTest extends TestCase
     }
 
     #[Test]
-    public function it_throws_an_exception_on_deserializing_unknown_operator()
+    public function it_throws_an_exception_on_deserializing_unknown_operator(): void
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
         $serializer = new OperatorSerializer();
 
-        $operator = $serializer->deserialize(['name' => 'unknown']);
+        $serializer->deserialize(['name' => 'unknown']);
     }
 }
 
 class UnknownOperator extends Operator
 {
-    public function appliesTo($argument): bool
+    public function appliesTo(mixed $argument): bool
     {
         return true;
     }
