@@ -11,17 +11,32 @@ on:
   schedule:
     - cron: "37 13 * * 1"
 
+permissions:
+  contents: "read"
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}"
+  cancel-in-progress: "${{ github.event_name == 'pull_request' }}"
+
 jobs:
   tests:
-    name: "Run tests"
+    name: "Run tests (PHP ${{ matrix.php-version }}, ${{ matrix.dependency-versions }} dependencies)"
     runs-on: "ubuntu-latest"
     strategy:
+      fail-fast: false
       matrix:
         php-version:
           - "8.2"
           - "8.3"
           - "8.4"
           - "8.5"
+        dependency-versions:
+          - "highest"
+        include:
+          # Test the lowest allowed dependencies only on the lowest supported PHP version.
+          # The oldest releases of some dependencies predate newer PHP versions.
+          - php-version: "8.2"
+            dependency-versions: "lowest"
     services:
       redis:
         image: "redis:7"
@@ -35,12 +50,12 @@ jobs:
         with:
           php-version: "${{ matrix.php-version }}"
           coverage: "none"
-        env:
-          fail-fast: true
-      - name: "Validate composer.json and composer.lock"
+      - name: "Validate composer.json"
         run: "composer validate --strict --no-interaction --ansi"
       - name: "Install dependencies with Composer"
         uses: "ramsey/composer-install@v4"
+        with:
+          dependency-versions: "${{ matrix.dependency-versions }}"
       - name: "Run tests"
         run: "make test"
 
@@ -57,6 +72,8 @@ jobs:
           coverage: "none"
       - name: "Install dependencies with Composer"
         uses: "ramsey/composer-install@v4"
+        with:
+          dependency-versions: "highest"
       - name: "Check coding standards"
         run: "make php-cs-fixer-ci"
 
@@ -73,5 +90,7 @@ jobs:
           coverage: "none"
       - name: "Install dependencies with Composer"
         uses: "ramsey/composer-install@v4"
+        with:
+          dependency-versions: "highest"
       - name: "Run PHPStan"
-        run: "make phpstan"
+        run: "vendor/bin/phpstan analyse --no-progress --error-format=github"

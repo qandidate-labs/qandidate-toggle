@@ -22,7 +22,8 @@
         "phpunit/phpunit": "^11.5 || ^12.5 || ^13.4",
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpstan/phpstan": "^2.0",
-        "phpstan/phpstan-phpunit": "^2.0"
+        "phpstan/phpstan-phpunit": "^2.0",
+        "psr/http-message": "^1.1 || ^2.0"
     },
     "suggest": {
         "predis/predis": "To use the PredisCollection to persist toggles in redis",
