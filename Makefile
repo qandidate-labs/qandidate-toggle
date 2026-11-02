@@ -8,6 +8,10 @@ dependencies:
 test:
 	vendor/bin/phpunit --testdox --exclude-group=none --colors=always
 
+.PHONY: coverage
+coverage:
+	XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text
+
 .PHONY: qa
 qa: php-cs-fixer phpstan
 
@@ -19,9 +23,9 @@ php-cs-fixer:
 php-cs-fixer-ci:
 	vendor/bin/php-cs-fixer fix --dry-run --no-interaction --allow-risky=yes --diff --verbose
 
-PHONY: phpstan
+.PHONY: phpstan
 phpstan:
-	vendor/bin/phpstan analyse --level=max lib/
+	vendor/bin/phpstan analyse
 
 .PHONY: changelog
 changelog:
