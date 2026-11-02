@@ -13,22 +13,24 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Serializer;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\Operator\GreaterThan;
 use Qandidate\Toggle\OperatorCondition;
 
+#[CoversClass(OperatorConditionSerializer::class)]
 class OperatorConditionSerializerTest extends TestCase
 {
     #[Test]
-    public function it_serializes_an_operator()
+    public function it_serializes_an_operator(): void
     {
         $serializer = $this->createOperatorConditionSerializer();
 
         $operator = new OperatorCondition('user_id', new GreaterThan(42));
         $data = $serializer->serialize($operator);
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 'name' => 'operator-condition',
                 'key' => 'user_id',
@@ -39,7 +41,7 @@ class OperatorConditionSerializerTest extends TestCase
     }
 
     #[Test]
-    public function it_deserializes_an_operator()
+    public function it_deserializes_an_operator(): void
     {
         $serializer = $this->createOperatorConditionSerializer();
 
@@ -54,9 +56,9 @@ class OperatorConditionSerializerTest extends TestCase
     }
 
     #[Test]
-    public function it_throws_exception_on_unknown_name()
+    public function it_throws_exception_on_unknown_name(): void
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
         $serializer = $this->createOperatorConditionSerializer();
 
         $serialized = [
@@ -68,17 +70,23 @@ class OperatorConditionSerializerTest extends TestCase
         $serializer->deserialize($serialized);
     }
 
+    /**
+     * @param array<mixed> $serialized
+     */
     #[Test]
     #[DataProvider('missingKeys')]
-    public function it_throws_exception_on_missing_key($serialized)
+    public function it_throws_exception_on_missing_key(array $serialized): void
     {
-        $this->expectException('RuntimeException');
+        $this->expectException(\RuntimeException::class);
         $serializer = $this->createOperatorConditionSerializer();
 
         $serializer->deserialize($serialized);
     }
 
-    public static function missingKeys()
+    /**
+     * @return iterable<array{list<string>}>
+     */
+    public static function missingKeys(): iterable
     {
         return [
             [[]],
@@ -88,7 +96,7 @@ class OperatorConditionSerializerTest extends TestCase
         ];
     }
 
-    private function createOperatorConditionSerializer()
+    private function createOperatorConditionSerializer(): OperatorConditionSerializer
     {
         $operatorSerializer = new OperatorSerializer();
 

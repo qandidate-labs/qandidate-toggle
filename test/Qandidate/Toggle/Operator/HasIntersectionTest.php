@@ -13,21 +13,29 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Operator;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\TestCase;
 
+#[CoversClass(HasIntersection::class)]
 class HasIntersectionTest extends TestCase
 {
+    /**
+     * @param list<mixed> $values
+     */
     #[Test]
     #[DataProvider('valuesNotMatching')]
-    public function it_not_applies_to_set_not_matching_values($values, $argument)
+    public function it_not_applies_to_set_not_matching_values(array $values, mixed $argument): void
     {
         $operator = new HasIntersection($values);
         $this->assertFalse($operator->appliesTo($argument));
     }
 
-    public static function valuesNotMatching()
+    /**
+     * @return iterable<array{list<mixed>, list<mixed>}>
+     */
+    public static function valuesNotMatching(): iterable
     {
         return [
             [[4],     [1, 2, 3]],
@@ -36,15 +44,21 @@ class HasIntersectionTest extends TestCase
         ];
     }
 
+    /**
+     * @param list<mixed> $values
+     */
     #[Test]
     #[DataProvider('valuesMatching')]
-    public function it_applies_to_set_matching_values($values, $argument)
+    public function it_applies_to_set_matching_values(array $values, mixed $argument): void
     {
         $operator = new HasIntersection($values);
         $this->assertTrue($operator->appliesTo($argument));
     }
 
-    public static function valuesMatching()
+    /**
+     * @return iterable<array{list<mixed>, list<mixed>}>
+     */
+    public static function valuesMatching(): iterable
     {
         return [
             [[1],     [1, 2, 3]],
@@ -55,9 +69,9 @@ class HasIntersectionTest extends TestCase
     }
 
     #[Test]
-    public function it_exposes_its_value()
+    public function it_exposes_its_value(): void
     {
         $operator = new HasIntersection(['a', 'b', 'c']);
-        $this->assertEquals(['a', 'b', 'c'], $operator->getValues());
+        $this->assertSame(['a', 'b', 'c'], $operator->getValues());
     }
 }

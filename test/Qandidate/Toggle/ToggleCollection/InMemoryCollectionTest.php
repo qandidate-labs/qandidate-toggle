@@ -13,11 +13,14 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\ToggleCollection;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use Qandidate\Toggle\ToggleCollection;
 use Qandidate\Toggle\ToggleCollectionTestCase;
 
+#[CoversClass(InMemoryCollection::class)]
 class InMemoryCollectionTest extends ToggleCollectionTestCase
 {
-    protected function createCollection()
+    protected function createCollection(): ToggleCollection
     {
         return new InMemoryCollection();
     }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Qandidate\Toggle\Serializer;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use Qandidate\Toggle\Operator\LessThan;
 use Qandidate\Toggle\OperatorCondition;
@@ -20,10 +21,11 @@ use Qandidate\Toggle\TestCase;
 use Qandidate\Toggle\Toggle;
 use Qandidate\Toggle\ToggleCollection\InMemoryCollection;
 
+#[CoversClass(InMemoryCollectionSerializer::class)]
 class InMemoryCollectionSerializerTest extends TestCase
 {
     #[Test]
-    public function it_unserializes_a_collection_from_an_array()
+    public function it_unserializes_a_collection_from_an_array(): void
     {
         $data = [
             [
@@ -42,12 +44,12 @@ class InMemoryCollectionSerializerTest extends TestCase
         $serializer = new InMemoryCollectionSerializer();
         $collection = $serializer->deserialize($data);
 
-        $this->assertInstanceOf('Qandidate\Toggle\Toggle', $collection->get('toggling'));
+        $this->assertInstanceOf(Toggle::class, $collection->get('toggling'));
         $this->assertCount(1, $collection->all());
     }
 
     #[Test]
-    public function it_serializes_a_collection_to_an_array()
+    public function it_serializes_a_collection_to_an_array(): void
     {
         $collection = new InMemoryCollection();
         $operator = new LessThan(42);
@@ -58,15 +60,27 @@ class InMemoryCollectionSerializerTest extends TestCase
 
         $serialized = $serializer->serialize($collection);
 
-        $this->assertIsArray($serialized);
-        $this->assertCount(1, $serialized);
-        $this->assertArrayHasKey('name', $serialized[0]);
-        $this->assertArrayHasKey('conditions', $serialized[0]);
-        $this->assertSame('toggling', $serialized[0]['name']);
+        $this->assertSame(
+            [
+                [
+                    'name' => 'toggling',
+                    'conditions' => [
+                        [
+                            'name' => 'operator-condition',
+                            'key' => 'user_id',
+                            'operator' => ['name' => 'less-than', 'value' => 42],
+                        ],
+                    ],
+                    'status' => 'conditionally-active',
+                    'strategy' => 'affirmative',
+                ],
+            ],
+            $serialized
+        );
     }
 
     #[Test]
-    public function it_serializes_and_deserializes_a_collection()
+    public function it_serializes_and_deserializes_a_collection(): void
     {
         $collection = new InMemoryCollection();
         $operator = new LessThan(42);
